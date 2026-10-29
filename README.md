@@ -1,5 +1,8 @@
 # ComfyUI-OrbitTo3D
 
+**Repository:** https://github.com/mefisure-create/ComfyUI-OrbitTo3D  
+**Comfy Registry package ID:** `orbit-to-3d` (publisher `@fadj`)
+
 `ComfyUI-OrbitTo3D` is a **mesh-only, high-precision multiview reconstruction extension for ComfyUI**, derived from and designed to coexist with [`visualbruno/ComfyUI-Trellis2`](https://github.com/visualbruno/ComfyUI-Trellis2).
 
 Orbit is intended for a specific workflow: take an ordered turntable / multiview sequence, select camera-aligned views, preserve native geometry evidence, and reconstruct a Pixal3D mesh with stronger multiview consistency. It keeps Trellis2-compatible socket types so the original Trellis2 decode / mesh reconstruction / export nodes remain downstream-compatible.

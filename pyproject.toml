@@ -1,5 +1,5 @@
 [project]
-name = "comfyui-orbit-to-3d"
+name = "orbit-to-3d"
 description = "Orbit to 3D: turntable selection, VSR and Pixal3D multiview reconstruction"
 version = "0.1.0"
 license = {file = "LICENSE"} 
@@ -22,14 +22,14 @@ license = {file = "LICENSE"}
 
 dependencies = ["easydict", "meshlib", "trimesh"]
 
-[project.optional-dependencies]
-background-removal = ["rembg"]
-remove-small-holes = ["scikit-image"]
-
 [project.urls]
 Repository = "https://github.com/mefisure-create/ComfyUI-OrbitTo3D"
 Documentation = "https://github.com/mefisure-create/ComfyUI-OrbitTo3D/tree/main/docs"
 "Bug Tracker" = "https://github.com/mefisure-create/ComfyUI-OrbitTo3D/issues"
+
+[project.optional-dependencies]
+background-removal = ["rembg"]
+remove-small-holes = ["scikit-image"]
 
 [tool.comfy]
 PublisherId = "fadj"

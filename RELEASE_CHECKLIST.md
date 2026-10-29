@@ -13,7 +13,7 @@ Before publishing a public release:
 - [ ] Verify the README remains a short project/front-page overview and detailed requirements/features live in `docs/` / `UPSTREAM.md`.
 - [ ] Verify the README documentation links and the `docs/INSTALLATION.md` workflow dependency table still match the bundled example, including nodes nested inside subgraphs.
 - [ ] Keep `LICENSE`, `THIRD_PARTY_NOTICES.md`, `UPSTREAM.md`, `ORBIT_BASELINE.md`, `docs/` and the pinned upstream metadata in the release.
-- [ ] Replace `[tool.comfy].PublisherId = "local-orbit-to-3d"` with the real Comfy Registry publisher ID before Registry publication.
-- [ ] Add the final repository/documentation/issue URLs to `pyproject.toml` once the public GitHub location is known.
+- [ ] Confirm `[tool.comfy].PublisherId` still matches the Registry publisher (`fadj`) before publishing.
+- [ ] Confirm the `Repository`, `Documentation` and `Bug Tracker` URLs in `pyproject.toml` still point to `https://github.com/mefisure-create/ComfyUI-OrbitTo3D`.
 
 The package intentionally remains mesh-only. Texture/PBR generation belongs to the original Trellis2 package or another downstream workflow.
