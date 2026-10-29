@@ -34,12 +34,12 @@
     {
       "path": "README.md",
       "mode": "metadata",
-      "local_sha256": "29640546914c6f3b56069b2b9a22b2506ab2b12090b36bbe32072c60cb2a56d4"
+      "local_sha256": "a7c9e0e2baa1c24af058626ac368c0f26cd3993d1523ea996332d14e3016a355"
     },
     {
       "path": "RELEASE_CHECKLIST.md",
       "mode": "metadata",
-      "local_sha256": "d30e1b2a89dddd0bceff8d0c536a53d2d759c0826a5398b69e7bf51c6c7ac28c"
+      "local_sha256": "02b1a8b1f1303db66ee22990b1e0c0417ee943e99e8dbdc13afdbd0cfe02cffe"
     },
     {
       "path": "THIRD_PARTY_NOTICES.md",
@@ -124,7 +124,7 @@
     {
       "path": "pyproject.toml",
       "mode": "metadata",
-      "local_sha256": "d8429302c0b697a1efac4f7fcfdf80a7e17cf5c73c61ae41c0fa4204df986003"
+      "local_sha256": "9f8e00d38f68f5f12e0e6d9b7e32121f7b4bf71852864bc15b811f34af2a0d67"
     },
     {
       "path": "requirements.txt",
@@ -134,7 +134,7 @@
     {
       "path": "tools/check_release.py",
       "mode": "metadata",
-      "local_sha256": "814567525433bc6d1c407c16206e05e208d12c33120c09a44fec7f3060edfb40"
+      "local_sha256": "a687cee27c389627b7e2877426170d55dc5c56355232c1d07d8308051d8e066f"
     },
     {
       "path": "tools/check_upstream.py",

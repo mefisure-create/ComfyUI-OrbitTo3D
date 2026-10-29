@@ -5,6 +5,7 @@ import ast
 import hashlib
 import json
 import py_compile
+import subprocess
 import sys
 from pathlib import Path
 
@@ -138,15 +139,39 @@ for item in data["files"]:
         errors.append(f'local file drift: {item["path"]}')
 
 # Every shipped release file (except the manifest itself) must be represented.
+# In a Git working tree, the release payload is the set of tracked files. This
+# deliberately excludes local repository state and build/test artefacts such as
+# .git/, .ruff_cache/, node.zip, etc. In an unpacked source archive (no .git),
+# fall back to the actual files present so archive contamination is still caught.
 manifest_paths = {item["path"] for item in data["files"]}
-actual_paths = {
-    str(p.relative_to(ROOT))
-    for p in ROOT.rglob("*")
-    if p.is_file()
-    and "__pycache__" not in p.parts
-    and p.suffix != ".pyc"
-    and p.name != "upstream_symbols.json"
-}
+
+def release_payload_paths() -> set[str]:
+    if (ROOT / ".git").exists():
+        try:
+            result = subprocess.run(
+                ["git", "-C", str(ROOT), "ls-files", "-z"],
+                check=True,
+                capture_output=True,
+            )
+            return {
+                path
+                for path in result.stdout.decode("utf-8").split("\0")
+                if path and path != "upstream_symbols.json"
+            }
+        except (OSError, subprocess.CalledProcessError, UnicodeDecodeError) as e:
+            warnings.append(f"git ls-files unavailable; falling back to filesystem scan: {e}")
+
+    return {
+        str(p.relative_to(ROOT))
+        for p in ROOT.rglob("*")
+        if p.is_file()
+        and ".git" not in p.parts
+        and "__pycache__" not in p.parts
+        and p.suffix != ".pyc"
+        and p.name != "upstream_symbols.json"
+    }
+
+actual_paths = release_payload_paths()
 missing_from_manifest = sorted(actual_paths - manifest_paths)
 stale_manifest = sorted(manifest_paths - actual_paths)
 if missing_from_manifest:
@@ -156,7 +181,18 @@ if stale_manifest:
 
 # Registry metadata may remain placeholder for an RC, but must be resolved before publication.
 if 'PublisherId = "local-orbit-to-3d"' in pyproject:
-    warnings.append("Comfy Registry PublisherId is still the RC placeholder")
+    errors.append("Comfy Registry PublisherId is still the RC placeholder")
+if 'PublisherId = "fadj"' not in pyproject:
+    errors.append("Comfy Registry PublisherId does not match the release publisher: fadj")
+if 'name = "orbit-to-3d"' not in pyproject:
+    errors.append("Comfy Registry package ID does not match the release package: orbit-to-3d")
+for required_url in (
+    'Repository = "https://github.com/mefisure-create/ComfyUI-OrbitTo3D"',
+    'Documentation = "https://github.com/mefisure-create/ComfyUI-OrbitTo3D/tree/main/docs"',
+    '"Bug Tracker" = "https://github.com/mefisure-create/ComfyUI-OrbitTo3D/issues"',
+):
+    if required_url not in pyproject:
+        errors.append(f"pyproject.toml missing release URL: {required_url}")
 
 if errors:
     print("RELEASE CHECK FAILED")
