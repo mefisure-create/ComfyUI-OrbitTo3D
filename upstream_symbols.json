@@ -1,0 +1,1444 @@
+{
+  "schema_version": 1,
+  "upstream": {
+    "repository": "https://github.com/visualbruno/ComfyUI-Trellis2",
+    "base_commit": "b0e84c0f29857a444e8bcb5b9be2ea218e96efd0",
+    "checked_main_commit": "b0e84c0f29857a444e8bcb5b9be2ea218e96efd0",
+    "checked_date": "2026-10-29"
+  },
+  "policy": {
+    "auto_merge": false,
+    "required_regression_after_port": true
+  },
+  "files": [
+    {
+      "path": ".github/workflows/upstream-contract.yml",
+      "mode": "metadata",
+      "local_sha256": "dd1dc26122bf2a66b7d8461f20e7e8fc0f25806838e4b8af4daa66d86f32e6e3"
+    },
+    {
+      "path": ".gitignore",
+      "mode": "metadata",
+      "local_sha256": "0c614ac94fecc6e315a5a690132c07d9fde193e88f6332dbc4df6962caf97f16"
+    },
+    {
+      "path": "LICENSE",
+      "mode": "metadata",
+      "local_sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb"
+    },
+    {
+      "path": "ORBIT_BASELINE.md",
+      "mode": "metadata",
+      "local_sha256": "d6d3fcf78cf5a3dd08fab949ab7ee2a40180f864896d2036b676a20362f604d0"
+    },
+    {
+      "path": "README.md",
+      "mode": "metadata",
+      "local_sha256": "29640546914c6f3b56069b2b9a22b2506ab2b12090b36bbe32072c60cb2a56d4"
+    },
+    {
+      "path": "RELEASE_CHECKLIST.md",
+      "mode": "metadata",
+      "local_sha256": "d30e1b2a89dddd0bceff8d0c536a53d2d759c0826a5398b69e7bf51c6c7ac28c"
+    },
+    {
+      "path": "THIRD_PARTY_NOTICES.md",
+      "mode": "metadata",
+      "local_sha256": "88a9455a614329dd4cc2615fffce2f462913c562d1a5c2155009882bad76e690"
+    },
+    {
+      "path": "UPSTREAM.md",
+      "mode": "metadata",
+      "local_sha256": "ff01a519372452f9e305712bf8e23837190b7a1c4235ff83fc01326c44424941"
+    },
+    {
+      "path": "__init__.py",
+      "mode": "metadata",
+      "local_sha256": "9b47f28aa3e6d998f28e4846a8f21fcd54a2adae00f1b3f6b2d07c7a066154f5"
+    },
+    {
+      "path": "docs/FEATURES.md",
+      "mode": "metadata",
+      "local_sha256": "6d70b4639f0b0de18cb3ce24f2374b8090b51db9e29c13dbb83478c1d8cbd93c"
+    },
+    {
+      "path": "docs/INSTALLATION.md",
+      "mode": "metadata",
+      "local_sha256": "a2392061bdd315d2ef61bde18d3828525afa542f47758848a7e97f97bfb2b615"
+    },
+    {
+      "path": "docs/REGRESSION.md",
+      "mode": "metadata",
+      "local_sha256": "18b35b36632039ea0afa9ef554b9e50a0464aa8a383809030b8c5108cf6f3cf8"
+    },
+    {
+      "path": "example_workflows/OrbitTo3D_HighPrecision_MultiView.json",
+      "mode": "metadata",
+      "local_sha256": "c8de8f71abb98d8ecf10d849d7cc0ff22be03904ace22ca34e04ec3cd52ac1a1"
+    },
+    {
+      "path": "nodes.py",
+      "mode": "derived_modified",
+      "local_sha256": "3af83f3c8009bdffb0b7bf813a848a182039661bce6001b98f20db559a4fa683"
+    },
+    {
+      "path": "orbit3d_ext/__init__.py",
+      "mode": "orbit_original",
+      "local_sha256": "675f2ec010306f39c2ec3b618e9bb68c47644453454cd96d88863b30dd1984f6"
+    },
+    {
+      "path": "orbit3d_ext/angle_nodes.py",
+      "mode": "orbit_original",
+      "local_sha256": "252df60985d94c8347249e472a1adf61caec2439a8249bcc602d463fc3a75da1"
+    },
+    {
+      "path": "orbit3d_ext/geometry_nodes.py",
+      "mode": "orbit_original",
+      "local_sha256": "adafc7fc16edde38ba62c73c4d59d9fcd7900a0443c4f000e94ee3bbdb08c559"
+    },
+    {
+      "path": "orbit3d_ext/moge_nodes.py",
+      "mode": "orbit_original",
+      "local_sha256": "c0a88e25839205ba992252cffc6dbfecb773b88a009fdcae05566ccc3adaee1f"
+    },
+    {
+      "path": "orbit3d_ext/realbasicvsr_backend.py",
+      "mode": "orbit_original",
+      "local_sha256": "7c57cd5da77e8d552bffc161d729e0c6836caccbb22d872b93f965853529830f"
+    },
+    {
+      "path": "orbit3d_ext/vggt_nodes.py",
+      "mode": "orbit_original",
+      "local_sha256": "eb6e3bbc575a08f960c89766cdbf2bb707dafa25909be5728506f0f5ec5c8f23"
+    },
+    {
+      "path": "orbit3d_ext/vsr_nodes.py",
+      "mode": "orbit_original",
+      "local_sha256": "236ac82110a4c8c88472a5ad75d2e4e49efda726eec344f526b16de4e9b86775"
+    },
+    {
+      "path": "orbit_nodes.py",
+      "mode": "orbit_original",
+      "local_sha256": "7a555a65d00a2941659e23e93b36eca3f3b37f300aa6aa88037e9f853283d88e"
+    },
+    {
+      "path": "pyproject.toml",
+      "mode": "metadata",
+      "local_sha256": "d8429302c0b697a1efac4f7fcfdf80a7e17cf5c73c61ae41c0fa4204df986003"
+    },
+    {
+      "path": "requirements.txt",
+      "mode": "metadata",
+      "local_sha256": "a18df2cec64f90cba6028c5d6b24e090793c6e778e8db19092413951743491ab"
+    },
+    {
+      "path": "tools/check_release.py",
+      "mode": "metadata",
+      "local_sha256": "814567525433bc6d1c407c16206e05e208d12c33120c09a44fec7f3060edfb40"
+    },
+    {
+      "path": "tools/check_upstream.py",
+      "mode": "metadata",
+      "local_sha256": "77bfbd6d2710d33e1765b031068e246bc71b862e790e1b658a2fd9fd5592f29d"
+    },
+    {
+      "path": "tools/update_upstream_manifest.py",
+      "mode": "metadata",
+      "local_sha256": "04a491398bcfa6d7095ad7bdaec513afdbff7da96f51dc6ef47ad6ac756572d6"
+    },
+    {
+      "path": "trellis2/__init__.py",
+      "mode": "derived_modified",
+      "local_sha256": "b1a8b2ae1034fc57d880f3c23039a94d7d58c2a7df59c4ad54c0314096a9637b"
+    },
+    {
+      "path": "trellis2/models/__init__.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "6464ac512e4eb14c6145c3708e4ac485d9e799410bd845634f6789f25a26ba51"
+    },
+    {
+      "path": "trellis2/models/sc_vaes/fdg_vae.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "11503139b4ce0eb1126048e579a895ab0b0db61831cf157ff1aa4a318c025e73"
+    },
+    {
+      "path": "trellis2/models/sc_vaes/sparse_unet_vae.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "3211f0fc7b8c56854856b5da35a7d93827d41c55864439a90c0e89596554d49e"
+    },
+    {
+      "path": "trellis2/models/sparse_elastic_mixin.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "f28ee27e2d633510a2663f5dd1a63298983bcf6de25c85296d147578529e047d"
+    },
+    {
+      "path": "trellis2/models/sparse_structure_flow.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "ffa1b436488202d0d6cbb54a7ef1f1b7e9cfb73e0c84f03afe0febd225d2b114"
+    },
+    {
+      "path": "trellis2/models/sparse_structure_vae.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "e9941116a4736bbb70c9970fe42f5eb17bf2c71f74b2a2a9c379ef60880e7713"
+    },
+    {
+      "path": "trellis2/models/structured_latent_flow.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "d365ee5f413c2e4ad3ff79bc4f082b53c4301a30971cc78f640935fb1d02d7b8"
+    },
+    {
+      "path": "trellis2/modules/attention/__init__.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "c8560fd8f4f7278ae837f003564c29571c54f97464bec115e0bafba06b19a8e7"
+    },
+    {
+      "path": "trellis2/modules/attention/config.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "c6205b4419b2e2436d2fb8a918d317abc5427c31a3d5db96f4aa2302215754a5"
+    },
+    {
+      "path": "trellis2/modules/attention/full_attn.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "64c43354780dcbc3dcf7612ac5e53d6e21c2081234ea63cd329a77f4185dadfc"
+    },
+    {
+      "path": "trellis2/modules/attention/modules.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "c055ef95e997233dbec331a3d505a066c52817998726ed2a766d2936790eb65a"
+    },
+    {
+      "path": "trellis2/modules/attention/proj_attention.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "ad11bfd5dae90ae5229bff4973d4f34aceb548df98142318b6939773b3809ca9"
+    },
+    {
+      "path": "trellis2/modules/attention/rope.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "e3e2a18ea810d090d2766512576398ae21e4e8948bb1097674bd4bafe08197bb"
+    },
+    {
+      "path": "trellis2/modules/norm.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "13e3564c829bbcddbfab42142a0f5e0f78b39b7935e3c3749cba7d48320bf632"
+    },
+    {
+      "path": "trellis2/modules/sparse/__init__.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "3613f4380be75367f02221a6cac786bb1e162319b5f7ed131cd13d996ee9d628"
+    },
+    {
+      "path": "trellis2/modules/sparse/attention/__init__.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "7ead879fcf3f01c3e3a0f2e93efc6ac4b2b0b1a62e7341521f443e05965a6a4d"
+    },
+    {
+      "path": "trellis2/modules/sparse/attention/full_attn.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "0abb48d0fa2b42e9975e6c69555e5db4e4e48a5079ca1c688b86e795a9aa0fdb"
+    },
+    {
+      "path": "trellis2/modules/sparse/attention/modules.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "cfa99afda24e5840118814e80cefae783423d01d47e6322fe967412aff11f6cf"
+    },
+    {
+      "path": "trellis2/modules/sparse/attention/proj_attention.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "244647a4edffbbca58fd829e12fc241e88d7df8274608e4fd276ff23dd817230"
+    },
+    {
+      "path": "trellis2/modules/sparse/attention/rope.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "0525164901c3f1c885e961b747c856b654a4d6840882f34827677fb017dcec00"
+    },
+    {
+      "path": "trellis2/modules/sparse/attention/windowed_attn.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "fd451b519391d4c17942632c8f82670022c7ef2f1acf50722db134818a25d6f1"
+    },
+    {
+      "path": "trellis2/modules/sparse/basic.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "cd3c28472f482e9e78bbcd721b9fe48c77958af04647c3af25bc1980f0cfc69d"
+    },
+    {
+      "path": "trellis2/modules/sparse/config.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "6a9cb44608829cb2c11591685282959928c6081c5bc659687aa8395765c5f91b"
+    },
+    {
+      "path": "trellis2/modules/sparse/conv/__init__.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "51fb639dfbd3f6c162d5aef9488a2d858a6bedfbd03e353d9164739eba8da7cb"
+    },
+    {
+      "path": "trellis2/modules/sparse/conv/config.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "ba8e0033ca14880e2bd53456bf2fe20494c2c6d42eeed7813d33d19005fe51e1"
+    },
+    {
+      "path": "trellis2/modules/sparse/conv/conv.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "17d957e742b10a4972493bb1a7aa9ad3f744a6e3b0e85408d4ee9af7cd228bab"
+    },
+    {
+      "path": "trellis2/modules/sparse/conv/conv_flex_gemm.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "b0ae09f1addfbc51a43ec27fbcf76a810ef2d3e9a9fd3d6084cae69a9c6a7dcc"
+    },
+    {
+      "path": "trellis2/modules/sparse/conv/conv_spconv.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "c1e7c5adc05e45483d37a5f239b8b785eabd03173aac7327426ca59f4416f3ab"
+    },
+    {
+      "path": "trellis2/modules/sparse/conv/conv_torchsparse.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "1c948094e37dbe84236ad4b3db1db0d7bb9eb1833ac6b7660f7d8e4a89b7fca1"
+    },
+    {
+      "path": "trellis2/modules/sparse/linear.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "633daa066e9964902ff7b0adb963409e2aca95176083bb785abbc3c91c00d516"
+    },
+    {
+      "path": "trellis2/modules/sparse/nonlinearity.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "bc0b7f1f57be9682d0cbbf024a55a3783a80d70c5d0e7f4bede84d13e10430bf"
+    },
+    {
+      "path": "trellis2/modules/sparse/norm.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "9200f55c03ae2db0ad37fc528df46013a457ea03dc3f410ab33c9c6e8ea4d80b"
+    },
+    {
+      "path": "trellis2/modules/sparse/spatial/__init__.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "269a147eea3347ce4321c430d51288f44c4c64f4c829ecc46de7ec8e84b67dda"
+    },
+    {
+      "path": "trellis2/modules/sparse/spatial/basic.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "79dc91748b73efadb2c4eb8e2164363df421285a028f665072487c40a785db3a"
+    },
+    {
+      "path": "trellis2/modules/sparse/spatial/spatial2channel.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "4c0cd556548e3f1006f24a6db7490d10de284e6457898ebc23cce059bc3bf8e7"
+    },
+    {
+      "path": "trellis2/modules/sparse/transformer/__init__.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "debb94976ce5c7fbf196012d9dbd1c6aa70acbc37c8f97cb3ffc94ef90730bfb"
+    },
+    {
+      "path": "trellis2/modules/sparse/transformer/blocks.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "622e7c5374976c053fb96151c706356b44244e241afab180e0fbdde5da6770d9"
+    },
+    {
+      "path": "trellis2/modules/sparse/transformer/modulated.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "7d70f3ff4173f3a1e566dce5a210e75266212d976e5e83353be5ac611ebcff79"
+    },
+    {
+      "path": "trellis2/modules/spatial.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "cfab71d7106b4fdf6cbdd2885646b5590d13439f9308c5b924c069afcdbf185d"
+    },
+    {
+      "path": "trellis2/modules/transformer/__init__.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "debb94976ce5c7fbf196012d9dbd1c6aa70acbc37c8f97cb3ffc94ef90730bfb"
+    },
+    {
+      "path": "trellis2/modules/transformer/blocks.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "2b313c1c5d523231f5dcdc00f86d530033087bb6539de378e75261b3ccb2dfbf"
+    },
+    {
+      "path": "trellis2/modules/transformer/modulated.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "01e74682109b799f83d4672aa475b53ed9afe2e356ac5ee56f748b099f9b6be4"
+    },
+    {
+      "path": "trellis2/modules/utils.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "babb9593767cdb58c9fad3be0adad7c8dd5e12ba0e69fca59017890c3b676667"
+    },
+    {
+      "path": "trellis2/pipelines/__init__.py",
+      "mode": "derived_modified",
+      "local_sha256": "de7df87fab089f5f46ca606b4b22cd6a2b132bff517f9ed1d03ce8264d0cf584"
+    },
+    {
+      "path": "trellis2/pipelines/base.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "e8bfddf0328ab2ed3ddf1b50e80864f324a19d41336ea3ce5fa90b6ca449a999"
+    },
+    {
+      "path": "trellis2/pipelines/samplers/__init__.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "595fd7783bb6f83ecc56674bc899602d12f1369363e3ddef21364682e7240687"
+    },
+    {
+      "path": "trellis2/pipelines/samplers/base.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "be8530b55ea66ac58e8ab23d650f463636dd52cf7e39c7c9c66f69bf72e6a0d1"
+    },
+    {
+      "path": "trellis2/pipelines/samplers/classifier_free_guidance_mixin.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "1780182cd7d3c7af3f82b7904aa9c40eb3f632064d77456565c5acccd9598bee"
+    },
+    {
+      "path": "trellis2/pipelines/samplers/flow_euler.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "e06335cc0dee3b4bedafff9174436a5da920f65b4f14096a8076a714c65345f8"
+    },
+    {
+      "path": "trellis2/pipelines/samplers/guidance_interval_mixin.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "633f97c48a811a835d3b894b3e0de794407f60774f6c60a2c6a61e7c0351c6f2"
+    },
+    {
+      "path": "trellis2/pipelines/trellis2_image_to_3d.py",
+      "mode": "derived_modified",
+      "local_sha256": "7f45735c0a564f67e3790fc059def972e744a7bbb5964bb4131baad332d25c02"
+    },
+    {
+      "path": "trellis2/representations/__init__.py",
+      "mode": "derived_modified",
+      "local_sha256": "1c0e0caf47bc7a9b417f2e661108909bb635a0691baa19c91d5499122909513b"
+    },
+    {
+      "path": "trellis2/representations/mesh/__init__.py",
+      "mode": "derived_modified",
+      "local_sha256": "622255f310e036f4357a7668c430f38db22e3da3e8e97f42bf8b569e6390caca"
+    },
+    {
+      "path": "trellis2/representations/mesh/base.py",
+      "mode": "derived_modified",
+      "local_sha256": "16c98eb016ae1a6660aec3761ac6cc12d18627141b73d9fa790a040b958224be"
+    },
+    {
+      "path": "trellis2/representations/voxel/__init__.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "f3282f1059f0aa66d8490b7c37b1eef7079c94eef9fbe4c2d8e4ed730ab495dd"
+    },
+    {
+      "path": "trellis2/representations/voxel/voxel_model.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "2d95aad7c38d1a59e88ba5a66a9db237990bc25c09ab3017e2430c1e9350df72"
+    },
+    {
+      "path": "trellis2/trainers/__init__.py",
+      "mode": "derived_modified",
+      "local_sha256": "c28aac093a19a44a19c81c3cbeb04f2b389e823da43b18bc7f5b6ac6fe23215b"
+    },
+    {
+      "path": "trellis2/trainers/flow_matching/mixins/image_conditioned_proj.py",
+      "mode": "derived_modified",
+      "local_sha256": "f968538b56a80ae3c64899819f4c82492ddf8066e5bb171609578a9b627492a4"
+    },
+    {
+      "path": "trellis2/utils/__init__.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "trellis2/utils/camera.py",
+      "mode": "derived_modified",
+      "local_sha256": "f79b1e1604cb4c4cb6492306df538548e756624d8a5188dc3af29696ad89b972"
+    },
+    {
+      "path": "trellis2/utils/elastic_utils.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "3ddb58be780ea572d1e047771fd7d33b3cc147c9df79edcedba80a94a5ee0114"
+    },
+    {
+      "path": "trellis2/utils/mv_camera.py",
+      "mode": "derived_modified",
+      "local_sha256": "f2d58f22cabef869fb4957094808545e6ad50b13123831f3ba841769888080d7"
+    }
+  ],
+  "tracked_upstream_files": [
+    {
+      "path": "nodes.py",
+      "mode": "derived_modified",
+      "local_sha256": "3af83f3c8009bdffb0b7bf813a848a182039661bce6001b98f20db559a4fa683"
+    },
+    {
+      "path": "trellis2/__init__.py",
+      "mode": "derived_modified",
+      "local_sha256": "b1a8b2ae1034fc57d880f3c23039a94d7d58c2a7df59c4ad54c0314096a9637b"
+    },
+    {
+      "path": "trellis2/models/__init__.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "6464ac512e4eb14c6145c3708e4ac485d9e799410bd845634f6789f25a26ba51"
+    },
+    {
+      "path": "trellis2/models/sc_vaes/fdg_vae.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "11503139b4ce0eb1126048e579a895ab0b0db61831cf157ff1aa4a318c025e73"
+    },
+    {
+      "path": "trellis2/models/sc_vaes/sparse_unet_vae.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "3211f0fc7b8c56854856b5da35a7d93827d41c55864439a90c0e89596554d49e"
+    },
+    {
+      "path": "trellis2/models/sparse_elastic_mixin.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "f28ee27e2d633510a2663f5dd1a63298983bcf6de25c85296d147578529e047d"
+    },
+    {
+      "path": "trellis2/models/sparse_structure_flow.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "ffa1b436488202d0d6cbb54a7ef1f1b7e9cfb73e0c84f03afe0febd225d2b114"
+    },
+    {
+      "path": "trellis2/models/sparse_structure_vae.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "e9941116a4736bbb70c9970fe42f5eb17bf2c71f74b2a2a9c379ef60880e7713"
+    },
+    {
+      "path": "trellis2/models/structured_latent_flow.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "d365ee5f413c2e4ad3ff79bc4f082b53c4301a30971cc78f640935fb1d02d7b8"
+    },
+    {
+      "path": "trellis2/modules/attention/__init__.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "c8560fd8f4f7278ae837f003564c29571c54f97464bec115e0bafba06b19a8e7"
+    },
+    {
+      "path": "trellis2/modules/attention/config.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "c6205b4419b2e2436d2fb8a918d317abc5427c31a3d5db96f4aa2302215754a5"
+    },
+    {
+      "path": "trellis2/modules/attention/full_attn.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "64c43354780dcbc3dcf7612ac5e53d6e21c2081234ea63cd329a77f4185dadfc"
+    },
+    {
+      "path": "trellis2/modules/attention/modules.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "c055ef95e997233dbec331a3d505a066c52817998726ed2a766d2936790eb65a"
+    },
+    {
+      "path": "trellis2/modules/attention/proj_attention.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "ad11bfd5dae90ae5229bff4973d4f34aceb548df98142318b6939773b3809ca9"
+    },
+    {
+      "path": "trellis2/modules/attention/rope.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "e3e2a18ea810d090d2766512576398ae21e4e8948bb1097674bd4bafe08197bb"
+    },
+    {
+      "path": "trellis2/modules/norm.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "13e3564c829bbcddbfab42142a0f5e0f78b39b7935e3c3749cba7d48320bf632"
+    },
+    {
+      "path": "trellis2/modules/sparse/__init__.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "3613f4380be75367f02221a6cac786bb1e162319b5f7ed131cd13d996ee9d628"
+    },
+    {
+      "path": "trellis2/modules/sparse/attention/__init__.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "7ead879fcf3f01c3e3a0f2e93efc6ac4b2b0b1a62e7341521f443e05965a6a4d"
+    },
+    {
+      "path": "trellis2/modules/sparse/attention/full_attn.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "0abb48d0fa2b42e9975e6c69555e5db4e4e48a5079ca1c688b86e795a9aa0fdb"
+    },
+    {
+      "path": "trellis2/modules/sparse/attention/modules.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "cfa99afda24e5840118814e80cefae783423d01d47e6322fe967412aff11f6cf"
+    },
+    {
+      "path": "trellis2/modules/sparse/attention/proj_attention.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "244647a4edffbbca58fd829e12fc241e88d7df8274608e4fd276ff23dd817230"
+    },
+    {
+      "path": "trellis2/modules/sparse/attention/rope.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "0525164901c3f1c885e961b747c856b654a4d6840882f34827677fb017dcec00"
+    },
+    {
+      "path": "trellis2/modules/sparse/attention/windowed_attn.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "fd451b519391d4c17942632c8f82670022c7ef2f1acf50722db134818a25d6f1"
+    },
+    {
+      "path": "trellis2/modules/sparse/basic.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "cd3c28472f482e9e78bbcd721b9fe48c77958af04647c3af25bc1980f0cfc69d"
+    },
+    {
+      "path": "trellis2/modules/sparse/config.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "6a9cb44608829cb2c11591685282959928c6081c5bc659687aa8395765c5f91b"
+    },
+    {
+      "path": "trellis2/modules/sparse/conv/__init__.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "51fb639dfbd3f6c162d5aef9488a2d858a6bedfbd03e353d9164739eba8da7cb"
+    },
+    {
+      "path": "trellis2/modules/sparse/conv/config.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "ba8e0033ca14880e2bd53456bf2fe20494c2c6d42eeed7813d33d19005fe51e1"
+    },
+    {
+      "path": "trellis2/modules/sparse/conv/conv.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "17d957e742b10a4972493bb1a7aa9ad3f744a6e3b0e85408d4ee9af7cd228bab"
+    },
+    {
+      "path": "trellis2/modules/sparse/conv/conv_flex_gemm.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "b0ae09f1addfbc51a43ec27fbcf76a810ef2d3e9a9fd3d6084cae69a9c6a7dcc"
+    },
+    {
+      "path": "trellis2/modules/sparse/conv/conv_spconv.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "c1e7c5adc05e45483d37a5f239b8b785eabd03173aac7327426ca59f4416f3ab"
+    },
+    {
+      "path": "trellis2/modules/sparse/conv/conv_torchsparse.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "1c948094e37dbe84236ad4b3db1db0d7bb9eb1833ac6b7660f7d8e4a89b7fca1"
+    },
+    {
+      "path": "trellis2/modules/sparse/linear.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "633daa066e9964902ff7b0adb963409e2aca95176083bb785abbc3c91c00d516"
+    },
+    {
+      "path": "trellis2/modules/sparse/nonlinearity.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "bc0b7f1f57be9682d0cbbf024a55a3783a80d70c5d0e7f4bede84d13e10430bf"
+    },
+    {
+      "path": "trellis2/modules/sparse/norm.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "9200f55c03ae2db0ad37fc528df46013a457ea03dc3f410ab33c9c6e8ea4d80b"
+    },
+    {
+      "path": "trellis2/modules/sparse/spatial/__init__.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "269a147eea3347ce4321c430d51288f44c4c64f4c829ecc46de7ec8e84b67dda"
+    },
+    {
+      "path": "trellis2/modules/sparse/spatial/basic.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "79dc91748b73efadb2c4eb8e2164363df421285a028f665072487c40a785db3a"
+    },
+    {
+      "path": "trellis2/modules/sparse/spatial/spatial2channel.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "4c0cd556548e3f1006f24a6db7490d10de284e6457898ebc23cce059bc3bf8e7"
+    },
+    {
+      "path": "trellis2/modules/sparse/transformer/__init__.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "debb94976ce5c7fbf196012d9dbd1c6aa70acbc37c8f97cb3ffc94ef90730bfb"
+    },
+    {
+      "path": "trellis2/modules/sparse/transformer/blocks.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "622e7c5374976c053fb96151c706356b44244e241afab180e0fbdde5da6770d9"
+    },
+    {
+      "path": "trellis2/modules/sparse/transformer/modulated.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "7d70f3ff4173f3a1e566dce5a210e75266212d976e5e83353be5ac611ebcff79"
+    },
+    {
+      "path": "trellis2/modules/spatial.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "cfab71d7106b4fdf6cbdd2885646b5590d13439f9308c5b924c069afcdbf185d"
+    },
+    {
+      "path": "trellis2/modules/transformer/__init__.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "debb94976ce5c7fbf196012d9dbd1c6aa70acbc37c8f97cb3ffc94ef90730bfb"
+    },
+    {
+      "path": "trellis2/modules/transformer/blocks.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "2b313c1c5d523231f5dcdc00f86d530033087bb6539de378e75261b3ccb2dfbf"
+    },
+    {
+      "path": "trellis2/modules/transformer/modulated.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "01e74682109b799f83d4672aa475b53ed9afe2e356ac5ee56f748b099f9b6be4"
+    },
+    {
+      "path": "trellis2/modules/utils.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "babb9593767cdb58c9fad3be0adad7c8dd5e12ba0e69fca59017890c3b676667"
+    },
+    {
+      "path": "trellis2/pipelines/__init__.py",
+      "mode": "derived_modified",
+      "local_sha256": "de7df87fab089f5f46ca606b4b22cd6a2b132bff517f9ed1d03ce8264d0cf584"
+    },
+    {
+      "path": "trellis2/pipelines/base.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "e8bfddf0328ab2ed3ddf1b50e80864f324a19d41336ea3ce5fa90b6ca449a999"
+    },
+    {
+      "path": "trellis2/pipelines/samplers/__init__.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "595fd7783bb6f83ecc56674bc899602d12f1369363e3ddef21364682e7240687"
+    },
+    {
+      "path": "trellis2/pipelines/samplers/base.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "be8530b55ea66ac58e8ab23d650f463636dd52cf7e39c7c9c66f69bf72e6a0d1"
+    },
+    {
+      "path": "trellis2/pipelines/samplers/classifier_free_guidance_mixin.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "1780182cd7d3c7af3f82b7904aa9c40eb3f632064d77456565c5acccd9598bee"
+    },
+    {
+      "path": "trellis2/pipelines/samplers/flow_euler.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "e06335cc0dee3b4bedafff9174436a5da920f65b4f14096a8076a714c65345f8"
+    },
+    {
+      "path": "trellis2/pipelines/samplers/guidance_interval_mixin.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "633f97c48a811a835d3b894b3e0de794407f60774f6c60a2c6a61e7c0351c6f2"
+    },
+    {
+      "path": "trellis2/pipelines/trellis2_image_to_3d.py",
+      "mode": "derived_modified",
+      "local_sha256": "7f45735c0a564f67e3790fc059def972e744a7bbb5964bb4131baad332d25c02"
+    },
+    {
+      "path": "trellis2/representations/__init__.py",
+      "mode": "derived_modified",
+      "local_sha256": "1c0e0caf47bc7a9b417f2e661108909bb635a0691baa19c91d5499122909513b"
+    },
+    {
+      "path": "trellis2/representations/mesh/__init__.py",
+      "mode": "derived_modified",
+      "local_sha256": "622255f310e036f4357a7668c430f38db22e3da3e8e97f42bf8b569e6390caca"
+    },
+    {
+      "path": "trellis2/representations/mesh/base.py",
+      "mode": "derived_modified",
+      "local_sha256": "16c98eb016ae1a6660aec3761ac6cc12d18627141b73d9fa790a040b958224be"
+    },
+    {
+      "path": "trellis2/representations/voxel/__init__.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "f3282f1059f0aa66d8490b7c37b1eef7079c94eef9fbe4c2d8e4ed730ab495dd"
+    },
+    {
+      "path": "trellis2/representations/voxel/voxel_model.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "2d95aad7c38d1a59e88ba5a66a9db237990bc25c09ab3017e2430c1e9350df72"
+    },
+    {
+      "path": "trellis2/trainers/__init__.py",
+      "mode": "derived_modified",
+      "local_sha256": "c28aac093a19a44a19c81c3cbeb04f2b389e823da43b18bc7f5b6ac6fe23215b"
+    },
+    {
+      "path": "trellis2/trainers/flow_matching/mixins/image_conditioned_proj.py",
+      "mode": "derived_modified",
+      "local_sha256": "f968538b56a80ae3c64899819f4c82492ddf8066e5bb171609578a9b627492a4"
+    },
+    {
+      "path": "trellis2/utils/__init__.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "trellis2/utils/camera.py",
+      "mode": "derived_modified",
+      "local_sha256": "f79b1e1604cb4c4cb6492306df538548e756624d8a5188dc3af29696ad89b972"
+    },
+    {
+      "path": "trellis2/utils/elastic_utils.py",
+      "mode": "upstream_verbatim_base",
+      "local_sha256": "3ddb58be780ea572d1e047771fd7d33b3cc147c9df79edcedba80a94a5ee0114"
+    },
+    {
+      "path": "trellis2/utils/mv_camera.py",
+      "mode": "derived_modified",
+      "local_sha256": "f2d58f22cabef869fb4957094808545e6ad50b13123831f3ba841769888080d7"
+    }
+  ],
+  "tracked_symbols": [
+    {
+      "path": "nodes.py",
+      "symbol": "reset_cuda",
+      "local_ast_sha256": "6adc9188dfedbe3f24876aa2e50e6823a229bc9e59de5a2f7ab69bc6912dc910"
+    },
+    {
+      "path": "nodes.py",
+      "symbol": "check_pixal3d_mv_pipeline",
+      "local_ast_sha256": "6444336d46d161a6de81a32a195d96e0a95000cac8e92b576c237638af733b68"
+    },
+    {
+      "path": "nodes.py",
+      "symbol": "Trellis2LoadModel",
+      "local_ast_sha256": "2b0871805d294b8982eb6e33718ec78840cfc843244c06f120f7a1df769d51df"
+    },
+    {
+      "path": "nodes.py",
+      "symbol": "Trellis2LoadModel.INPUT_TYPES",
+      "local_ast_sha256": "3e84e510076cb903c8579c1f70ccf0701b467faeefa14a636ce8511cfd6cb346"
+    },
+    {
+      "path": "nodes.py",
+      "symbol": "Trellis2LoadModel.process",
+      "local_ast_sha256": "53d116351ea879b38cf9fe7e82a01ba7281f2ca36643f51f16e19aac6724d9cc"
+    },
+    {
+      "path": "nodes.py",
+      "symbol": "Trellis2SparseGenerator",
+      "local_ast_sha256": "9cbff3613c5e3da0e6fee77c3e543bd5786131ac71132b4e01f71e24de1f690b"
+    },
+    {
+      "path": "nodes.py",
+      "symbol": "Trellis2SparseGenerator.INPUT_TYPES",
+      "local_ast_sha256": "7ffc13e7f1797f7e30471b4fc57fd779b07e65e01f5bdf2fa069f5813687329a"
+    },
+    {
+      "path": "nodes.py",
+      "symbol": "Trellis2SparseGenerator.process",
+      "local_ast_sha256": "f30b6b0a002c464a90ae588a353d49a4fcc197c8a171af8e8b498b6cdcc492b1"
+    },
+    {
+      "path": "nodes.py",
+      "symbol": "Trellis2SparseGenerator.seed_all",
+      "local_ast_sha256": "3bb6697d6f92d52e4cffb00b26757535d3525e71005d5933a35d3c540f21b4a4"
+    },
+    {
+      "path": "nodes.py",
+      "symbol": "Trellis2ShapeGenerator",
+      "local_ast_sha256": "04efda7d82405c27c37be171fdfddaf9d2578eac7f9399131fbc0e3f92462f83"
+    },
+    {
+      "path": "nodes.py",
+      "symbol": "Trellis2ShapeGenerator.INPUT_TYPES",
+      "local_ast_sha256": "759bd877aea7c9e251545775e302e4fabd06fa70b5d1d88029f8947a1e3cc29f"
+    },
+    {
+      "path": "nodes.py",
+      "symbol": "Trellis2ShapeGenerator.process",
+      "local_ast_sha256": "77bbc8747d31d9e5bf31005da5d05f098248c5f79d41fae99e9aec02bc32fcc5"
+    },
+    {
+      "path": "nodes.py",
+      "symbol": "Trellis2ShapeCascadeGenerator",
+      "local_ast_sha256": "d2812ef87deb4a48bae7266b3a3bb7f02f300ca7d6f06761552a4e21d7b17ab3"
+    },
+    {
+      "path": "nodes.py",
+      "symbol": "Trellis2ShapeCascadeGenerator.INPUT_TYPES",
+      "local_ast_sha256": "0bcd0d5d8188ca415c0d0f13ffb396b7c74450a9e441a12230000bb9a137c930"
+    },
+    {
+      "path": "nodes.py",
+      "symbol": "Trellis2ShapeCascadeGenerator.process",
+      "local_ast_sha256": "14852f9d39410bccb227be685b76143d016f44eee47542290f5150d028ce10ff"
+    },
+    {
+      "path": "nodes.py",
+      "symbol": "Trellis2ShapeCascadeGenerator.sample",
+      "local_ast_sha256": "50eabbd94bc586ef90eeb6bc741b59e8fc0a45d46b30dc7a49635327659c9759"
+    },
+    {
+      "path": "nodes.py",
+      "symbol": "comfy_images_to_rgba_pils",
+      "local_ast_sha256": "bcf04a751d3c5eadd5f65a8383a7fe20f32c247f0ef986b5aacd46262edf27f6"
+    },
+    {
+      "path": "nodes.py",
+      "symbol": "pixal3d_views_to_preview",
+      "local_ast_sha256": "53fd7be838292a3f22c7fa0fab43aeb258312b5ae1560c053eaeae99c2a97695"
+    },
+    {
+      "path": "nodes.py",
+      "symbol": "Trellis2ImagesToViewConfigs",
+      "local_ast_sha256": "161f51b930e9deda2e719a32c1da24a3b739ddabe12091280abd596f6c7195a1"
+    },
+    {
+      "path": "nodes.py",
+      "symbol": "Trellis2ImagesToViewConfigs._parse_angles",
+      "local_ast_sha256": "90ba66445c493017e23df6f073c550fe9de874da369a003a40b8779c74f8537b"
+    },
+    {
+      "path": "nodes.py",
+      "symbol": "Trellis2Pixal3DMultiViewConfig",
+      "local_ast_sha256": "9bf66c833e65316deb9015620441726f2724be90d4b45839667d674ec418c722"
+    },
+    {
+      "path": "nodes.py",
+      "symbol": "Trellis2Pixal3DMultiViewConfig.INPUT_TYPES",
+      "local_ast_sha256": "856fcc8a5ae6f8181b1eff27b34a5d3935a2dbc2cd06955243b2e2a7254a3215"
+    },
+    {
+      "path": "nodes.py",
+      "symbol": "Trellis2Pixal3DMultiViewConfig.process",
+      "local_ast_sha256": "1ece5d6d5a9ac3d7a7e9601ad4931db517a6192c93568a0c693d5d50529bf5af"
+    },
+    {
+      "path": "trellis2/pipelines/trellis2_image_to_3d.py",
+      "symbol": "build_pixal3d_mv_image_cond_model",
+      "local_ast_sha256": "543ee5d6119fed1b32731018492e34928b1ea78a1553998cd1f8651f379941a4"
+    },
+    {
+      "path": "trellis2/pipelines/trellis2_image_to_3d.py",
+      "symbol": "Trellis2ImageTo3DPipeline",
+      "local_ast_sha256": "aff1568f48fa91e0567b57a24d3fa0b3386e093c12210d5b38a046cb242206ce"
+    },
+    {
+      "path": "trellis2/pipelines/trellis2_image_to_3d.py",
+      "symbol": "Trellis2ImageTo3DPipeline.__init__",
+      "local_ast_sha256": "f9549cdd5973a3e62ae6dfacc233abf152a648d655082d8cf814358cd9a96aa8"
+    },
+    {
+      "path": "trellis2/pipelines/trellis2_image_to_3d.py",
+      "symbol": "Trellis2ImageTo3DPipeline.low_vram",
+      "local_ast_sha256": "722f36563fc5dcf82933d634d2e35576492baff1b5752c3d24bb245e38228995"
+    },
+    {
+      "path": "trellis2/pipelines/trellis2_image_to_3d.py",
+      "symbol": "Trellis2ImageTo3DPipeline._cond_to",
+      "local_ast_sha256": "b22db8cba1561a3ff8530d11d58a9bb4e7a7dcaf3e3af528a040e48d311ef66c"
+    },
+    {
+      "path": "trellis2/pipelines/trellis2_image_to_3d.py",
+      "symbol": "Trellis2ImageTo3DPipeline._cond_cpu",
+      "local_ast_sha256": "45a8fa775d4035f5fe4ace92385f0cce0b2ae9249fde4ad803ae5ffa8a88ab7b"
+    },
+    {
+      "path": "trellis2/pipelines/trellis2_image_to_3d.py",
+      "symbol": "Trellis2ImageTo3DPipeline._cleanup_cuda",
+      "local_ast_sha256": "695edf34edbf39a24d794aaa84a52f53477de8a92cf0138b7f4981deb0687358"
+    },
+    {
+      "path": "trellis2/pipelines/trellis2_image_to_3d.py",
+      "symbol": "Trellis2ImageTo3DPipeline.from_pretrained",
+      "local_ast_sha256": "5e34d8ecaac4814ccc8a0f1f1982fe1ba340932d895e8bf1aad366e361a74b49"
+    },
+    {
+      "path": "trellis2/pipelines/trellis2_image_to_3d.py",
+      "symbol": "Trellis2ImageTo3DPipeline._load_pixal3d_mv_image_cond",
+      "local_ast_sha256": "6c24b0b67b23a4305a3863659c88f1443132249632522f6ef0e8f7019144b2b0"
+    },
+    {
+      "path": "trellis2/pipelines/trellis2_image_to_3d.py",
+      "symbol": "Trellis2ImageTo3DPipeline._unload_pixal3d_mv_image_cond",
+      "local_ast_sha256": "363519f40a5a519028853f92c1f393427780bcef2db8de1611140fa38e30c82c"
+    },
+    {
+      "path": "trellis2/pipelines/trellis2_image_to_3d.py",
+      "symbol": "Trellis2ImageTo3DPipeline.load_pixal3d_mv_image_cond_ss",
+      "local_ast_sha256": "fd5a6b14b9c1860e8388bcc12be905926c7b09f7f3d15af4e4a89642bf5a5eed"
+    },
+    {
+      "path": "trellis2/pipelines/trellis2_image_to_3d.py",
+      "symbol": "Trellis2ImageTo3DPipeline.unload_pixal3d_mv_image_cond_ss",
+      "local_ast_sha256": "cdd9502bfddb3a848a9995e54136f0ce0a5c3c8371b8ea2d2de1fb780a7914e8"
+    },
+    {
+      "path": "trellis2/pipelines/trellis2_image_to_3d.py",
+      "symbol": "Trellis2ImageTo3DPipeline.load_pixal3d_mv_image_cond_shape_512",
+      "local_ast_sha256": "7dcff65f056e93c6a1df34d4b49bd552e297710f139f255e2740d5ddb4da8a59"
+    },
+    {
+      "path": "trellis2/pipelines/trellis2_image_to_3d.py",
+      "symbol": "Trellis2ImageTo3DPipeline.unload_pixal3d_mv_image_cond_shape_512",
+      "local_ast_sha256": "0ea0d5b6a9b737910fe5668eeb6a8021b0503b27d7f60d1157f77db69737cc06"
+    },
+    {
+      "path": "trellis2/pipelines/trellis2_image_to_3d.py",
+      "symbol": "Trellis2ImageTo3DPipeline.load_pixal3d_mv_image_cond_shape_1024",
+      "local_ast_sha256": "99b6fe3d8c5e9da81c4fdf85cacf85cbeae8c620d08b69c8861b87451ca85677"
+    },
+    {
+      "path": "trellis2/pipelines/trellis2_image_to_3d.py",
+      "symbol": "Trellis2ImageTo3DPipeline.unload_pixal3d_mv_image_cond_shape_1024",
+      "local_ast_sha256": "fbecf29968c27018a9b7b0f154a52e9d07d0c3177b503028f928ef69a8430958"
+    },
+    {
+      "path": "trellis2/pipelines/trellis2_image_to_3d.py",
+      "symbol": "Trellis2ImageTo3DPipeline.load_sparse_structure_model",
+      "local_ast_sha256": "8ee9e2c1beb3bc00e575606ba16bbafa3fb63a96888c894882888e361bbfd37e"
+    },
+    {
+      "path": "trellis2/pipelines/trellis2_image_to_3d.py",
+      "symbol": "Trellis2ImageTo3DPipeline.unload_sparse_structure_model",
+      "local_ast_sha256": "ca260d9c8b3f278e345369a86f6e97d3cccf2db3eecf84c20f4cd2e2ce1b4284"
+    },
+    {
+      "path": "trellis2/pipelines/trellis2_image_to_3d.py",
+      "symbol": "Trellis2ImageTo3DPipeline.load_shape_slat_flow_model_512",
+      "local_ast_sha256": "248be84a9f51dfe671dd60c09cb4d85fdbe172b237e56a8e6b2060766bac1d06"
+    },
+    {
+      "path": "trellis2/pipelines/trellis2_image_to_3d.py",
+      "symbol": "Trellis2ImageTo3DPipeline.unload_shape_slat_flow_model_512",
+      "local_ast_sha256": "1164e9c509c9d271043c1465c1509aba1ae9071917d1636dff54c2b029a7df3c"
+    },
+    {
+      "path": "trellis2/pipelines/trellis2_image_to_3d.py",
+      "symbol": "Trellis2ImageTo3DPipeline.load_shape_slat_decoder",
+      "local_ast_sha256": "f4be57db96e80fba771e19f5e675231d8e1ea8ba1463a446412a759bf5007f24"
+    },
+    {
+      "path": "trellis2/pipelines/trellis2_image_to_3d.py",
+      "symbol": "Trellis2ImageTo3DPipeline.unload_shape_slat_decoder",
+      "local_ast_sha256": "d0d56f7283251f30822c50c572fbb78bc20a5e123d1a1c6e55d0acf9ee8995bb"
+    },
+    {
+      "path": "trellis2/pipelines/trellis2_image_to_3d.py",
+      "symbol": "Trellis2ImageTo3DPipeline.load_shape_slat_flow_model_1024",
+      "local_ast_sha256": "345ecaacbd9c8acc4ee7b4046bdc1638b1f60b191588eb64604c16466f4d3c57"
+    },
+    {
+      "path": "trellis2/pipelines/trellis2_image_to_3d.py",
+      "symbol": "Trellis2ImageTo3DPipeline.unload_shape_slat_flow_model_1024",
+      "local_ast_sha256": "fb17c39abc9be0c647ef48f0e45dc150f6ee07c67ee1009e195ae428c9db76ed"
+    },
+    {
+      "path": "trellis2/pipelines/trellis2_image_to_3d.py",
+      "symbol": "Trellis2ImageTo3DPipeline.to",
+      "local_ast_sha256": "cd8f6ea7c34b25ef7659196ea74ca92caf12eac54f278039d951fabcd347cb9c"
+    },
+    {
+      "path": "trellis2/pipelines/trellis2_image_to_3d.py",
+      "symbol": "Trellis2ImageTo3DPipeline._mv_image_for",
+      "local_ast_sha256": "43cd0617af7bc210545a09d49a2d0fa84a3de880f4a9ae6ecdd0bc402060c6bd"
+    },
+    {
+      "path": "trellis2/pipelines/trellis2_image_to_3d.py",
+      "symbol": "Trellis2ImageTo3DPipeline._build_sparse_mv_visibility",
+      "local_ast_sha256": "426cdae2e892e968296929ec3469271ffdab32affcf7449031daf161ddaf4a05"
+    },
+    {
+      "path": "trellis2/pipelines/trellis2_image_to_3d.py",
+      "symbol": "Trellis2ImageTo3DPipeline._build_ss_soft_occlusion_weights",
+      "local_ast_sha256": "9f9d69056b251a07e1d4ecd4555d712f9e7b057a31a5b5601c785561504f5883"
+    },
+    {
+      "path": "trellis2/pipelines/trellis2_image_to_3d.py",
+      "symbol": "Trellis2ImageTo3DPipeline._prepare_ss_moge_diag_state",
+      "local_ast_sha256": "fff6edb56225a2b016e614435908ff469618838ea88aafba225a5efab5944618"
+    },
+    {
+      "path": "trellis2/pipelines/trellis2_image_to_3d.py",
+      "symbol": "Trellis2ImageTo3DPipeline._moge_views_quantiles",
+      "local_ast_sha256": "3d390a9a03ab1118b7c18b44ff198aeb6e840162c63111b60a30f21c67d57f26"
+    },
+    {
+      "path": "trellis2/pipelines/trellis2_image_to_3d.py",
+      "symbol": "Trellis2ImageTo3DPipeline._moge_views_sample_points",
+      "local_ast_sha256": "34c441a857419b2ff0711fb58e62b784653d87e21c4fcc549e44d44687d8006d"
+    },
+    {
+      "path": "trellis2/pipelines/trellis2_image_to_3d.py",
+      "symbol": "Trellis2ImageTo3DPipeline._moge_views_nn",
+      "local_ast_sha256": "c7ced6fb72fac2ffbb9ee7d88f653459c47fa6cef6a63819e8fed531e0055809"
+    },
+    {
+      "path": "trellis2/pipelines/trellis2_image_to_3d.py",
+      "symbol": "Trellis2ImageTo3DPipeline._moge_views_fit_similarity",
+      "local_ast_sha256": "4bb6001ec3d32abc1a66c64ced4a9767d6f2d6fd8c1aa054a99e3c40b9ddc6c5"
+    },
+    {
+      "path": "trellis2/pipelines/trellis2_image_to_3d.py",
+      "symbol": "Trellis2ImageTo3DPipeline._diagnose_moge_views_alignment",
+      "local_ast_sha256": "25838b07da0d6f009d31c4c99f2231bf8e9851e82a41d2ca89189b93625b8d02"
+    },
+    {
+      "path": "trellis2/pipelines/trellis2_image_to_3d.py",
+      "symbol": "Trellis2ImageTo3DPipeline._diagnose_ss_moge_against_coords",
+      "local_ast_sha256": "de9618c171249a30bca06cee63e5d5b6e079a1eaa744c120455ee2a345f98154"
+    },
+    {
+      "path": "trellis2/pipelines/trellis2_image_to_3d.py",
+      "symbol": "Trellis2ImageTo3DPipeline._shape512_selected_sources",
+      "local_ast_sha256": "aa6546253a7d7b387772dc957421d1c8a256b5ed5c80bb42a9848ab5333aa52d"
+    },
+    {
+      "path": "trellis2/pipelines/trellis2_image_to_3d.py",
+      "symbol": "Trellis2ImageTo3DPipeline._shape_geometry_stage_config",
+      "local_ast_sha256": "de612e4f2305b1e069bb499c6d755108f0a1a31f8d4b310004c29cad32691f45"
+    },
+    {
+      "path": "trellis2/pipelines/trellis2_image_to_3d.py",
+      "symbol": "Trellis2ImageTo3DPipeline._shape512_marigold_diagnostics",
+      "local_ast_sha256": "e7168b85994b8cac49f93c51de0a33a9f26cb3fca98052ac9744de73816f2777"
+    },
+    {
+      "path": "trellis2/pipelines/trellis2_image_to_3d.py",
+      "symbol": "Trellis2ImageTo3DPipeline._run_mv_extractor",
+      "local_ast_sha256": "623976dae3ad6edbf5c930907ae5845afd410130fd47635fbf4dd75719629cde"
+    },
+    {
+      "path": "trellis2/pipelines/trellis2_image_to_3d.py",
+      "symbol": "Trellis2ImageTo3DPipeline.get_proj_cond_ss_mv",
+      "local_ast_sha256": "c63d8c2a291c36f00dc8d48d366d045c5daeca913ae4ca35ccef1a6b90e57e38"
+    },
+    {
+      "path": "trellis2/pipelines/trellis2_image_to_3d.py",
+      "symbol": "Trellis2ImageTo3DPipeline.get_proj_cond_shape_mv",
+      "local_ast_sha256": "cf0d8a8b16516d267db7fe3b2ab52a4774d4b0a8368659daf80b002184b04983"
+    },
+    {
+      "path": "trellis2/pipelines/trellis2_image_to_3d.py",
+      "symbol": "Trellis2ImageTo3DPipeline._ss_coords_signature",
+      "local_ast_sha256": "b07468598e83d55e5df4148f03216972b90cc1ec603029df9dac5c274d6ca6a2"
+    },
+    {
+      "path": "trellis2/pipelines/trellis2_image_to_3d.py",
+      "symbol": "Trellis2ImageTo3DPipeline._repair_ss_with_moge",
+      "local_ast_sha256": "298c34677b3fb71eee07cd0ada419ac2118e513c7ca659cfebee953f05b75d62"
+    },
+    {
+      "path": "trellis2/pipelines/trellis2_image_to_3d.py",
+      "symbol": "Trellis2ImageTo3DPipeline.sample_sparse_structure",
+      "local_ast_sha256": "c9a3406167aa3c1ea538bdf54bea089146935b51b21677f53a797f3714439e2f"
+    },
+    {
+      "path": "trellis2/pipelines/trellis2_image_to_3d.py",
+      "symbol": "Trellis2ImageTo3DPipeline.sample_shape_slat",
+      "local_ast_sha256": "7fc02e5ba6ce902c3e25c9af1ec58645e61265c4da650e3c2d51df87859b9985"
+    },
+    {
+      "path": "trellis2/pipelines/trellis2_image_to_3d.py",
+      "symbol": "Trellis2ImageTo3DPipeline.decode_shape_slat",
+      "local_ast_sha256": "68b933bb0ef266ec0058261e6d860e480b9a25f682a34cfc04680fccae4b1a3e"
+    },
+    {
+      "path": "trellis2/pipelines/trellis2_image_to_3d.py",
+      "symbol": "Trellis2ImageTo3DPipeline.decode_latent",
+      "local_ast_sha256": "237195b393e036847b5ea2ae8c815fdc51e36e4a43cf43abd0e7c5ea348d6d93"
+    },
+    {
+      "path": "trellis2/pipelines/trellis2_image_to_3d.py",
+      "symbol": "Trellis2ImageTo3DPipeline.GetSamplerName",
+      "local_ast_sha256": "9e3b62e2d028b8c4ccd3947814321c0438f4719db70a9c91fdfe24aa22866ef8"
+    },
+    {
+      "path": "trellis2/trainers/flow_matching/mixins/image_conditioned_proj.py",
+      "symbol": "project_points_to_image_batch",
+      "local_ast_sha256": "59120c3db5ac3600937d72c748a9feaeba2c9b45e2699d0332ff46bc575c6c26"
+    },
+    {
+      "path": "trellis2/trainers/flow_matching/mixins/image_conditioned_proj.py",
+      "symbol": "sample_features",
+      "local_ast_sha256": "e145a81f5339dea7bde1a73673ec423f40ac479d49f24005ad568a1253b2668a"
+    },
+    {
+      "path": "trellis2/trainers/flow_matching/mixins/image_conditioned_proj.py",
+      "symbol": "ProjGrid",
+      "local_ast_sha256": "08b49ae5a245a7caf7e35470bd34b56e852e168df2821ac0fd05d339ce4c65bf"
+    },
+    {
+      "path": "trellis2/trainers/flow_matching/mixins/image_conditioned_proj.py",
+      "symbol": "ProjGrid.__init__",
+      "local_ast_sha256": "784c76b6a91ed79bf00962208d724ccf4f77396108caec204a7d4ffdb2126f6e"
+    },
+    {
+      "path": "trellis2/trainers/flow_matching/mixins/image_conditioned_proj.py",
+      "symbol": "ProjGrid.forward",
+      "local_ast_sha256": "3b67d807780ea4069d01927b68264360a1ad2b055f5fd90a8f9c18eb213e10e4"
+    },
+    {
+      "path": "trellis2/trainers/flow_matching/mixins/image_conditioned_proj.py",
+      "symbol": "ProjGrid.visualize_projection",
+      "local_ast_sha256": "227af4c4ad2362a3c01900003b6c3cb131248b1bbf79904238d8fd1ab8d8af2a"
+    },
+    {
+      "path": "trellis2/trainers/flow_matching/mixins/image_conditioned_proj.py",
+      "symbol": "ProjGridMV",
+      "local_ast_sha256": "9f5b76f688329e143274676e8f1acfea1e971a0e5a51dce14069a13f3940345c"
+    },
+    {
+      "path": "trellis2/trainers/flow_matching/mixins/image_conditioned_proj.py",
+      "symbol": "ProjGridMV.forward",
+      "local_ast_sha256": "dc1153a8c55d6b16e3f7c8e875c708cc4945cc2fc1cb075045391db97e50a4bc"
+    },
+    {
+      "path": "trellis2/trainers/flow_matching/mixins/image_conditioned_proj.py",
+      "symbol": "ProjGridMV.forward_crop",
+      "local_ast_sha256": "4f36b3efe9e6589367a83e07eeaec7245681d4870505ae7dc5e00b4fe4215e10"
+    },
+    {
+      "path": "trellis2/trainers/flow_matching/mixins/image_conditioned_proj.py",
+      "symbol": "compute_relative_calc_mat",
+      "local_ast_sha256": "c3b4cb2e97176f86040ce4484393c4bc5d8dbe03854274a92b3738dc86226877"
+    },
+    {
+      "path": "trellis2/trainers/flow_matching/mixins/image_conditioned_proj.py",
+      "symbol": "DinoV3ProjFeatureExtractor",
+      "local_ast_sha256": "d71079a814187488da5607a79ba91e351cd75f3fb0fa0f27b8fd2c98b46d710d"
+    },
+    {
+      "path": "trellis2/trainers/flow_matching/mixins/image_conditioned_proj.py",
+      "symbol": "DinoV3ProjFeatureExtractor.__init__",
+      "local_ast_sha256": "fe04bac2dc3447c2f69a99b312e2dd8bb4b9f5e90e5551684c50aa6528166602"
+    },
+    {
+      "path": "trellis2/trainers/flow_matching/mixins/image_conditioned_proj.py",
+      "symbol": "DinoV3ProjFeatureExtractor._cached_naf_repo",
+      "local_ast_sha256": "8e56dfc5175b7721757ebecbb7cc02359c2a105f52e9f5a0fe8a8a98bfc440b0"
+    },
+    {
+      "path": "trellis2/trainers/flow_matching/mixins/image_conditioned_proj.py",
+      "symbol": "DinoV3ProjFeatureExtractor._load_naf",
+      "local_ast_sha256": "4e2a6abf9978bc8a0e5e8ebd97db2133380a03f4e2abafeb24099085098dacba"
+    },
+    {
+      "path": "trellis2/trainers/flow_matching/mixins/image_conditioned_proj.py",
+      "symbol": "DinoV3ProjFeatureExtractor.to",
+      "local_ast_sha256": "284fa17fabadd650d4cefd7615ad062a44afb9151559c352de39739f88685acf"
+    },
+    {
+      "path": "trellis2/trainers/flow_matching/mixins/image_conditioned_proj.py",
+      "symbol": "DinoV3ProjFeatureExtractor.cuda",
+      "local_ast_sha256": "28e296d3a263a51ed9c6d6d0ca76b70110fc2d4fa8602cb0ca08085ff4a59d09"
+    },
+    {
+      "path": "trellis2/trainers/flow_matching/mixins/image_conditioned_proj.py",
+      "symbol": "DinoV3ProjFeatureExtractor.cpu",
+      "local_ast_sha256": "ad6214c324f77dafc33f0f4c32316ebadea1a1ed12cc672c49e7878f1b068e23"
+    },
+    {
+      "path": "trellis2/trainers/flow_matching/mixins/image_conditioned_proj.py",
+      "symbol": "DinoV3ProjFeatureExtractor.extract_features",
+      "local_ast_sha256": "32c8ff96caad5a8d98156f880e30b3795febaf2c74d304adce6e6bd71f162d88"
+    },
+    {
+      "path": "trellis2/trainers/flow_matching/mixins/image_conditioned_proj.py",
+      "symbol": "DinoV3ProjFeatureExtractor.forward",
+      "local_ast_sha256": "8411bc88e1cc33b9902cc14e648fe9f8a12bb2e2a090810e0c6782cf16f3698e"
+    },
+    {
+      "path": "trellis2/trainers/flow_matching/mixins/image_conditioned_proj.py",
+      "symbol": "DinoV3ProjFeatureExtractor._proj_naf_tiled",
+      "local_ast_sha256": "4aecba571216d421d3f8f1baedafcc3c1f4bcb03fd31d79fec5baf0945a8746f"
+    },
+    {
+      "path": "trellis2/trainers/flow_matching/mixins/image_conditioned_proj.py",
+      "symbol": "DinoV3ProjFeatureExtractor.visualize_projection",
+      "local_ast_sha256": "9450abfb8c6c5747913d55cdf56242c335e494e96e12d3e7a7f8ebfdb75dcaa6"
+    },
+    {
+      "path": "trellis2/trainers/flow_matching/mixins/image_conditioned_proj.py",
+      "symbol": "DinoV3ProjMultiViewFeatureExtractor",
+      "local_ast_sha256": "9f0b4bd7b0de0d20a98b7860e3fc5584aa3cf9f8405224a7b2c0914a1ad19672"
+    },
+    {
+      "path": "trellis2/trainers/flow_matching/mixins/image_conditioned_proj.py",
+      "symbol": "DinoV3ProjMultiViewFeatureExtractor.__init__",
+      "local_ast_sha256": "bc9baa87180c5eff322e54a9610c44848325a13dfeef90132e68346e885f84a7"
+    },
+    {
+      "path": "trellis2/trainers/flow_matching/mixins/image_conditioned_proj.py",
+      "symbol": "DinoV3ProjMultiViewFeatureExtractor._project_single_view",
+      "local_ast_sha256": "1b85167dd95c09278b48b6a543335e912a39176024f128f8a24a5379d1f6d832"
+    },
+    {
+      "path": "trellis2/trainers/flow_matching/mixins/image_conditioned_proj.py",
+      "symbol": "DinoV3ProjMultiViewFeatureExtractor._project_single_view_lr",
+      "local_ast_sha256": "9ffaf646fb8c4c3776b9a55e5675b0e9fccffe22c09f7db973fae1309eebd390"
+    },
+    {
+      "path": "trellis2/trainers/flow_matching/mixins/image_conditioned_proj.py",
+      "symbol": "DinoV3ProjMultiViewFeatureExtractor._project_single_view_hr",
+      "local_ast_sha256": "7f1950da0ad6d291804b27aba02ea104f4f220ae0d0cd6ff4bf1f3140638ec21"
+    },
+    {
+      "path": "trellis2/trainers/flow_matching/mixins/image_conditioned_proj.py",
+      "symbol": "DinoV3ProjMultiViewFeatureExtractor._project_detail_tile_lr",
+      "local_ast_sha256": "ada0c91a81dae0a2a572267233b8ba8e22fdead947b8ec2cb4f1ae53c0be406f"
+    },
+    {
+      "path": "trellis2/trainers/flow_matching/mixins/image_conditioned_proj.py",
+      "symbol": "DinoV3ProjMultiViewFeatureExtractor.forward",
+      "local_ast_sha256": "99df164583473ab628e8bd7bce0f02b7f8013f26ce1558735b15ea21b21b522f"
+    },
+    {
+      "path": "trellis2/utils/mv_camera.py",
+      "symbol": "_diag_quantiles",
+      "local_ast_sha256": "dd0e6c7a58a8d8636ce58603190cfcb76ba7e5d75878f2345a0bb0ef46477d97"
+    },
+    {
+      "path": "trellis2/utils/mv_camera.py",
+      "symbol": "camera_distance_for_extent",
+      "local_ast_sha256": "083998228cc3842e0e92cfd04c300695a7d990ddacb0c5692589c1aba21b80e1"
+    },
+    {
+      "path": "trellis2/utils/mv_camera.py",
+      "symbol": "camera_distance_for_fov",
+      "local_ast_sha256": "f93adc837381d436b89d00e5ef515b2f420563451732da3a7217732f761dfe3f"
+    },
+    {
+      "path": "trellis2/utils/mv_camera.py",
+      "symbol": "measure_object_fill",
+      "local_ast_sha256": "2806f62ff11ca2fc7e65ef2ec4069de1b0fc4c254c1bf62e72efd1e54c2d3fce"
+    },
+    {
+      "path": "trellis2/utils/mv_camera.py",
+      "symbol": "blender_c2w_from_azimuth_elevation",
+      "local_ast_sha256": "d74de623bebba9ee16422b06d11b20a52a8f1c02e62a9652d49d28cad33d9f90"
+    },
+    {
+      "path": "trellis2/utils/mv_camera.py",
+      "symbol": "to_cond_tensor",
+      "local_ast_sha256": "db5f6d1fd72f5481cc7ad35f0a9e71b54f9ecf646af7a9190943f410958837a7"
+    },
+    {
+      "path": "trellis2/utils/mv_camera.py",
+      "symbol": "to_native_cond_tensor",
+      "local_ast_sha256": "b28b6298033de455ead5d66dca05add85c2f1146a19cb38005960b5c7e207b72"
+    },
+    {
+      "path": "trellis2/utils/mv_camera.py",
+      "symbol": "build_views",
+      "local_ast_sha256": "3b8677a208b0ae8992fc6faa45b652179b6c6dc74b37cd89c3ee20f0a89d43cf"
+    },
+    {
+      "path": "trellis2/utils/mv_camera.py",
+      "symbol": "attach_geometry_confidence",
+      "local_ast_sha256": "c86be7336b4727b9edbb83bc2920c8c0a52ad25efcc24a20efedc16a210f5b95"
+    },
+    {
+      "path": "trellis2/utils/mv_camera.py",
+      "symbol": "attach_moge_shape512_geometry",
+      "local_ast_sha256": "91a08e466e20466b17be31747305f569048342057a2aaba24fb0a4b611f6dfba"
+    },
+    {
+      "path": "trellis2/utils/mv_camera.py",
+      "symbol": "build_views_from_angles",
+      "local_ast_sha256": "6af06016e89a67782f64f9eda732d595e955d476de0a165bf25ed00ce9e3b09c"
+    },
+    {
+      "path": "trellis2/utils/mv_camera.py",
+      "symbol": "load_rgba",
+      "local_ast_sha256": "9b5f85d13d7d98da3f9217729687c3b2136ec715d0b90b146e8da45b0f1f5737"
+    },
+    {
+      "path": "trellis2/utils/mv_camera.py",
+      "symbol": "load_views_from_dir",
+      "local_ast_sha256": "0803b2f946072266b64a418e182f74255b6c1052f37e888bbfa4f71625cd50ed"
+    },
+    {
+      "path": "trellis2/utils/mv_camera.py",
+      "symbol": "check_main_view",
+      "local_ast_sha256": "36658fc95b83f7f6742ed0091152832224ca206193b26a52d876772e1574337f"
+    },
+    {
+      "path": "trellis2/utils/mv_camera.py",
+      "symbol": "views_to",
+      "local_ast_sha256": "ff11fbaddff973d6f621f0dafaa9dc75f1a2ca22825e87c71b4c4ffb743ec641"
+    },
+    {
+      "path": "trellis2/representations/mesh/base.py",
+      "symbol": "Mesh",
+      "local_ast_sha256": "44993f5f869f8e007622a4049a2fb00d33da1d37702f5a90ab38be57b9acbc56"
+    },
+    {
+      "path": "trellis2/representations/mesh/base.py",
+      "symbol": "Mesh.__init__",
+      "local_ast_sha256": "d5819fd66cded2b1f8e06428fe9f5e706cbb34a8fe75fe5620111c106c443b67"
+    },
+    {
+      "path": "trellis2/representations/mesh/base.py",
+      "symbol": "Mesh.device",
+      "local_ast_sha256": "8b7dcfac6d3877cc863afe515a0fc9522af331d1345e14aab3500238ddef2bff"
+    },
+    {
+      "path": "trellis2/representations/mesh/base.py",
+      "symbol": "Mesh.to",
+      "local_ast_sha256": "ee93b56e1967b7e43687939662fb1f8fc88f3d91494b2e8220ad1b38d7df42cb"
+    },
+    {
+      "path": "trellis2/representations/mesh/base.py",
+      "symbol": "Mesh.cuda",
+      "local_ast_sha256": "845b3d4f884d9f5f3bc4069c834f94e12382bdb4e249309773b029c70a84b475"
+    },
+    {
+      "path": "trellis2/representations/mesh/base.py",
+      "symbol": "Mesh.cpu",
+      "local_ast_sha256": "1dd16509866931ee0e9db112e6eff58635832c7cd28ec91553db3e73282eb92e"
+    },
+    {
+      "path": "trellis2/representations/mesh/base.py",
+      "symbol": "Mesh.fill_holes",
+      "local_ast_sha256": "57c910d90d913019a1b241c373d1b1ba9acd8cbaab2650c559129456c4ecc7fe"
+    },
+    {
+      "path": "trellis2/representations/mesh/base.py",
+      "symbol": "Mesh.remove_faces",
+      "local_ast_sha256": "0f37058b580f887086a05e26a2f0a5bdce662945a038da72f9f5aefd39103da6"
+    },
+    {
+      "path": "trellis2/representations/mesh/base.py",
+      "symbol": "Mesh.simplify_with_cumesh",
+      "local_ast_sha256": "f48d9403f128c0f9d01486b92bd740a3d925f884ae3046cb9932e17b8fb22b3e"
+    },
+    {
+      "path": "trellis2/representations/mesh/base.py",
+      "symbol": "Mesh.simplify_with_meshlib",
+      "local_ast_sha256": "75f90b50aa525c54916c6bf610a819111d65eebc3f483dc7583ffc5c54ba0138"
+    },
+    {
+      "path": "trellis2/representations/mesh/base.py",
+      "symbol": "MeshWithVoxel",
+      "local_ast_sha256": "71075fb73b1fe6f0e4a2ddfcb2d9f9176de9ce2efc335647ba6eeba5017c8df6"
+    },
+    {
+      "path": "trellis2/representations/mesh/base.py",
+      "symbol": "MeshWithVoxel.__init__",
+      "local_ast_sha256": "9ad5312cd447cf6907e908d11f5301abe6e03a43c6209854803d8ed4b42776a7"
+    },
+    {
+      "path": "trellis2/representations/mesh/base.py",
+      "symbol": "MeshWithVoxel.to",
+      "local_ast_sha256": "7506d12d0c2c07f0b503eca2e5523602b73d1a458fa1bce4d6cae18a83cc5641"
+    },
+    {
+      "path": "trellis2/representations/mesh/base.py",
+      "symbol": "MeshWithVoxel.query_attrs",
+      "local_ast_sha256": "3c9b2bbc744a21329ee66c6b2e41065f4e9e51217ec1d4bdeff7d50a0feeb459"
+    },
+    {
+      "path": "trellis2/representations/mesh/base.py",
+      "symbol": "MeshWithVoxel.query_vertex_attrs",
+      "local_ast_sha256": "902f09a09af1a1742dd14ef1338d5737c650cd127d213701b5349dc0741dbc89"
+    },
+    {
+      "path": "trellis2/utils/camera.py",
+      "symbol": "compute_f_pixels",
+      "local_ast_sha256": "edb725f2d2f622fc22c522b5a4c414da2f1e148b1dde434a13ea83a38b613889"
+    },
+    {
+      "path": "trellis2/utils/camera.py",
+      "symbol": "distance_from_fov",
+      "local_ast_sha256": "7e15371e435a445a6f4543f0da491791cd33ae93fb32c43d4a5cb377b81d8e0c"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+__pycache__
+Cumesh/*
+o_voxel/*
+FlexGEMM/*
+weights/*
+triton_cache/*
+triton_caches/*
+o-voxel/*
+.vs/*
+nvdiffrast/*
+nvdiffrec/*
+fp8_models/*
+.upstream/
+upstream-review*.json

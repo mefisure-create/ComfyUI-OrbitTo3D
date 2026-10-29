@@ -1,0 +1,31 @@
+name: Upstream contract check
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 5 * * 1"
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Clone visualbruno upstream
+        run: git clone --filter=blob:none https://github.com/visualbruno/ComfyUI-Trellis2.git .upstream/ComfyUI-Trellis2
+      - name: Check tracked upstream files and symbols
+        run: >-
+          python tools/check_upstream.py
+          --upstream-repo .upstream/ComfyUI-Trellis2
+          --target origin/main
+          --json-report upstream-review.json
+          --fail-on-change
+      - name: Upload upstream review report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: upstream-review
+          path: upstream-review.json
+          if-no-files-found: ignore
