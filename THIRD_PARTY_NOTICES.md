@@ -17,3 +17,7 @@ ComfyUI-OrbitTo3D.
 
 See `UPSTREAM.md` and `upstream_symbols.json` for the maintained provenance and
 update contract.
+
+## External workflow/runtime dependencies (not vendored)
+
+The 0.1.1 workflow uses Akatz Execution Inversion (`akatz-ai/ComfyUI-Execution-Inversion`) for per-view while loops. WTiVo, `orbit_raw_component_tool`, and the audited systemd launcher are separately installed on the host. The solver and component cleaner are not bundled; consult their own distribution/license terms. The experimental PMP helper source in `orbit3d_ext/pmp_helper/` is based on CGAL libraries, which must be installed under their applicable licenses when built.

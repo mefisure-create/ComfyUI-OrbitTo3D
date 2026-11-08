@@ -17,6 +17,8 @@ socket so original downstream Trellis2 mesh/decode nodes can still consume it.
 import gc
 import math
 import os
+import random
+from contextlib import contextmanager
 from pathlib import Path
 
 import numpy as np
@@ -57,6 +59,178 @@ def check_pixal3d_mv_pipeline(pipeline):
         raise Exception(
             'pixal3d_mv_views needs the Pixal3D multi-view weights. Turn on '
             '"pixal3d_multiview" in Trellis2 - LoadModel (loads pipeline_mv.json / ckpts/*_mv).')
+
+
+def _orbit3d_seed_all(seed: int = 0):
+    """Set Python / NumPy / Torch RNGs together."""
+    random.seed(int(seed))
+    np.random.seed(int(seed))
+    torch.manual_seed(int(seed))
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed_all(int(seed))
+
+
+@contextmanager
+def _orbit3d_seed_scope(seed_mode: str = "inherit", seed: int = 0):
+    """
+    Optional deterministic RNG scope that restores previous RNG state on exit.
+    Default "inherit" preserves legacy behavior exactly.
+    "fixed" temporarily reseeds Python / NumPy / Torch for this node only.
+    """
+    seed_mode = str(seed_mode).strip().lower()
+    if seed_mode == "inherit":
+        yield
+        return
+    if seed_mode != "fixed":
+        raise ValueError(f"unsupported seed_mode={seed_mode!r}")
+
+    py_state = random.getstate()
+    np_state = np.random.get_state()
+    torch_state = torch.get_rng_state()
+    cuda_states = None
+    if torch.cuda.is_available():
+        cuda_states = torch.cuda.get_rng_state_all()
+
+    _orbit3d_seed_all(int(seed))
+    try:
+        yield
+    finally:
+        random.setstate(py_state)
+        np.random.set_state(np_state)
+        torch.set_rng_state(torch_state)
+        if cuda_states is not None:
+            torch.cuda.set_rng_state_all(cuda_states)
+
+
+def _orbit3d_randn(shape, device, generator=None):
+    if generator is None:
+        return torch.randn(shape, device=device)
+    return torch.randn(shape, generator=generator, device=device)
+
+
+def _orbit3d_make_generator(seed_mode: str, seed: int, device):
+    seed_mode = str(seed_mode).strip().lower()
+    if seed_mode == "inherit":
+        return None
+    if seed_mode != "fixed":
+        raise ValueError(f"unsupported seed_mode={seed_mode!r}")
+    gen = torch.Generator(device=device)
+    gen.manual_seed(int(seed))
+    return gen
+
+
+def _orbit3d_normalize_cache_mode(cache_mode: str):
+    cache_mode = str(cache_mode).strip().lower()
+    if cache_mode in ("off", "none", "legacy"):
+        return "off"
+    if cache_mode not in ("save", "replay", "replay_or_save"):
+        raise ValueError(f"unsupported cache_mode={cache_mode!r}")
+    return cache_mode
+
+
+def _orbit3d_expand_cache_path(cache_path: str):
+    cache_path = str(cache_path or "").strip()
+    if not cache_path:
+        return None
+    return Path(cache_path).expanduser().resolve()
+
+
+def _orbit3d_reconcile_noise_from_cache(coords_cpu, in_channels, seed_mode, seed, cache_path):
+    payload = torch.load(str(cache_path), map_location="cpu")
+    if not isinstance(payload, dict):
+        raise ValueError(f"noise cache {cache_path} is not a dict payload")
+    if "coords" not in payload or "noise_feats" not in payload:
+        raise ValueError(f"noise cache {cache_path} must contain coords and noise_feats")
+
+    saved_coords = payload["coords"].detach().cpu().int()
+    saved_noise = payload["noise_feats"].detach().cpu().float()
+    if saved_noise.ndim != 2:
+        raise ValueError(f"noise cache {cache_path} noise_feats must be rank-2")
+    if saved_coords.ndim != 2:
+        raise ValueError(f"noise cache {cache_path} coords must be rank-2")
+    if saved_coords.shape[0] != saved_noise.shape[0]:
+        raise ValueError(
+            f"noise cache {cache_path} row mismatch: coords={saved_coords.shape} noise={saved_noise.shape}"
+        )
+    if saved_noise.shape[1] != int(in_channels):
+        raise ValueError(
+            f"noise cache {cache_path} in_channels mismatch: saved={saved_noise.shape[1]} current={in_channels}"
+        )
+
+    if saved_coords.shape == coords_cpu.shape and torch.equal(saved_coords, coords_cpu):
+        return saved_noise
+
+    saved_map = {tuple(row.tolist()): i for i, row in enumerate(saved_coords)}
+    rows = []
+    missing = []
+    for i, row in enumerate(coords_cpu):
+        idx = saved_map.get(tuple(row.tolist()))
+        if idx is None:
+            rows.append(None)
+            missing.append(i)
+        else:
+            rows.append(saved_noise[idx])
+
+    if missing:
+        gen = _orbit3d_make_generator(seed_mode, seed, device="cpu")
+        fresh = _orbit3d_randn((len(missing), int(in_channels)), device="cpu", generator=gen).float()
+        for j, dst_i in enumerate(missing):
+            rows[dst_i] = fresh[j]
+        print(
+            f"[ShapeHR noise] replayed {coords_cpu.shape[0] - len(missing)} rows from {cache_path}; "
+            f"generated {len(missing)} new rows for unmatched coords",
+            flush=True,
+        )
+    else:
+        print(
+            f"[ShapeHR noise] replayed full cache with reordered coords from {cache_path}",
+            flush=True,
+        )
+    return torch.stack(rows, dim=0)
+
+
+def _orbit3d_build_hr_noise(coords, in_channels, device, seed_mode, seed, cache_mode, cache_path):
+    """Build or replay HR noise while preserving legacy behavior by default."""
+    cache_mode = _orbit3d_normalize_cache_mode(cache_mode)
+    cache_path = _orbit3d_expand_cache_path(cache_path)
+    coords_cpu = coords.detach().cpu().int()
+
+    if cache_mode == "replay":
+        if cache_path is None or not cache_path.exists():
+            raise FileNotFoundError(
+                f"shape_hr_noise_cache_mode='replay' requires an existing cache file, got {cache_path}"
+            )
+        noise_cpu = _orbit3d_reconcile_noise_from_cache(
+            coords_cpu, in_channels, seed_mode, seed, cache_path
+        )
+        return noise_cpu.to(device=device)
+
+    if cache_mode == "replay_or_save" and cache_path is not None and cache_path.exists():
+        noise_cpu = _orbit3d_reconcile_noise_from_cache(
+            coords_cpu, in_channels, seed_mode, seed, cache_path
+        )
+        return noise_cpu.to(device=device)
+
+    gen = _orbit3d_make_generator(seed_mode, seed, device=device)
+    noise = _orbit3d_randn((coords.shape[0], int(in_channels)), device=device, generator=gen)
+
+    if cache_mode in ("save", "replay_or_save"):
+        if cache_path is None:
+            raise ValueError(
+                f"shape_hr_noise_cache_mode={cache_mode!r} requires a non-empty shape_hr_noise_cache_path"
+            )
+        cache_path.parent.mkdir(parents=True, exist_ok=True)
+        payload = {
+            "coords": coords_cpu,
+            "noise_feats": noise.detach().cpu(),
+            "in_channels": int(in_channels),
+            "seed_mode": str(seed_mode),
+            "seed": int(seed),
+        }
+        torch.save(payload, str(cache_path))
+        print(f"[ShapeHR noise] saved cache to {cache_path}", flush=True)
+
+    return noise
 
 class Trellis2LoadModel:
     @classmethod
@@ -344,6 +518,11 @@ class Trellis2ShapeGenerator:
                 "dino_lock": ("FLOAT",{"default":0.00,"min":0.00,"max":1.00,"step":0.01}),
                 "dino_substeps": ("INT",{"default":4,"min":1,"max":99,"step":1}),
                 "dino_foundation_cap": ("FLOAT",{"default":1.00,"min":0.01,"max":1.00,"step":0.01}),
+                "shape_seed_mode": (["inherit", "fixed"], {
+                    "default": "inherit",
+                    "tooltip": "Shape512 RNG control. inherit preserves current behavior; fixed uses shape_seed only inside this node."
+                }),
+                "shape_seed": ("INT", {"default": 0, "min": 0, "max": 0x7fffffff}),
             },
             "optional":
             {
@@ -369,6 +548,8 @@ class Trellis2ShapeGenerator:
         dino_lock,
         dino_substeps,
         dino_foundation_cap,
+        shape_seed_mode="inherit",
+        shape_seed=0,
         pixal3d_mv_views=None
         ):
         if pixal3d_mv_views is None:
@@ -394,14 +575,15 @@ class Trellis2ShapeGenerator:
 
             pipeline.load_shape_slat_flow_model_512()
 
-            shape_slat = pipeline.sample_shape_slat(
-                image_cond, pipeline.models['shape_slat_flow_model_512'],
-                coords, shape_slat_sampler_params,
-                verbose=verbose,
-                dino_lock=dino_lock,
-                dino_substeps=dino_substeps,
-                dino_foundation_cap=dino_foundation_cap
-            )
+            with _orbit3d_seed_scope(shape_seed_mode, shape_seed):
+                shape_slat = pipeline.sample_shape_slat(
+                    image_cond, pipeline.models['shape_slat_flow_model_512'],
+                    coords, shape_slat_sampler_params,
+                    verbose=verbose,
+                    dino_lock=dino_lock,
+                    dino_substeps=dino_substeps,
+                    dino_foundation_cap=dino_foundation_cap
+                )
 
             if not pipeline.keep_models_loaded:
                 pipeline.unload_shape_slat_flow_model_512()
@@ -418,14 +600,15 @@ class Trellis2ShapeGenerator:
 
             pipeline.load_shape_slat_flow_model_1024()
 
-            shape_slat = pipeline.sample_shape_slat(
-                image_cond, pipeline.models['shape_slat_flow_model_1024'],
-                coords, shape_slat_sampler_params,
-                verbose=verbose,
-                dino_lock=dino_lock,
-                dino_substeps=dino_substeps,
-                dino_foundation_cap=dino_foundation_cap
-            )
+            with _orbit3d_seed_scope(shape_seed_mode, shape_seed):
+                shape_slat = pipeline.sample_shape_slat(
+                    image_cond, pipeline.models['shape_slat_flow_model_1024'],
+                    coords, shape_slat_sampler_params,
+                    verbose=verbose,
+                    dino_lock=dino_lock,
+                    dino_substeps=dino_substeps,
+                    dino_foundation_cap=dino_foundation_cap
+                )
 
             if not pipeline.keep_models_loaded:
                 pipeline.unload_shape_slat_flow_model_1024()
@@ -480,6 +663,20 @@ class Trellis2ShapeCascadeGenerator:
                         "tooltip": "Depth source used only by the cascade HR shape pass."
                     },
                 ),
+                "shape_hr_seed_mode": (["inherit", "fixed"], {
+                    "default": "inherit",
+                    "tooltip": "HR Shape RNG control. inherit preserves current behavior; fixed uses shape_hr_seed for HR noise only."
+                }),
+                "shape_hr_seed": ("INT", {"default": 0, "min": 0, "max": 0x7fffffff}),
+                "shape_hr_noise_cache_mode": (["off", "save", "replay", "replay_or_save"], {
+                    "default": "off",
+                    "tooltip": "Optional HR noise cache. off preserves current behavior. save writes coords+noise; replay restores matching rows; replay_or_save reuses an existing cache or writes a new one."
+                }),
+                "shape_hr_noise_cache_path": ("STRING", {
+                    "default": "",
+                    "multiline": False,
+                    "tooltip": "Optional file path for HR noise cache (torch.save payload)."
+                }),
             },
             "optional":
             {
@@ -508,6 +705,10 @@ class Trellis2ShapeCascadeGenerator:
         shape_hr_mode="off",
         shape_hr_normals_source="Marigold",
         shape_hr_depth_source="Marigold",
+        shape_hr_seed_mode="inherit",
+        shape_hr_seed=0,
+        shape_hr_noise_cache_mode="off",
+        shape_hr_noise_cache_path="",
         pixal3d_mv_views=None
         ):
         if pixal3d_mv_views is None:
@@ -551,7 +752,11 @@ class Trellis2ShapeCascadeGenerator:
             pipeline, shape_slat, from_resolution, to_resolution,
             sparse_structure_resolution, max_num_tokens,
             shape_slat_sampler_params, verbose, dino_lock, dino_substeps,
-            dino_foundation_cap, hr_views
+            dino_foundation_cap, hr_views,
+            shape_hr_seed_mode=shape_hr_seed_mode,
+            shape_hr_seed=shape_hr_seed,
+            shape_hr_noise_cache_mode=shape_hr_noise_cache_mode,
+            shape_hr_noise_cache_path=shape_hr_noise_cache_path,
         )
 
         if not pipeline.keep_models_loaded:
@@ -561,7 +766,10 @@ class Trellis2ShapeCascadeGenerator:
 
     def sample(self, pipeline, slat, lr_resolution, resolution, sparse_structure_resolution,
                max_num_tokens, sampler_params, verbose, dino_lock, dino_substeps,
-               dino_foundation_cap, pixal3d_mv_views):
+               dino_foundation_cap, pixal3d_mv_views,
+               shape_hr_seed_mode="inherit", shape_hr_seed=0,
+               shape_hr_noise_cache_mode="off", shape_hr_noise_cache_path=""):
+
         pipeline.load_shape_slat_decoder()
         if pipeline.low_vram:
             pipeline.models['shape_slat_decoder'].to(pipeline.device)
@@ -618,8 +826,23 @@ class Trellis2ShapeCascadeGenerator:
             cond = pipeline._cond_to(cond, pipeline.device)
 
         coords_dev = coords.to(pipeline.device)
+        if str(shape_hr_seed_mode).strip().lower() == "inherit" and \
+           _orbit3d_normalize_cache_mode(shape_hr_noise_cache_mode) == "off":
+            noise_feats = torch.randn(
+                coords.shape[0], flow_model.in_channels, device=pipeline.device
+            )
+        else:
+            noise_feats = _orbit3d_build_hr_noise(
+                coords=coords,
+                in_channels=flow_model.in_channels,
+                device=pipeline.device,
+                seed_mode=shape_hr_seed_mode,
+                seed=shape_hr_seed,
+                cache_mode=shape_hr_noise_cache_mode,
+                cache_path=shape_hr_noise_cache_path,
+            )
         noise = SparseTensor(
-            feats=torch.randn(coords.shape[0], flow_model.in_channels, device=pipeline.device),
+            feats=noise_feats,
             coords=coords_dev,
         )
         sampler_params = {**pipeline.shape_slat_sampler_params, **sampler_params}
@@ -661,7 +884,12 @@ def comfy_images_to_rgba_pils(images, masks=None, invert_mask=False, remove_back
     rescaled here: transforms.json describes the framing as given, so changing it
     would break the correspondence between the pixels and the cameras.
     """
-    if not isinstance(images, torch.Tensor):
+    # ORBIT3D PATCH 3.6.3: allow a disk-backed logical IMAGE batch.
+    # Each images[i] still resolves to the same ordinary torch.Tensor expected below.
+    if (
+        not isinstance(images, torch.Tensor)
+        and not getattr(images, "_orbit3d_lazy_view_batch", False)
+    ):
         raise TypeError(f"Expected torch.Tensor for IMAGE, got {type(images)}")
     if images.ndim == 3:
         images = images.unsqueeze(0)
@@ -943,7 +1171,10 @@ class Trellis2Pixal3DMultiViewConfig:
         # ComfyUI cannot silently truncate/reorder a batch relative to azimuths.
         expected_v = len(az_list)
 
-        if not isinstance(images, torch.Tensor):
+        if (
+            not isinstance(images, torch.Tensor)
+            and not getattr(images, "_orbit3d_lazy_view_batch", False)
+        ):
             raise TypeError(
                 f"Pixal3D MV images must be a torch.Tensor, got {type(images).__name__}"
             )

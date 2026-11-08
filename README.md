@@ -1,32 +1,33 @@
 # ComfyUI-OrbitTo3D
 
-**Repository:** https://github.com/mefisure-create/ComfyUI-OrbitTo3D  
-**Comfy Registry package ID:** `orbit-to-3d` (publisher `@fadj`)
+**Version:** `0.1.1` · **Repository:** https://github.com/mefisure-create/ComfyUI-OrbitTo3D
+**Comfy Registry:** `orbit-to-3d` (publisher `@fadj`)
 
-`ComfyUI-OrbitTo3D` is a **mesh-only, high-precision multiview reconstruction extension for ComfyUI**, derived from and designed to coexist with [`visualbruno/ComfyUI-Trellis2`](https://github.com/visualbruno/ComfyUI-Trellis2).
+`ComfyUI-OrbitTo3D` is a **mesh-only, high-precision multiview reconstruction extension for ComfyUI**. It takes a turntable video, estimates the frame-to-yaw correspondence with VGGT-Omega, enhances selected views with cyclic RealBasicVSR, prepares Marigold V2/MoGe-3 geometric evidence, and reconstructs a Pixal3D mesh using consistent multiview observations.
 
-Orbit is intended for a specific workflow: take an ordered turntable / multiview sequence, select camera-aligned views, preserve native geometry evidence, and reconstruct a Pixal3D mesh with stronger multiview consistency. It keeps Trellis2-compatible socket types so the original Trellis2 decode / mesh reconstruction / export nodes remain downstream-compatible.
+The project is derived from, and coexists with, [`visualbruno/ComfyUI-Trellis2`](https://github.com/visualbruno/ComfyUI-Trellis2). Its compatible `TRELLIS2PIPELINE` / `MESHWITHVOXEL` sockets enable downstream Trellis2 decoding and mesh operations. The reviewed reference baseline is `b0e84c0f29857a444e8bcb5b9be2ea218e96efd0`; see [UPSTREAM.md](UPSTREAM.md) for provenance and the update contract.
 
-This repository does **not** replace `ComfyUI-Trellis2`. The pinned Trellis2 reference baseline is commit `b0e84c0f29857a444e8bcb5b9be2ea218e96efd0`; retained upstream-derived code is tracked explicitly and checked for upstream changes.
+## What's new in 0.1.1
 
-## Current release status
+- **Disk-backed multiview preprocessing:** an Akatz-driven per-view loop stores VSR inputs and synchronized image/mask, MoGe, Marigold normal/depth data on disk instead of retaining every view in RAM. Unified manifests support opening the reconstruction packet later, persistent snapshots, and cleanup of temporary sessions.
+- **WTiVo mesh post-processing integration:** a pre-clean → external WTiVo remesh/repair → post-clean route accepts and returns `MESHWITHVOXEL`, uses transient resource-limited worker execution, and reports topology/resource diagnostics. **WTiVo itself and the privileged launcher are separate local installations**, not bundled binaries.
+- **Checkpoints and diagnostics:** optional Sparse/Shape and mesh checkpoints, debug/repair helpers and RAM-profiling support.
 
-The bundled 24-view / 15° yaw workflow has passed a clean-room end-to-end regression on ComfyUI `0.42.3` with Python 3.12, PyTorch `2.8.0+cu128`, CUDA 12.8 and an RTX 4090 24 GB. The validated path includes RealBasicVSR 2×, native-resolution MoGe/Marigold geometry, Sparse anchored soft occlusion, Shape512 normal+depth guidance, ShapeHR 1536 and final mesh reconstruction.
-
-`Orbit3DMoGeInference` subclasses ComfyUI's native `MoGeInference` and changes only the `resolution_level` schema bound (up to 30); the original ComfyUI inference implementation is inherited unchanged. **No patch to `comfy_extras/nodes_moge.py` is required.**
+The bundled [0.1.1 workflow](example_workflows/OrbitTo3D_HighPrecision_MultiView.json) is configured for a **3° yaw grid (120 views)** with 1536 ShapeHR and WTiVo 1536→2048. It captures the supplied working configuration, including **machine-specific absolute paths and external debug-export nodes**; adapt those before running on another host. The earlier **24-view / 15° clean-room regression** is retained as a reference, **not** presented as validation of the entire new 120-view + WTiVo graph.
 
 ## Documentation
 
-- [Installation and requirements](docs/INSTALLATION.md) — host requirements, platform-specific dependencies, custom-node dependencies, model/checkpoint layout, tested stack and `--cache-none` guidance.
-- [Nodes and reconstruction features](docs/FEATURES.md) — public node API, reconstruction behavior and the high-precision multiview mechanisms added by Orbit.
-- [Regression and release validation](docs/REGRESSION.md) — accepted clean-room profile and release/regression procedure.
-- [Trellis2 upstream synchronization](UPSTREAM.md) — pinned baseline, provenance contract, automated upstream detection and the manual review/port/rebaseline procedure.
-- [Release checklist](RELEASE_CHECKLIST.md) and [third-party notices](THIRD_PARTY_NOTICES.md).
+- [Installation & dependencies](docs/INSTALLATION.md) — ComfyUI/Trellis2 environment, node packs, external binaries and workflow adaptation.
+- [Features & node API](docs/FEATURES.md) — multiview conditioning and public nodes.
+- [Disk cache and execution lifecycle](docs/CACHE.md) — session storage, manifests, persistence and cleanup.
+- [WTiVo integration](docs/WTIVO.md) — external worker requirements, parameters, topology checks and limitations.
+- [Regression & release checks](docs/REGRESSION.md), [changelog](CHANGELOG.md), [release checklist](RELEASE_CHECKLIST.md).
+- [Upstream compatibility](UPSTREAM.md) and [third-party notices](THIRD_PARTY_NOTICES.md).
 
-## Scope
+## Scope and compatibility
 
-Orbit stops at reconstruction and is intentionally **mesh-only**. Texture/PBR generation stays in the original Trellis2 ecosystem. Print-specific cleanup such as internal-shell removal, floating-island cleanup, hole repair and remeshing belongs downstream.
+Orbit remains **mesh-only**: it does not implement Pixal3D texture/PBR generation. WTiVo integration extends the post-reconstruction mesh stage; it does **not** replace or modify the Pixal3D sparse/shape denoising algorithms. External WTiVo output is **geometry-only** and loses voxel-specific metadata.
 
-## License and upstream attribution
+`Orbit3DMoGeInference` inherits the stock ComfyUI `MoGeInference.execute()` and changes only the `resolution_level` input bound. **No patch to `comfy_extras/nodes_moge.py` is required.**
 
-Orbit retains the upstream MIT licensing/attribution for Trellis-derived code. See [LICENSE](LICENSE), [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) and [UPSTREAM.md](UPSTREAM.md).
+See [LICENSE](LICENSE), [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) and [UPSTREAM.md](UPSTREAM.md) for licensing and upstream-derived code attribution.

@@ -73,6 +73,12 @@ def _normalize_geometry(g, label):
     batch_size = None
 
     for key, value in g.items():
+        # ORBIT3D_MV_MEMLEAN_V2
+        # Native ComfyUI MoGe carries the source RGB under "image".
+        # Orbit reconstruction consumes separate RGB/mask inputs and only needs
+        # MoGe geometry fields. Do not copy/concatenate this duplicate RGB field.
+        if key == "image":
+            continue
         if key in _FIELD_NDIMS:
             value = _as_batched_tensor(key, value, label)
             b = int(value.shape[0])

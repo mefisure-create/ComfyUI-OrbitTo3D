@@ -18,6 +18,11 @@ implementation. It only:
 from __future__ import annotations
 
 from . import nodes as _trellis
+from .orbit3d_ext.moge_cache_nodes import attach_moge_cache_to_views
+from .orbit3d_ext.unified_cache_nodes import (
+    make_marigold_lazy_tensors,
+    make_view_lazy_tensors,
+)
 
 
 _PUBLIC_API = "ORBIT3D_PUBLIC_MV_ONLY_V1"
@@ -169,14 +174,19 @@ class Orbit3DMultiViewConfig(_trellis.Trellis2Pixal3DMultiViewConfig):
         required["azimuths"] = ("STRING", {"default": "0, 90, 180, 270"})
         required["elevations"] = ("STRING", {"default": "0, 0, 0, 0"})
 
-        # Base runtime core already exposes standard MOGE_GEOMETRY.
+        # Preserve the standard MOGE_GEOMETRY path and add the disk-backed
+        # Patch 3.2 path as a separate optional socket.
+        optional["moge_cache"] = ("ORBIT3D_MOGE_CACHE",)
+        optional["marigold_cache"] = ("ORBIT3D_MARIGOLD_CACHE",)
+        required.pop("images", None)
+        optional["images"] = ("IMAGE",)
+        optional["view_cache"] = ("ORBIT3D_VIEW_CACHE",)
         return {"required": required, "optional": optional}
 
     CATEGORY = "Orbit to 3D/Pixal3D"
 
     def process(
         self,
-        images,
         azimuths,
         elevations,
         fov,
@@ -186,15 +196,67 @@ class Orbit3DMultiViewConfig(_trellis.Trellis2Pixal3DMultiViewConfig):
         remove_background,
         invert_mask,
         framing="auto",
+        images=None,
         masks=None,
         normal_maps=None,
         depth_maps=None,
         moge_geometry=None,
+        moge_cache=None,
+        marigold_cache=None,
+        view_cache=None,
         cleanup_before_pixal3d=True,
     ):
-        # Geometry maps are attached here through the standard MOGE_GEOMETRY
-        # packet. Sparse/Shape consumption policy stays unchanged.
-        return super().process(
+        if view_cache is not None:
+            if images is not None or masks is not None:
+                raise ValueError(
+                    "Orbit3D MultiView Config accepts either images/masks "
+                    "or view_cache, not both."
+                )
+            # ORBIT3D PATCH 3.6.12: fail-closed disk-backed integrity gate
+            if moge_cache is None or marigold_cache is None:
+                raise RuntimeError(
+                    "Orbit3D MultiView integrity requires view_cache + moge_cache + "
+                    "marigold_cache together; refusing partial disk-backed payload."
+                )
+            _az_integrity = _trellis.Trellis2ImagesToViewConfigs()._parse_angles(azimuths)
+            _el_integrity = _trellis.Trellis2ImagesToViewConfigs()._parse_angles(elevations)
+            if len(_az_integrity) != len(_el_integrity):
+                raise RuntimeError(
+                    f"Orbit3D MultiView integrity: azimuth/elevation count mismatch "
+                    f"{len(_az_integrity)} != {len(_el_integrity)}"
+                )
+            from .orbit3d_ext.unified_cache_nodes import validate_unified_cache_integrity
+            _integrity_report = validate_unified_cache_integrity(
+                view_cache=view_cache,
+                moge_cache=moge_cache,
+                marigold_cache=marigold_cache,
+                expected_views=len(_az_integrity),
+            )
+            print(f"[Orbit3D MultiView Config] integrity={_integrity_report}", flush=True)
+            images, masks = make_view_lazy_tensors(view_cache)
+        elif images is None:
+            raise ValueError(
+                "Orbit3D MultiView Config needs either images or view_cache."
+            )
+
+        if moge_geometry is not None and moge_cache is not None:
+            raise ValueError(
+                "Orbit3D MultiView Config accepts either moge_geometry or "
+                "moge_cache, not both."
+            )
+
+        if marigold_cache is not None:
+            if normal_maps is not None or depth_maps is not None:
+                raise ValueError(
+                    "Orbit3D MultiView Config accepts either normal_maps/depth_maps "
+                    "or marigold_cache, not both."
+                )
+            normal_maps, depth_maps = make_marigold_lazy_tensors(marigold_cache)
+
+        # The standard MOGE_GEOMETRY path is left unchanged. For the disk
+        # cache path, build all non-MoGe view state first, then attach
+        # one-view-at-a-time lazy tensor proxies.
+        result = super().process(
             images=images,
             azimuths=azimuths,
             elevations=elevations,
@@ -220,6 +282,11 @@ class Orbit3DMultiViewConfig(_trellis.Trellis2Pixal3DMultiViewConfig):
             moge_geometry=moge_geometry,
             cleanup_before_pixal3d=cleanup_before_pixal3d,
         )
+
+        views, preview = result
+        if moge_cache is not None:
+            attach_moge_cache_to_views(views, moge_cache)
+        return (views, preview)
 
 
 class Orbit3DSparseGenerator(_trellis.Trellis2SparseGenerator):
@@ -408,6 +475,8 @@ class Orbit3DShapeGenerator(_trellis.Trellis2ShapeGenerator):
         shape512_mode="normal",
         shape512_normals_source="Marigold",
         shape512_depth_source="Marigold",
+        shape_seed_mode="inherit",
+        shape_seed=0,
         pixal3d_mv_views=None,
     ):
         _require_pixal3d_mv(pipeline)
@@ -454,6 +523,8 @@ class Orbit3DShapeGenerator(_trellis.Trellis2ShapeGenerator):
             dino_lock=dino_lock,
             dino_substeps=dino_substeps,
             dino_foundation_cap=dino_foundation_cap,
+            shape_seed_mode=shape_seed_mode,
+            shape_seed=shape_seed,
             pixal3d_mv_views=views,
         )
 
@@ -492,6 +563,10 @@ class Orbit3DShapeCascadeGenerator(_trellis.Trellis2ShapeCascadeGenerator):
         shape_hr_mode="off",
         shape_hr_normals_source="Marigold",
         shape_hr_depth_source="Marigold",
+        shape_hr_seed_mode="inherit",
+        shape_hr_seed=0,
+        shape_hr_noise_cache_mode="off",
+        shape_hr_noise_cache_path="",
         pixal3d_mv_views=None,
     ):
         _require_pixal3d_mv(pipeline)
@@ -527,5 +602,9 @@ class Orbit3DShapeCascadeGenerator(_trellis.Trellis2ShapeCascadeGenerator):
             shape_hr_mode=mode,
             shape_hr_normals_source=normal_source,
             shape_hr_depth_source=depth_source,
+            shape_hr_seed_mode=shape_hr_seed_mode,
+            shape_hr_seed=shape_hr_seed,
+            shape_hr_noise_cache_mode=shape_hr_noise_cache_mode,
+            shape_hr_noise_cache_path=shape_hr_noise_cache_path,
             pixal3d_mv_views=pixal3d_mv_views,
         )

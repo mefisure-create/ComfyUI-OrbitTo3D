@@ -15,6 +15,64 @@ from transformers import DINOv3ViTModel
 import numpy as np
 from PIL import Image, ImageDraw
 
+# ORBIT3D_MV_MEMLEAN_V2
+def _orbit3d_materialize_mv_detail_view(
+    detail_source,
+    view_index: int,
+    batch_size: int,
+    device: torch.device,
+    dtype: torch.dtype,
+) -> torch.Tensor:
+    # Legacy tensor input follows the old path exactly.
+    # Lazy PIL input is converted with the same RGB/alpha operations used by
+    # mv_camera.to_native_cond_tensor(), but only for the current view.
+    if torch.is_tensor(detail_source):
+        return detail_source[:, view_index].to(
+            device=device,
+            dtype=dtype,
+            non_blocking=True,
+        )
+
+    if isinstance(detail_source, (list, tuple)):
+        if batch_size != 1:
+            raise ValueError(
+                "Lazy native PIL detail views require object batch B=1; "
+                f"got B={batch_size}"
+            )
+        if view_index < 0 or view_index >= len(detail_source):
+            raise IndexError(
+                f"detail view index {view_index} out of range for "
+                f"{len(detail_source)} native views"
+            )
+
+        image = detail_source[view_index]
+        if not isinstance(image, Image.Image):
+            raise TypeError(
+                "Lazy native detail source entries must be PIL.Image.Image, "
+                f"got {type(image).__name__}"
+            )
+
+        image = image.convert("RGBA")
+        alpha = torch.from_numpy(
+            np.array(image.getchannel(3), copy=True)
+        ).float() / 255.0
+        rgb = torch.from_numpy(
+            np.array(image.convert("RGB"), copy=True)
+        ).permute(2, 0, 1).float() / 255.0
+        view = (rgb * alpha.unsqueeze(0)).unsqueeze(0)
+
+        return view.to(
+            device=device,
+            dtype=dtype,
+            non_blocking=True,
+        )
+
+    raise TypeError(
+        "detail_image must be legacy [B,V,3,H,W] tensor or "
+        f"a list/tuple of PIL views, got {type(detail_source).__name__}"
+    )
+
+
 
 
 # =============================================================================
@@ -1247,10 +1305,15 @@ class DinoV3ProjMultiViewFeatureExtractor(DinoV3ProjFeatureExtractor):
             detail_image_v = None
 
             if self.detail_tiles and detail_image is not None:
-                detail_image_v = detail_image[:, v].to(
-                    device=image_v.device,
-                    dtype=image_v.dtype,
-                    non_blocking=True,
+                # ORBIT3D_MV_MEMLEAN_V2
+                # Tensor and lazy-PIL sources yield the same premultiplied RGB;
+                # only the current native view is materialised as a tensor.
+                detail_image_v = _orbit3d_materialize_mv_detail_view(
+                    detail_image,
+                    v,
+                    B,
+                    image_v.device,
+                    image_v.dtype,
                 )
 
                 tile_source_v = detail_image_v

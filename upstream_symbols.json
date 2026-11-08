@@ -12,6 +12,11 @@
   },
   "files": [
     {
+      "path": ".github/workflows/release-check.yml",
+      "mode": "metadata",
+      "local_sha256": "5ea248ada15c5edb1d22fb5f030a3e6f2cd97c78ae5b0276bf2cdeeff04f67fe"
+    },
+    {
       "path": ".github/workflows/upstream-contract.yml",
       "mode": "metadata",
       "local_sha256": "dd1dc26122bf2a66b7d8461f20e7e8fc0f25806838e4b8af4daa66d86f32e6e3"
@@ -19,7 +24,12 @@
     {
       "path": ".gitignore",
       "mode": "metadata",
-      "local_sha256": "0c614ac94fecc6e315a5a690132c07d9fde193e88f6332dbc4df6962caf97f16"
+      "local_sha256": "081bc973be7c73b34fbda4fb4189cbffcad68f25322de2cfb1592251f1c4c533"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "mode": "metadata",
+      "local_sha256": "6cb788ae8fa4179a29dc22f04a414787356eaf8d0a7823a0552a72e991bf0a3e"
     },
     {
       "path": "LICENSE",
@@ -29,57 +39,67 @@
     {
       "path": "ORBIT_BASELINE.md",
       "mode": "metadata",
-      "local_sha256": "d6d3fcf78cf5a3dd08fab949ab7ee2a40180f864896d2036b676a20362f604d0"
+      "local_sha256": "9219f3d9a8c720010b02d3e210cc06bcaed58669191f06b702700df7f9518855"
     },
     {
       "path": "README.md",
       "mode": "metadata",
-      "local_sha256": "a7c9e0e2baa1c24af058626ac368c0f26cd3993d1523ea996332d14e3016a355"
+      "local_sha256": "c70170782cc9a75aead85e89a8a632f5cb2e129889a0877a1836244f726f5bb2"
     },
     {
       "path": "RELEASE_CHECKLIST.md",
       "mode": "metadata",
-      "local_sha256": "02b1a8b1f1303db66ee22990b1e0c0417ee943e99e8dbdc13afdbd0cfe02cffe"
+      "local_sha256": "7134be3175aa8ec5e547f651075fea5f017efc136a0adaaceb20ac652d4a1a49"
     },
     {
       "path": "THIRD_PARTY_NOTICES.md",
       "mode": "metadata",
-      "local_sha256": "88a9455a614329dd4cc2615fffce2f462913c562d1a5c2155009882bad76e690"
+      "local_sha256": "cace6c64e06adef7d37246fd937c2e054d4429c059a789b20683b58a6714589e"
     },
     {
       "path": "UPSTREAM.md",
       "mode": "metadata",
-      "local_sha256": "ff01a519372452f9e305712bf8e23837190b7a1c4235ff83fc01326c44424941"
+      "local_sha256": "6a301933f574c5eabe8dfe8a34bed8c6dc4e80e3807588491b4c152092854439"
     },
     {
       "path": "__init__.py",
       "mode": "metadata",
-      "local_sha256": "9b47f28aa3e6d998f28e4846a8f21fcd54a2adae00f1b3f6b2d07c7a066154f5"
+      "local_sha256": "ddddbd6ee081d18c93bc0ef7321e0dbef93234f01566d393d1e6ff0e8b2244e8"
+    },
+    {
+      "path": "docs/CACHE.md",
+      "mode": "metadata",
+      "local_sha256": "1412104bcff6363dd8984ac9f3d4fe8daa3588efee01f4a138c30293d954f038"
     },
     {
       "path": "docs/FEATURES.md",
       "mode": "metadata",
-      "local_sha256": "6d70b4639f0b0de18cb3ce24f2374b8090b51db9e29c13dbb83478c1d8cbd93c"
+      "local_sha256": "b22ce8608b1928d46e8c48b4d5c6f2487d2d49999b79c558c3fbe90c11bb1566"
     },
     {
       "path": "docs/INSTALLATION.md",
       "mode": "metadata",
-      "local_sha256": "a2392061bdd315d2ef61bde18d3828525afa542f47758848a7e97f97bfb2b615"
+      "local_sha256": "4cfe36c990bfb2794d84b6b99388c554cc416e0632b639e38c2fc49a22127060"
     },
     {
       "path": "docs/REGRESSION.md",
       "mode": "metadata",
-      "local_sha256": "18b35b36632039ea0afa9ef554b9e50a0464aa8a383809030b8c5108cf6f3cf8"
+      "local_sha256": "b11b33727ea5f48d9ff6a12ebf38f2f50c5f704100f123904d008b2718a252e5"
+    },
+    {
+      "path": "docs/WTIVO.md",
+      "mode": "metadata",
+      "local_sha256": "a7d367bc40aa9422a1dbc1c78b2a5d499fe4b61c00c32048247e2574be469391"
     },
     {
       "path": "example_workflows/OrbitTo3D_HighPrecision_MultiView.json",
       "mode": "metadata",
-      "local_sha256": "c8de8f71abb98d8ecf10d849d7cc0ff22be03904ace22ca34e04ec3cd52ac1a1"
+      "local_sha256": "f824f1db6b235701d7e149478cb2f9d451988470b3dc930ef550042aca72cde9"
     },
     {
       "path": "nodes.py",
       "mode": "derived_modified",
-      "local_sha256": "3af83f3c8009bdffb0b7bf813a848a182039661bce6001b98f20db559a4fa683"
+      "local_sha256": "08badc3cc4a7eb617041e0372983d2e98e382c92eb2030a9f8b6d334cb039b3c"
     },
     {
       "path": "orbit3d_ext/__init__.py",
@@ -87,14 +107,74 @@
       "local_sha256": "675f2ec010306f39c2ec3b618e9bb68c47644453454cd96d88863b30dd1984f6"
     },
     {
+      "path": "orbit3d_ext/akatz_static_context_nodes.py",
+      "mode": "orbit_original",
+      "local_sha256": "263361112457322ac801be36c391150f1f13a741d4c981baa70fdb11af143b5b"
+    },
+    {
       "path": "orbit3d_ext/angle_nodes.py",
       "mode": "orbit_original",
       "local_sha256": "252df60985d94c8347249e472a1adf61caec2439a8249bcc602d463fc3a75da1"
     },
     {
+      "path": "orbit3d_ext/camera_checkpoint_nodes.py",
+      "mode": "orbit_original",
+      "local_sha256": "060439af94f4ca9a49076d80e65150c34515c760c99f94389ba96ce53f0567fc"
+    },
+    {
+      "path": "orbit3d_ext/experimental_repair_nodes.py",
+      "mode": "orbit_original",
+      "local_sha256": "054464c2e3837f41f60a3cbd35c6db1eed108fb07f2669988e72545355c2f9a7"
+    },
+    {
+      "path": "orbit3d_ext/experimental_shape_nodes.py",
+      "mode": "orbit_original",
+      "local_sha256": "60ff51f9e1b76157d6e97ee3e2ca74d6c530d5222de179295b9a7cf2bf75141e"
+    },
+    {
+      "path": "orbit3d_ext/generic_cache_nodes.py",
+      "mode": "orbit_original",
+      "local_sha256": "0921d569b23cb91c428457526ce8b206c22e9241e49902686a6f0792371d9545"
+    },
+    {
       "path": "orbit3d_ext/geometry_nodes.py",
       "mode": "orbit_original",
-      "local_sha256": "adafc7fc16edde38ba62c73c4d59d9fcd7900a0443c4f000e94ee3bbdb08c559"
+      "local_sha256": "b56070b62ef3787b675545843fbf2b32eaf22a8ce1a532005f86cdf4bae021c6"
+    },
+    {
+      "path": "orbit3d_ext/image_mmap_for_nodes.py",
+      "mode": "orbit_original",
+      "local_sha256": "2adfa1d43c1b0d2b44a55389df7d8634980767461bb1e3e3734163295705cced"
+    },
+    {
+      "path": "orbit3d_ext/image_mmap_nodes.py",
+      "mode": "orbit_original",
+      "local_sha256": "5d96562f6e596f9d543df7cf598362616c2571226c7219b65aafa466c759348f"
+    },
+    {
+      "path": "orbit3d_ext/image_spill_nodes.py",
+      "mode": "orbit_original",
+      "local_sha256": "79c5fad5fcddbc3768cdf8c1c7ce8db93d907d11eb651b25538b426942ec7e69"
+    },
+    {
+      "path": "orbit3d_ext/memory_diag_nodes.py",
+      "mode": "orbit_original",
+      "local_sha256": "19177e73a2b796369289cfe5379844ec85a26d0fe195a834da8ff9e9e62fbf22"
+    },
+    {
+      "path": "orbit3d_ext/mesh_checkpoint_nodes.py",
+      "mode": "orbit_original",
+      "local_sha256": "5a3d5b00ce88055b4c1ef0ecf8799c0027e7bbd1b38a8fe2ac79b379cd55842d"
+    },
+    {
+      "path": "orbit3d_ext/meshlib_repair_nodes.py",
+      "mode": "orbit_original",
+      "local_sha256": "dc866f55f82abe7ea0d68cbe4d389c9756eb9c0972abfb862b5eeb3879920cec"
+    },
+    {
+      "path": "orbit3d_ext/moge_cache_nodes.py",
+      "mode": "orbit_original",
+      "local_sha256": "07e810c05367a01c7502354d329f0cce3e5948d2638e5dc5f02b036fa34f5f9a"
     },
     {
       "path": "orbit3d_ext/moge_nodes.py",
@@ -102,14 +182,44 @@
       "local_sha256": "c0a88e25839205ba992252cffc6dbfecb773b88a009fdcae05566ccc3adaee1f"
     },
     {
+      "path": "orbit3d_ext/pmp_helper/CMakeLists.txt",
+      "mode": "orbit_original",
+      "local_sha256": "f3a43d59652237e3b3e712ee1a42afbee3f43ce6c083bfcdc154f2a60f155564"
+    },
+    {
+      "path": "orbit3d_ext/pmp_helper/orbit3d_pmp_polyline.cpp",
+      "mode": "orbit_original",
+      "local_sha256": "42a6fbba83be1b2e83b6d3a2b4317c70da614c3c2928e52d27e529da7deeb4d8"
+    },
+    {
+      "path": "orbit3d_ext/production_cache_nodes.py",
+      "mode": "orbit_original",
+      "local_sha256": "443c3703e746d71b344657f0c752db8facde2c68e7d1f7df87d41153888418d0"
+    },
+    {
+      "path": "orbit3d_ext/ram_profiler.py",
+      "mode": "orbit_original",
+      "local_sha256": "8249ba01b8d399c1989aa825b4577cf5da5deb1f642e675250096492050561eb"
+    },
+    {
       "path": "orbit3d_ext/realbasicvsr_backend.py",
       "mode": "orbit_original",
       "local_sha256": "7c57cd5da77e8d552bffc161d729e0c6836caccbb22d872b93f965853529830f"
     },
     {
+      "path": "orbit3d_ext/repair_diagnostics_nodes.py",
+      "mode": "orbit_original",
+      "local_sha256": "53fd906b9576b4ced20ea33d5a3876b2aa4dca3216ecb1210f726d7592e6e2c6"
+    },
+    {
+      "path": "orbit3d_ext/unified_cache_nodes.py",
+      "mode": "orbit_original",
+      "local_sha256": "360e964c2f9d19220b97f4c35ff0be7b35a513ba24e428f4540c199aae38585f"
+    },
+    {
       "path": "orbit3d_ext/vggt_nodes.py",
       "mode": "orbit_original",
-      "local_sha256": "eb6e3bbc575a08f960c89766cdbf2bb707dafa25909be5728506f0f5ec5c8f23"
+      "local_sha256": "197098a9b4b307a54b69c7f70ae9222b6b725cc16e77011e528cac97e447025a"
     },
     {
       "path": "orbit3d_ext/vsr_nodes.py",
@@ -117,14 +227,19 @@
       "local_sha256": "236ac82110a4c8c88472a5ad75d2e4e49efda726eec344f526b16de4e9b86775"
     },
     {
+      "path": "orbit3d_ext/wtivo_integration_nodes.py",
+      "mode": "orbit_original",
+      "local_sha256": "d33e9922a2a6079cc4106de208c03527a5f82e31b8e0fbce24eb8aa80f781bbe"
+    },
+    {
       "path": "orbit_nodes.py",
       "mode": "orbit_original",
-      "local_sha256": "7a555a65d00a2941659e23e93b36eca3f3b37f300aa6aa88037e9f853283d88e"
+      "local_sha256": "bdaf8bb2999298eacc226dc4f692e64eae293f660731224a5553d2420b264de3"
     },
     {
       "path": "pyproject.toml",
       "mode": "metadata",
-      "local_sha256": "9f8e00d38f68f5f12e0e6d9b7e32121f7b4bf71852864bc15b811f34af2a0d67"
+      "local_sha256": "a6c3cb2b5c115e7521c552c87d22750cd99d2c6238b9ee814294779f89008e9e"
     },
     {
       "path": "requirements.txt",
@@ -134,12 +249,17 @@
     {
       "path": "tools/check_release.py",
       "mode": "metadata",
-      "local_sha256": "a687cee27c389627b7e2877426170d55dc5c56355232c1d07d8308051d8e066f"
+      "local_sha256": "010605c2d92be6aa246803fc9f2d9a14f3d50904b1c289a48e6fbd0365fb809f"
     },
     {
       "path": "tools/check_upstream.py",
       "mode": "metadata",
       "local_sha256": "77bfbd6d2710d33e1765b031068e246bc71b862e790e1b658a2fd9fd5592f29d"
+    },
+    {
+      "path": "tools/summarize_ram_profile.py",
+      "mode": "metadata",
+      "local_sha256": "759b6e0b3231f617a85d1d5ec03cc85c8652fb00493ba3cae7569de2c4f9deae"
     },
     {
       "path": "tools/update_upstream_manifest.py",
@@ -439,7 +559,7 @@
     {
       "path": "trellis2/trainers/flow_matching/mixins/image_conditioned_proj.py",
       "mode": "derived_modified",
-      "local_sha256": "f968538b56a80ae3c64899819f4c82492ddf8066e5bb171609578a9b627492a4"
+      "local_sha256": "65ad30a5f91bf74c4eaac8c8d609c79aff557a80a3fa7ab91774e8f440322e5a"
     },
     {
       "path": "trellis2/utils/__init__.py",
@@ -459,14 +579,14 @@
     {
       "path": "trellis2/utils/mv_camera.py",
       "mode": "derived_modified",
-      "local_sha256": "f2d58f22cabef869fb4957094808545e6ad50b13123831f3ba841769888080d7"
+      "local_sha256": "7a6a91065c1b3956772a7265d1e6dfccc4b1e36674668fdfeefd8b97c5e21b8e"
     }
   ],
   "tracked_upstream_files": [
     {
       "path": "nodes.py",
       "mode": "derived_modified",
-      "local_sha256": "3af83f3c8009bdffb0b7bf813a848a182039661bce6001b98f20db559a4fa683"
+      "local_sha256": "08badc3cc4a7eb617041e0372983d2e98e382c92eb2030a9f8b6d334cb039b3c"
     },
     {
       "path": "trellis2/__init__.py",
@@ -761,7 +881,7 @@
     {
       "path": "trellis2/trainers/flow_matching/mixins/image_conditioned_proj.py",
       "mode": "derived_modified",
-      "local_sha256": "f968538b56a80ae3c64899819f4c82492ddf8066e5bb171609578a9b627492a4"
+      "local_sha256": "65ad30a5f91bf74c4eaac8c8d609c79aff557a80a3fa7ab91774e8f440322e5a"
     },
     {
       "path": "trellis2/utils/__init__.py",
@@ -781,7 +901,7 @@
     {
       "path": "trellis2/utils/mv_camera.py",
       "mode": "derived_modified",
-      "local_sha256": "f2d58f22cabef869fb4957094808545e6ad50b13123831f3ba841769888080d7"
+      "local_sha256": "7a6a91065c1b3956772a7265d1e6dfccc4b1e36674668fdfeefd8b97c5e21b8e"
     }
   ],
   "tracked_symbols": [
@@ -833,42 +953,42 @@
     {
       "path": "nodes.py",
       "symbol": "Trellis2ShapeGenerator",
-      "local_ast_sha256": "04efda7d82405c27c37be171fdfddaf9d2578eac7f9399131fbc0e3f92462f83"
+      "local_ast_sha256": "e51789daf64ad5ed1ca95b3c00cb7ac3a91f5cd40ad7f6b6ad8d7accf7192742"
     },
     {
       "path": "nodes.py",
       "symbol": "Trellis2ShapeGenerator.INPUT_TYPES",
-      "local_ast_sha256": "759bd877aea7c9e251545775e302e4fabd06fa70b5d1d88029f8947a1e3cc29f"
+      "local_ast_sha256": "4e6d1b1f3af182712e429605c59dd888a75484a260625d789c07c354d06b2773"
     },
     {
       "path": "nodes.py",
       "symbol": "Trellis2ShapeGenerator.process",
-      "local_ast_sha256": "77bbc8747d31d9e5bf31005da5d05f098248c5f79d41fae99e9aec02bc32fcc5"
+      "local_ast_sha256": "0a84aecdbd9618d2ffc479c357ad6d6370ef14425d1ffd486009fc3b3295b9d6"
     },
     {
       "path": "nodes.py",
       "symbol": "Trellis2ShapeCascadeGenerator",
-      "local_ast_sha256": "d2812ef87deb4a48bae7266b3a3bb7f02f300ca7d6f06761552a4e21d7b17ab3"
+      "local_ast_sha256": "26e37598d896bdc94a033d9fa187f4d26386ab5dde2c9077c14f929163135b9c"
     },
     {
       "path": "nodes.py",
       "symbol": "Trellis2ShapeCascadeGenerator.INPUT_TYPES",
-      "local_ast_sha256": "0bcd0d5d8188ca415c0d0f13ffb396b7c74450a9e441a12230000bb9a137c930"
+      "local_ast_sha256": "d2b005806ac3c8ee13c15a77e147dedf54cfd1a0511b33628a21f0f89927f1e1"
     },
     {
       "path": "nodes.py",
       "symbol": "Trellis2ShapeCascadeGenerator.process",
-      "local_ast_sha256": "14852f9d39410bccb227be685b76143d016f44eee47542290f5150d028ce10ff"
+      "local_ast_sha256": "9e01c295da703931996bd8e07ceb16ca3306c31f41e8322ad84f37c8b82d9e77"
     },
     {
       "path": "nodes.py",
       "symbol": "Trellis2ShapeCascadeGenerator.sample",
-      "local_ast_sha256": "50eabbd94bc586ef90eeb6bc741b59e8fc0a45d46b30dc7a49635327659c9759"
+      "local_ast_sha256": "a43526649cea4ca961020488cb3d390065121e20babfdaa722afacafec86ab2f"
     },
     {
       "path": "nodes.py",
       "symbol": "comfy_images_to_rgba_pils",
-      "local_ast_sha256": "bcf04a751d3c5eadd5f65a8383a7fe20f32c247f0ef986b5aacd46262edf27f6"
+      "local_ast_sha256": "f2f6cf7cc9c629c64cf1e92b0a45bd74b7b0304d03d3f251ed5798b7f2b3500c"
     },
     {
       "path": "nodes.py",
@@ -888,7 +1008,7 @@
     {
       "path": "nodes.py",
       "symbol": "Trellis2Pixal3DMultiViewConfig",
-      "local_ast_sha256": "9bf66c833e65316deb9015620441726f2724be90d4b45839667d674ec418c722"
+      "local_ast_sha256": "cab9dbff6655d5ee8c91fe16cea73c930ac1833b7d6bff92bf21ccf6378499f9"
     },
     {
       "path": "nodes.py",
@@ -898,7 +1018,7 @@
     {
       "path": "nodes.py",
       "symbol": "Trellis2Pixal3DMultiViewConfig.process",
-      "local_ast_sha256": "1ece5d6d5a9ac3d7a7e9601ad4931db517a6192c93568a0c693d5d50529bf5af"
+      "local_ast_sha256": "1760d50b5cbf8a45d0577ae6d0b213432d5c1b809669437be228c6d756346a7f"
     },
     {
       "path": "trellis2/pipelines/trellis2_image_to_3d.py",
@@ -1248,7 +1368,7 @@
     {
       "path": "trellis2/trainers/flow_matching/mixins/image_conditioned_proj.py",
       "symbol": "DinoV3ProjMultiViewFeatureExtractor",
-      "local_ast_sha256": "9f0b4bd7b0de0d20a98b7860e3fc5584aa3cf9f8405224a7b2c0914a1ad19672"
+      "local_ast_sha256": "470fbdc03145d487ff2743538eb47f62815cdba17de4b29cf050b9d70b89644d"
     },
     {
       "path": "trellis2/trainers/flow_matching/mixins/image_conditioned_proj.py",
@@ -1278,7 +1398,7 @@
     {
       "path": "trellis2/trainers/flow_matching/mixins/image_conditioned_proj.py",
       "symbol": "DinoV3ProjMultiViewFeatureExtractor.forward",
-      "local_ast_sha256": "99df164583473ab628e8bd7bce0f02b7f8013f26ce1558735b15ea21b21b522f"
+      "local_ast_sha256": "834f2e0cfd706de0c9ef812fe97c0123c42124e1dd1c8fff82f1e4964daf72ac"
     },
     {
       "path": "trellis2/utils/mv_camera.py",
@@ -1318,17 +1438,17 @@
     {
       "path": "trellis2/utils/mv_camera.py",
       "symbol": "build_views",
-      "local_ast_sha256": "3b8677a208b0ae8992fc6faa45b652179b6c6dc74b37cd89c3ee20f0a89d43cf"
+      "local_ast_sha256": "67986773c78377ac3cd22571328718e33c31f9e5f5422a0c1410c94e5ce90309"
     },
     {
       "path": "trellis2/utils/mv_camera.py",
       "symbol": "attach_geometry_confidence",
-      "local_ast_sha256": "c86be7336b4727b9edbb83bc2920c8c0a52ad25efcc24a20efedc16a210f5b95"
+      "local_ast_sha256": "f347261eb5fe6e83d4080cc800e5beda50968dc74df635181b6f22f334d732da"
     },
     {
       "path": "trellis2/utils/mv_camera.py",
       "symbol": "attach_moge_shape512_geometry",
-      "local_ast_sha256": "91a08e466e20466b17be31747305f569048342057a2aaba24fb0a4b611f6dfba"
+      "local_ast_sha256": "bbf7853332409896efa4869cd1a995c05a1989df00e1d20d102ed24f48c7c620"
     },
     {
       "path": "trellis2/utils/mv_camera.py",

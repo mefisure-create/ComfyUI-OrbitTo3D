@@ -1,8 +1,8 @@
 {
-  "id": "7a3bb359-10a7-42ad-acbf-e4bb9b7855c3",
-  "revision": 1,
-  "last_node_id": 808,
-  "last_link_id": 1810,
+  "id": "bdc559ba-679b-4aef-bacf-65bcfcec0986",
+  "revision": 4,
+  "last_node_id": 877,
+  "last_link_id": 2038,
   "nodes": [
     {
       "id": 1,
@@ -29,7 +29,10 @@
         }
       ],
       "properties": {
-        "Node name for S&R": "Orbit3DLoadModel"
+        "cnr_id": "comfyui-orbit-to-3d",
+        "ver": "618e1bbcd9e257f142e7707372074f9302542b34",
+        "Node name for S&R": "Orbit3DLoadModel",
+        "aux_id": "mefisure-create/ComfyUI-OrbitTo3D"
       },
       "widgets_values": [
         "TencentARC/Pixal3D",
@@ -51,206 +54,6 @@
       }
     },
     {
-      "id": 17,
-      "type": "Trellis2ExportMesh",
-      "pos": [
-        5384.474494171153,
-        107.20857334136973
-      ],
-      "size": [
-        270,
-        122
-      ],
-      "flags": {},
-      "order": 39,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "trimesh",
-          "type": "TRIMESH",
-          "link": 1111
-        }
-      ],
-      "outputs": [
-        {
-          "name": "glb_path",
-          "type": "STRING",
-          "links": [
-            30
-          ]
-        },
-        {
-          "name": "relative_path",
-          "type": "STRING",
-          "links": null
-        },
-        {
-          "name": "model_3d",
-          "type": "FILE_3D",
-          "links": null
-        }
-      ],
-      "properties": {
-        "cnr_id": "trellis2",
-        "ver": "b0e84c0f29857a444e8bcb5b9be2ea218e96efd0",
-        "Node name for S&R": "Trellis2ExportMesh"
-      },
-      "widgets_values": [
-        "MV",
-        "ply"
-      ],
-      "widgets_values_named": {
-        "filename_prefix": "MV",
-        "file_format": "ply"
-      }
-    },
-    {
-      "id": 18,
-      "type": "Preview3D",
-      "pos": [
-        5704.474494171152,
-        107.20857334136973
-      ],
-      "size": [
-        716.2418039718609,
-        806.4481702397279
-      ],
-      "flags": {},
-      "order": 40,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "camera_info",
-          "shape": 7,
-          "type": "LOAD3D_CAMERA",
-          "link": null
-        },
-        {
-          "name": "bg_image",
-          "shape": 7,
-          "type": "IMAGE",
-          "link": null
-        },
-        {
-          "name": "model_file",
-          "type": "STRING,FILE_3D_GLB,FILE_3D_GLTF,FILE_3D_FBX,FILE_3D_OBJ,FILE_3D_STL,FILE_3D_USDZ,FILE_3D",
-          "widget": {
-            "name": "model_file"
-          },
-          "link": 30
-        }
-      ],
-      "outputs": [],
-      "properties": {
-        "cnr_id": "comfy-core",
-        "ver": "0.19.3",
-        "Node name for S&R": "Preview3D",
-        "Last Time Model File": "",
-        "Resource Folder": "",
-        "Scene Config": {
-          "showGrid": true,
-          "backgroundColor": "#282828",
-          "backgroundImage": "",
-          "backgroundRenderMode": "tiled",
-          "models": [
-            {
-              "position": {
-                "x": 0,
-                "y": 0,
-                "z": 0
-              },
-              "quaternion": {
-                "x": 0,
-                "y": 0,
-                "z": 0,
-                "w": 1
-              },
-              "scale": {
-                "x": 1,
-                "y": 1,
-                "z": 1
-              }
-            }
-          ]
-        },
-        "Camera Config": {
-          "cameraType": "perspective",
-          "fov": 35,
-          "state": {
-            "position": {
-              "x": 8.212183485961665,
-              "y": 8.212183485961663,
-              "z": 8.212183485961669
-            },
-            "target": {
-              "x": 0,
-              "y": 0,
-              "z": 0
-            },
-            "zoom": 1,
-            "cameraType": "perspective",
-            "quaternion": {
-              "x": -0.2798481423331212,
-              "y": 0.3647051996310008,
-              "z": 0.11591689595929507,
-              "w": 0.8804762392171493
-            },
-            "fov": 35,
-            "aspect": 1.0943396226415094,
-            "near": 0.01,
-            "far": 10000,
-            "frustum": {
-              "left": -5,
-              "right": 5,
-              "top": 5,
-              "bottom": -5
-            }
-          }
-        },
-        "Light Config": {
-          "intensity": 0.6400000000000001,
-          "hdri": {
-            "enabled": false,
-            "hdriPath": "",
-            "showAsBackground": false,
-            "intensity": 1
-          }
-        },
-        "Model Config": {
-          "upDirection": "original",
-          "materialMode": "original",
-          "showSkeleton": false,
-          "gizmo": {
-            "enabled": false,
-            "mode": "translate",
-            "position": {
-              "x": 0,
-              "y": 0,
-              "z": 0
-            },
-            "rotation": {
-              "x": 0,
-              "y": 0,
-              "z": 0
-            },
-            "scale": {
-              "x": 1,
-              "y": 1,
-              "z": 1
-            }
-          }
-        }
-      },
-      "widgets_values": [
-        "",
-        ""
-      ],
-      "widgets_values_named": {
-        "model_file": "",
-        "image": ""
-      }
-    },
-    {
       "id": 35,
       "type": "Orbit3DSparseGenerator",
       "pos": [
@@ -262,7 +65,7 @@
         650
       ],
       "flags": {},
-      "order": 33,
+      "order": 43,
       "mode": 0,
       "inputs": [
         {
@@ -282,7 +85,8 @@
           "name": "coords",
           "type": "COORDS",
           "links": [
-            75
+            75,
+            2022
           ]
         },
         {
@@ -301,11 +105,14 @@
         }
       ],
       "properties": {
-        "Node name for S&R": "Orbit3DSparseGenerator"
+        "cnr_id": "comfyui-orbit-to-3d",
+        "ver": "618e1bbcd9e257f142e7707372074f9302542b34",
+        "Node name for S&R": "Orbit3DSparseGenerator",
+        "aux_id": "mefisure-create/ComfyUI-OrbitTo3D"
       },
       "widgets_values": [
-        1234,
-        "fixed",
+        2059609874,
+        "randomize",
         12,
         7.5,
         0.01,
@@ -330,8 +137,8 @@
         0.5
       ],
       "widgets_values_named": {
-        "seed": 1234,
-        "control_after_generate": "fixed",
+        "seed": 2059609874,
+        "control_after_generate": "randomize",
         "sparse_structure_steps": 12,
         "sparse_structure_guidance_strength": 7.5,
         "sparse_structure_guidance_rescale": 0.01,
@@ -365,10 +172,10 @@
       ],
       "size": [
         336,
-        434
+        482
       ],
       "flags": {},
-      "order": 34,
+      "order": 45,
       "mode": 0,
       "inputs": [
         {
@@ -393,26 +200,32 @@
           "name": "shape_slat",
           "type": "SHAPE_SLAT",
           "links": [
-            79
+            79,
+            2023
           ]
         },
         {
           "name": "resolution",
           "type": "INT",
           "links": [
-            80
+            80,
+            2025
           ]
         },
         {
           "name": "pipeline",
           "type": "TRELLIS2PIPELINE",
           "links": [
-            77
+            77,
+            2024
           ]
         }
       ],
       "properties": {
-        "Node name for S&R": "Orbit3DShapeGenerator"
+        "cnr_id": "comfyui-orbit-to-3d",
+        "ver": "618e1bbcd9e257f142e7707372074f9302542b34",
+        "Node name for S&R": "Orbit3DShapeGenerator",
+        "aux_id": "mefisure-create/ComfyUI-OrbitTo3D"
       },
       "widgets_values": [
         512,
@@ -429,7 +242,9 @@
         1,
         "normal+depth",
         "Marigold",
-        "MoGe"
+        "MoGe",
+        "Marigold",
+        "Marigold"
       ],
       "widgets_values_named": {
         "resolution": 512,
@@ -444,9 +259,11 @@
         "dino_lock": 0,
         "dino_substeps": 4,
         "dino_foundation_cap": 1,
-        "shape512_mode": "normal+depth",
+        "shape_seed_mode": "normal+depth",
+        "shape_seed": "Marigold",
+        "shape512_mode": "MoGe",
         "shape512_normals_source": "Marigold",
-        "shape512_depth_source": "MoGe"
+        "shape512_depth_source": "Marigold"
       }
     },
     {
@@ -458,10 +275,10 @@
       ],
       "size": [
         336,
-        566
+        622
       ],
       "flags": {},
-      "order": 35,
+      "order": 46,
       "mode": 0,
       "inputs": [
         {
@@ -502,21 +319,24 @@
           "name": "shape_slat",
           "type": "SHAPE_SLAT",
           "links": [
-            85
+            85,
+            2026
           ]
         },
         {
           "name": "resolution",
           "type": "INT",
           "links": [
-            86
+            86,
+            2028
           ]
         },
         {
           "name": "pipeline",
           "type": "TRELLIS2PIPELINE",
           "links": [
-            84
+            84,
+            2027
           ]
         },
         {
@@ -526,7 +346,10 @@
         }
       ],
       "properties": {
-        "Node name for S&R": "Orbit3DShapeCascadeGenerator"
+        "cnr_id": "comfyui-orbit-to-3d",
+        "ver": "618e1bbcd9e257f142e7707372074f9302542b34",
+        "Node name for S&R": "Orbit3DShapeCascadeGenerator",
+        "aux_id": "mefisure-create/ComfyUI-OrbitTo3D"
       },
       "widgets_values": [
         0,
@@ -546,7 +369,11 @@
         1,
         "normal+depth",
         "Marigold",
-        "MoGe"
+        "MoGe",
+        "inherit",
+        0,
+        "off",
+        ""
       ],
       "widgets_values_named": {
         "from_resolution": 0,
@@ -566,7 +393,11 @@
         "dino_foundation_cap": 1,
         "shape_hr_mode": "normal+depth",
         "shape_hr_normals_source": "Marigold",
-        "shape_hr_depth_source": "MoGe"
+        "shape_hr_depth_source": "MoGe",
+        "shape_hr_seed_mode": "inherit",
+        "shape_hr_seed": 0,
+        "shape_hr_noise_cache_mode": "off",
+        "shape_hr_noise_cache_path": ""
       }
     },
     {
@@ -581,7 +412,7 @@
         122
       ],
       "flags": {},
-      "order": 36,
+      "order": 48,
       "mode": 0,
       "inputs": [
         {
@@ -614,7 +445,8 @@
           "name": "mesh",
           "type": "MESHWITHVOXEL",
           "links": [
-            1114
+            2019,
+            2031
           ]
         },
         {
@@ -631,7 +463,8 @@
       "properties": {
         "cnr_id": "trellis2",
         "ver": "b0e84c0f29857a444e8bcb5b9be2ea218e96efd0",
-        "Node name for S&R": "Trellis2DecodeLatents"
+        "Node name for S&R": "Trellis2DecodeLatents",
+        "aux_id": "visualbruno/ComfyUI-Trellis2"
       },
       "widgets_values": [
         0,
@@ -643,101 +476,11 @@
       }
     },
     {
-      "id": 532,
-      "type": "Trellis2ReconstructMeshWithQuad",
-      "pos": [
-        4925.678929374693,
-        270.6214147909804
-      ],
-      "size": [
-        354.7787841796875,
-        130
-      ],
-      "flags": {},
-      "order": 37,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "mesh",
-          "type": "MESHWITHVOXEL",
-          "link": 1114
-        }
-      ],
-      "outputs": [
-        {
-          "name": "mesh",
-          "type": "MESHWITHVOXEL",
-          "links": [
-            1110
-          ]
-        }
-      ],
-      "properties": {
-        "cnr_id": "trellis2",
-        "ver": "b0e84c0f29857a444e8bcb5b9be2ea218e96efd0",
-        "Node name for S&R": "Trellis2ReconstructMeshWithQuad"
-      },
-      "widgets_values": [
-        1,
-        1024,
-        false,
-        false
-      ],
-      "widgets_values_named": {
-        "remesh_band": 1,
-        "resolution": 1024,
-        "remove_floaters": false,
-        "remove_inner_faces": false
-      }
-    },
-    {
-      "id": 533,
-      "type": "Trellis2MeshWithVoxelToTrimesh",
-      "pos": [
-        4925.678929374693,
-        450.6214147909802
-      ],
-      "size": [
-        349.41171875,
-        58
-      ],
-      "flags": {},
-      "order": 38,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "mesh",
-          "type": "MESHWITHVOXEL",
-          "link": 1110
-        }
-      ],
-      "outputs": [
-        {
-          "name": "trimesh",
-          "type": "TRIMESH",
-          "links": [
-            1111
-          ]
-        }
-      ],
-      "properties": {
-        "cnr_id": "trellis2",
-        "ver": "b0e84c0f29857a444e8bcb5b9be2ea218e96efd0",
-        "Node name for S&R": "Trellis2MeshWithVoxelToTrimesh"
-      },
-      "widgets_values": [
-        "90 degrees"
-      ],
-      "widgets_values_named": {
-        "reorient_vertices": "90 degrees"
-      }
-    },
-    {
       "id": 577,
       "type": "UnetLoaderGGUF",
       "pos": [
         30.849578094482435,
-        92.08369922637958
+        90.71380985497483
       ],
       "size": [
         270,
@@ -779,7 +522,7 @@
         194
       ],
       "flags": {},
-      "order": 13,
+      "order": 15,
       "mode": 0,
       "inputs": [
         {
@@ -799,7 +542,7 @@
           "name": "marigold_model",
           "type": "MARIGOLDV2_MODEL",
           "links": [
-            1193
+            2004
           ]
         },
         {
@@ -811,7 +554,7 @@
           "name": "vae",
           "type": "VAE",
           "links": [
-            1195
+            2005
           ]
         }
       ],
@@ -837,32 +580,32 @@
       "id": 579,
       "type": "MarigoldV2Predict",
       "pos": [
-        2524.4538028558104,
-        86.26373980129073
+        2285.2688183041796,
+        648.1234386357366
       ],
       "size": [
         277.60606384277344,
         290
       ],
       "flags": {},
-      "order": 22,
+      "order": 32,
       "mode": 0,
       "inputs": [
         {
           "name": "marigold_model",
           "type": "MARIGOLDV2_MODEL",
-          "link": 1193
+          "link": 1951
         },
         {
           "name": "image",
           "type": "IMAGE",
-          "link": 1194
+          "link": 1915
         },
         {
           "name": "vae",
           "shape": 7,
           "type": "VAE",
-          "link": 1195
+          "link": 1952
         },
         {
           "name": "width",
@@ -870,7 +613,7 @@
           "widget": {
             "name": "width"
           },
-          "link": 1763
+          "link": 1946
         },
         {
           "name": "height",
@@ -878,7 +621,7 @@
           "widget": {
             "name": "height"
           },
-          "link": 1765
+          "link": 1947
         }
       ],
       "outputs": [
@@ -886,8 +629,8 @@
           "name": "image",
           "type": "IMAGE",
           "links": [
-            1382,
-            1778
+            1918,
+            1922
           ]
         },
         {
@@ -963,8 +706,8 @@
       "id": 583,
       "type": "LoadMoGeModel",
       "pos": [
-        30.849578094482435,
-        332.08369922637974
+        30.849578094482354,
+        337.7755214459147
       ],
       "size": [
         270,
@@ -979,7 +722,7 @@
           "name": "MOGE_MODEL",
           "type": "MOGE_MODEL",
           "links": [
-            1201
+            2002
           ]
         }
       ],
@@ -996,69 +739,6 @@
       }
     },
     {
-      "id": 584,
-      "type": "Orbit3DMoGeInference",
-      "pos": [
-        2524.4538028558104,
-        812.747291754643
-      ],
-      "size": [
-        270.78787994384766,
-        198
-      ],
-      "flags": {},
-      "order": 23,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "moge_model",
-          "type": "MOGE_MODEL",
-          "link": 1201
-        },
-        {
-          "name": "image",
-          "type": "IMAGE",
-          "link": 1202
-        },
-        {
-          "name": "fov_x_degrees",
-          "type": "FLOAT",
-          "widget": {
-            "name": "fov_x_degrees"
-          },
-          "link": 1534
-        }
-      ],
-      "outputs": [
-        {
-          "name": "moge_geometry",
-          "type": "MOGE_GEOMETRY",
-          "links": [
-            1773
-          ]
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Orbit3DMoGeInference"
-      },
-      "widgets_values": [
-        30,
-        28,
-        1,
-        true,
-        true,
-        8
-      ],
-      "widgets_values_named": {
-        "resolution_level": 30,
-        "fov_x_degrees": 28,
-        "batch_size": 1,
-        "force_projection": true,
-        "apply_mask": true,
-        "refine_steps": 8
-      }
-    },
-    {
       "id": 586,
       "type": "VHS_LoadVideo",
       "pos": [
@@ -1067,7 +747,7 @@
       ],
       "size": [
         256.8249969482422,
-        310
+        683.4933357480716
       ],
       "flags": {},
       "order": 4,
@@ -1116,7 +796,7 @@
         "Node name for S&R": "VHS_LoadVideo"
       },
       "widgets_values": {
-        "video": "turntable.mp4",
+        "video": "MiniMax_H3_Experiment_A_Universal_00001_.mp4",
         "force_rate": 0,
         "custom_width": 0,
         "custom_height": 0,
@@ -1129,7 +809,7 @@
           "hidden": false,
           "paused": false,
           "params": {
-            "filename": "turntable.mp4",
+            "filename": "MiniMax_H3_Experiment_A_Universal_00001_.mp4",
             "type": "input",
             "format": "video/mp4",
             "force_rate": 0,
@@ -1142,7 +822,7 @@
         }
       },
       "widgets_values_named": {
-        "video": "turntable.mp4",
+        "video": "MiniMax_H3_Experiment_A_Universal_00001_.mp4",
         "force_rate": 0,
         "custom_width": 0,
         "custom_height": 0,
@@ -1155,7 +835,7 @@
           "hidden": false,
           "paused": false,
           "params": {
-            "filename": "turntable.mp4",
+            "filename": "MiniMax_H3_Experiment_A_Universal_00001_.mp4",
             "type": "input",
             "format": "video/mp4",
             "force_rate": 0,
@@ -1180,7 +860,7 @@
         145.9375
       ],
       "flags": {},
-      "order": 15,
+      "order": 17,
       "mode": 0,
       "inputs": [
         {
@@ -1221,26 +901,26 @@
       "id": 589,
       "type": "e051e1fb-ede6-46e5-a437-138f0051e7d1",
       "pos": [
-        2269.648893396609,
-        345.7319909737403
+        2611.5445440450235,
+        452.32004154520115
       ],
       "size": [
         210,
         122
       ],
       "flags": {},
-      "order": 21,
+      "order": 30,
       "mode": 0,
       "inputs": [
         {
           "name": "destination",
           "type": "IMAGE",
-          "link": 1756
+          "link": 1940
         },
         {
           "name": "source",
           "type": "IMAGE",
-          "link": 1769
+          "link": 1972
         },
         {
           "name": "x",
@@ -1248,7 +928,7 @@
           "widget": {
             "name": "x"
           },
-          "link": 1758
+          "link": 1942
         },
         {
           "name": "y",
@@ -1256,12 +936,12 @@
           "widget": {
             "name": "y"
           },
-          "link": 1759
+          "link": 1943
         },
         {
           "name": "destination_1",
           "type": "MASK",
-          "link": 1761
+          "link": 1945
         }
       ],
       "outputs": [
@@ -1269,18 +949,18 @@
           "name": "IMAGE",
           "type": "IMAGE",
           "links": [
-            1194,
-            1202,
-            1262
+            1914,
+            1915,
+            1916
           ]
         },
         {
           "name": "MASK",
           "type": "MASK",
           "links": [
-            1245,
-            1385,
-            1771
+            1917,
+            1920,
+            1925
           ]
         }
       ],
@@ -1303,21 +983,21 @@
       "id": 597,
       "type": "ImageCompositeMasked",
       "pos": [
-        2855.1879439490963,
-        254.5670473539137
+        2943.80553695129,
+        771.4026432413791
       ],
       "size": [
-        310.48484802246094,
-        146
+        249.64999389648438,
+        148.26438360482712
       ],
       "flags": {},
-      "order": 30,
+      "order": 35,
       "mode": 0,
       "inputs": [
         {
           "name": "destination",
           "type": "IMAGE",
-          "link": 1757
+          "link": 1941
         },
         {
           "name": "source",
@@ -1328,7 +1008,7 @@
           "name": "mask",
           "shape": 7,
           "type": "MASK",
-          "link": 1245
+          "link": 1920
         }
       ],
       "outputs": [
@@ -1336,7 +1016,7 @@
           "name": "IMAGE",
           "type": "IMAGE",
           "links": [
-            1780
+            1924
           ]
         }
       ],
@@ -1368,7 +1048,7 @@
         194
       ],
       "flags": {},
-      "order": 14,
+      "order": 16,
       "mode": 0,
       "inputs": [
         {
@@ -1388,7 +1068,7 @@
           "name": "marigold_model",
           "type": "MARIGOLDV2_MODEL",
           "links": [
-            1261
+            2006
           ]
         },
         {
@@ -1400,7 +1080,7 @@
           "name": "vae",
           "type": "VAE",
           "links": [
-            1263
+            2007
           ]
         }
       ],
@@ -1426,32 +1106,32 @@
       "id": 603,
       "type": "MarigoldV2Predict",
       "pos": [
-        2524.4538028558104,
-        452.747291754643
+        2583.8510328698226,
+        645.9136639460941
       ],
       "size": [
         277.60606384277344,
         290
       ],
       "flags": {},
-      "order": 24,
+      "order": 33,
       "mode": 0,
       "inputs": [
         {
           "name": "marigold_model",
           "type": "MARIGOLDV2_MODEL",
-          "link": 1261
+          "link": 1953
         },
         {
           "name": "image",
           "type": "IMAGE",
-          "link": 1262
+          "link": 1916
         },
         {
           "name": "vae",
           "shape": 7,
           "type": "VAE",
-          "link": 1263
+          "link": 1954
         },
         {
           "name": "width",
@@ -1459,7 +1139,7 @@
           "widget": {
             "name": "width"
           },
-          "link": 1764
+          "link": 1960
         },
         {
           "name": "height",
@@ -1467,7 +1147,7 @@
           "widget": {
             "name": "height"
           },
-          "link": 1766
+          "link": 1961
         }
       ],
       "outputs": [
@@ -1475,8 +1155,8 @@
           "name": "image",
           "type": "IMAGE",
           "links": [
-            1384,
-            1776
+            1919,
+            1923
           ]
         },
         {
@@ -1515,42 +1195,42 @@
       "id": 646,
       "type": "e44a7a2f-cd71-4f4b-8780-40f07412d1f5",
       "pos": [
-        2855.1879439490963,
-        86.26373980129073
+        2938.4654408569986,
+        1043.7953447234115
       ],
       "size": [
-        234.99091186523438,
+        236.32500305175782,
         106
       ],
       "flags": {},
-      "order": 28,
+      "order": 34,
       "mode": 0,
       "inputs": [
         {
           "name": "diffuse_map",
           "type": "IMAGE",
-          "link": 1760
+          "link": 1944
         },
         {
           "name": "normal_map",
           "type": "IMAGE",
-          "link": 1382
+          "link": 1918
         },
         {
           "name": "specular_map",
           "type": "IMAGE",
-          "link": 1767
+          "link": 1948
         },
         {
           "label": "depth_map",
           "name": "image",
           "type": "IMAGE",
-          "link": 1384
+          "link": 1919
         },
         {
           "name": "mask",
           "type": "MASK",
-          "link": 1385
+          "link": 1917
         }
       ],
       "outputs": [
@@ -1570,67 +1250,6 @@
       }
     },
     {
-      "id": 710,
-      "type": "MathExpression|pysssss",
-      "pos": [
-        1873.9977501709575,
-        472.08263697912554
-      ],
-      "size": [
-        210,
-        128
-      ],
-      "flags": {},
-      "order": 18,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "a",
-          "shape": 7,
-          "type": "INT,FLOAT,IMAGE,LATENT",
-          "link": 1560
-        },
-        {
-          "name": "b",
-          "shape": 7,
-          "type": "INT,FLOAT,IMAGE,LATENT",
-          "link": 1561
-        },
-        {
-          "name": "c",
-          "shape": 7,
-          "type": "INT,FLOAT,IMAGE,LATENT",
-          "link": null
-        }
-      ],
-      "outputs": [
-        {
-          "name": "INT",
-          "type": "INT",
-          "links": null
-        },
-        {
-          "name": "FLOAT",
-          "type": "FLOAT",
-          "links": [
-            1534,
-            1803
-          ]
-        }
-      ],
-      "title": "Use max(FOVx, FOVy)",
-      "properties": {
-        "cnr_id": "comfyui-custom-scripts",
-        "ver": "1.2.5"
-      },
-      "widgets_values": [
-        "max(a, b)"
-      ],
-      "widgets_values_named": {
-        "expression": "max(a, b)"
-      }
-    },
-    {
       "id": 712,
       "type": "Orbit3DRealBasicVSR",
       "pos": [
@@ -1642,7 +1261,7 @@
         226
       ],
       "flags": {},
-      "order": 17,
+      "order": 19,
       "mode": 0,
       "inputs": [
         {
@@ -1664,13 +1283,15 @@
           "name": "views_sr",
           "type": "IMAGE",
           "links": [
-            1755,
-            1768
+            1962
           ]
         }
       ],
       "properties": {
-        "Node name for S&R": "Orbit3DRealBasicVSR"
+        "cnr_id": "comfyui-orbit-to-3d",
+        "ver": "618e1bbcd9e257f142e7707372074f9302542b34",
+        "Node name for S&R": "Orbit3DRealBasicVSR",
+        "aux_id": "mefisure-create/ComfyUI-OrbitTo3D"
       },
       "widgets_values": [
         "[0, 1, 2, 3]",
@@ -1701,11 +1322,11 @@
         274.9912129778502
       ],
       "size": [
-        305.6878723144531,
-        402
+        307.4499877929687,
+        422
       ],
       "flags": {},
-      "order": 16,
+      "order": 18,
       "mode": 0,
       "inputs": [
         {
@@ -1724,11 +1345,6 @@
       ],
       "outputs": [
         {
-          "name": "views",
-          "type": "IMAGE",
-          "links": null
-        },
-        {
           "name": "frames",
           "type": "STRING",
           "links": [
@@ -1744,19 +1360,32 @@
           "name": "fov_x_deg",
           "type": "FLOAT",
           "links": [
-            1560
+            1821
           ]
         },
         {
           "name": "fov_y_deg",
           "type": "FLOAT",
           "links": [
-            1561
+            1822
           ]
+        },
+        {
+          "name": "axis_x_input_px",
+          "type": "FLOAT",
+          "links": null
+        },
+        {
+          "name": "axis_diagnostic",
+          "type": "STRING",
+          "links": null
         }
       ],
       "properties": {
-        "Node name for S&R": "Orbit3DVGGTViewSelector"
+        "cnr_id": "comfyui-orbit-to-3d",
+        "ver": "618e1bbcd9e257f142e7707372074f9302542b34",
+        "Node name for S&R": "Orbit3DVGGTViewSelector",
+        "aux_id": "mefisure-create/ComfyUI-OrbitTo3D"
       },
       "widgets_values": [
         "0, 15, 30, 45, 60, 75, 90, 105, 120, 135, 150, 165, 180, 195, 210, 225, 240, 255, 270, 285, 300, 315, 330, 345",
@@ -1791,21 +1420,21 @@
       "id": 784,
       "type": "d2a1ee5a-be86-419a-9405-595b29f56306",
       "pos": [
-        2263.5150393129975,
-        86.26373980129073
+        1892.9442277319101,
+        581.0277498741748
       ],
       "size": [
-        211.74848022460938,
+        212.9749969482422,
         206
       ],
       "flags": {},
-      "order": 19,
+      "order": 22,
       "mode": 0,
       "inputs": [
         {
           "name": "image",
           "type": "IMAGE",
-          "link": 1755
+          "link": 1964
         }
       ],
       "outputs": [
@@ -1814,7 +1443,7 @@
           "name": "IMAGE",
           "type": "IMAGE",
           "links": [
-            1756
+            1993
           ]
         },
         {
@@ -1822,7 +1451,7 @@
           "name": "IMAGE_1",
           "type": "IMAGE",
           "links": [
-            1757
+            1994
           ]
         },
         {
@@ -1830,7 +1459,7 @@
           "name": "INT",
           "type": "INT",
           "links": [
-            1758
+            1995
           ]
         },
         {
@@ -1838,7 +1467,7 @@
           "name": "INT_1",
           "type": "INT",
           "links": [
-            1759
+            1996
           ]
         },
         {
@@ -1846,7 +1475,7 @@
           "name": "IMAGE_2",
           "type": "IMAGE",
           "links": [
-            1760
+            1997
           ]
         },
         {
@@ -1854,23 +1483,21 @@
           "name": "MASK",
           "type": "MASK",
           "links": [
-            1761
+            1998
           ]
         },
         {
           "name": "width",
           "type": "INT",
           "links": [
-            1763,
-            1764
+            1999
           ]
         },
         {
           "name": "height",
           "type": "INT",
           "links": [
-            1765,
-            1766
+            2000
           ]
         },
         {
@@ -1878,7 +1505,7 @@
           "name": "IMAGE_4",
           "type": "IMAGE",
           "links": [
-            1767
+            2001
           ]
         }
       ],
@@ -1890,269 +1517,67 @@
       }
     },
     {
-      "id": 785,
-      "type": "ImpactImageBatchToImageList",
-      "pos": [
-        1873.9977501709575,
-        370.75712981482314
-      ],
-      "size": [
-        232.0212158203125,
-        26
-      ],
-      "flags": {},
-      "order": 20,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "image",
-          "type": "IMAGE",
-          "link": 1768
-        }
-      ],
-      "outputs": [
-        {
-          "name": "IMAGE",
-          "shape": 6,
-          "type": "IMAGE",
-          "links": [
-            1769
-          ]
-        }
-      ],
-      "title": "Selected Views: Batch → List",
-      "properties": {
-        "cnr_id": "comfyui-impact-pack",
-        "ver": "8.28.3",
-        "Node name for S&R": "ImpactImageBatchToImageList"
-      }
-    },
-    {
-      "id": 786,
-      "type": "MaskListToMaskBatch",
-      "pos": [
-        2855.1879439490963,
-        569.0737159908268
-      ],
-      "size": [
-        200.3242401123047,
-        26
-      ],
-      "flags": {},
-      "order": 25,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "mask",
-          "type": "MASK",
-          "link": 1771
-        }
-      ],
-      "outputs": [
-        {
-          "name": "MASK",
-          "type": "MASK",
-          "links": [
-            1799
-          ]
-        }
-      ],
-      "title": "Masks: List → Batch",
-      "properties": {
-        "cnr_id": "comfyui-impact-pack",
-        "ver": "8.28.3",
-        "Node name for S&R": "MaskListToMaskBatch"
-      }
-    },
-    {
-      "id": 787,
-      "type": "Orbit3DMoGeGeometryListToBatch",
-      "pos": [
-        2855.1879439490963,
-        846.3628938066042
-      ],
-      "size": [
-        310,
-        26
-      ],
-      "flags": {},
-      "order": 27,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "moge_geometry",
-          "type": "MOGE_GEOMETRY",
-          "link": 1773
-        }
-      ],
-      "outputs": [
-        {
-          "name": "moge_geometry_batch",
-          "type": "MOGE_GEOMETRY",
-          "links": [
-            1802
-          ]
-        }
-      ],
-      "title": "MoGe Geometry: List → Batch",
-      "properties": {
-        "Node name for S&R": "Orbit3DMoGeGeometryListToBatch"
-      }
-    },
-    {
-      "id": 788,
-      "type": "ImageListToImageBatch",
-      "pos": [
-        2855.1879439490963,
-        750.5315191979021
-      ],
-      "size": [
-        210.50606384277344,
-        26
-      ],
-      "flags": {},
-      "order": 29,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "images",
-          "type": "IMAGE",
-          "link": 1776
-        }
-      ],
-      "outputs": [
-        {
-          "name": "IMAGE",
-          "type": "IMAGE",
-          "links": [
-            1801
-          ]
-        }
-      ],
-      "title": "Depth: List → Batch",
-      "properties": {
-        "cnr_id": "comfyui-impact-pack",
-        "ver": "8.28.3",
-        "Node name for S&R": "ImageListToImageBatch"
-      }
-    },
-    {
-      "id": 789,
-      "type": "ImageListToImageBatch",
-      "pos": [
-        2855.1879439490963,
-        660.5315191979021
-      ],
-      "size": [
-        210.50606384277344,
-        26
-      ],
-      "flags": {},
-      "order": 26,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "images",
-          "type": "IMAGE",
-          "link": 1778
-        }
-      ],
-      "outputs": [
-        {
-          "name": "IMAGE",
-          "type": "IMAGE",
-          "links": [
-            1800
-          ]
-        }
-      ],
-      "title": "Normals: List → Batch",
-      "properties": {
-        "cnr_id": "comfyui-impact-pack",
-        "ver": "8.28.3",
-        "Node name for S&R": "ImageListToImageBatch"
-      }
-    },
-    {
-      "id": 790,
-      "type": "ImageListToImageBatch",
-      "pos": [
-        2855.1879439490963,
-        470.3266945228742
-      ],
-      "size": [
-        218.17272033691407,
-        26
-      ],
-      "flags": {},
-      "order": 31,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "images",
-          "type": "IMAGE",
-          "link": 1780
-        }
-      ],
-      "outputs": [
-        {
-          "name": "IMAGE",
-          "type": "IMAGE",
-          "links": [
-            1798
-          ]
-        }
-      ],
-      "title": "Clay Renders: List → Batch",
-      "properties": {
-        "cnr_id": "comfyui-impact-pack",
-        "ver": "8.28.3",
-        "Node name for S&R": "ImageListToImageBatch"
-      }
-    },
-    {
       "id": 799,
       "type": "Orbit3DMultiViewConfig",
       "pos": [
-        3251.7193141956063,
-        86.26373980129073
+        3265.162498993543,
+        794.795873561138
       ],
       "size": [
-        348.8787841796875,
-        590
+        309.1515534423406,
+        425.61076705080427
       ],
       "flags": {},
-      "order": 32,
+      "order": 42,
       "mode": 0,
       "inputs": [
-        {
-          "name": "images",
-          "type": "IMAGE",
-          "link": 1798
-        },
         {
           "name": "masks",
           "shape": 7,
           "type": "MASK",
-          "link": 1799
+          "link": null
         },
         {
           "name": "normal_maps",
           "shape": 7,
           "type": "IMAGE",
-          "link": 1800
+          "link": null
         },
         {
           "name": "depth_maps",
           "shape": 7,
           "type": "IMAGE",
-          "link": 1801
+          "link": null
         },
         {
           "name": "moge_geometry",
           "shape": 7,
           "type": "MOGE_GEOMETRY",
-          "link": 1802
+          "link": null
+        },
+        {
+          "name": "moge_cache",
+          "shape": 7,
+          "type": "ORBIT3D_MOGE_CACHE",
+          "link": 1931
+        },
+        {
+          "name": "marigold_cache",
+          "shape": 7,
+          "type": "ORBIT3D_MARIGOLD_CACHE",
+          "link": 1932
+        },
+        {
+          "name": "images",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "name": "view_cache",
+          "shape": 7,
+          "type": "ORBIT3D_VIEW_CACHE",
+          "link": 1929
         },
         {
           "name": "azimuths",
@@ -2176,7 +1601,7 @@
           "widget": {
             "name": "fov"
           },
-          "link": 1803
+          "link": 1824
         }
       ],
       "outputs": [
@@ -2196,7 +1621,10 @@
         }
       ],
       "properties": {
-        "Node name for S&R": "Orbit3DMultiViewConfig"
+        "cnr_id": "comfyui-orbit-to-3d",
+        "ver": "618e1bbcd9e257f142e7707372074f9302542b34",
+        "Node name for S&R": "Orbit3DMultiViewConfig",
+        "aux_id": "mefisure-create/ComfyUI-OrbitTo3D"
       },
       "widgets_values": [
         "0, 15, 30, 45, 60, 75, 90, 105, 120, 135, 150, 165, 180, 195, 210, 225, 240, 255, 270, 285, 300, 315, 330, 345",
@@ -2261,14 +1689,17 @@
         }
       ],
       "properties": {
-        "Node name for S&R": "Orbit3DAngleGrid"
+        "cnr_id": "comfyui-orbit-to-3d",
+        "ver": "618e1bbcd9e257f142e7707372074f9302542b34",
+        "Node name for S&R": "Orbit3DAngleGrid",
+        "aux_id": "mefisure-create/ComfyUI-OrbitTo3D"
       },
       "widgets_values": [
-        "15",
+        "3",
         "360"
       ],
       "widgets_values_named": {
-        "yaw_step": "15",
+        "yaw_step": "3",
         "pitch_step": "360"
       }
     },
@@ -2384,8 +1815,8 @@
       "id": 806,
       "type": "MarkdownNote",
       "pos": [
-        3714.5170801620457,
-        -315.8127021789547
+        3566.840798549665,
+        -555.4100436926375
       ],
       "size": [
         921.6321775508959,
@@ -2411,8 +1842,8 @@
       "id": 807,
       "type": "MarkdownNote",
       "pos": [
-        5375.75031280519,
-        -315.8127021789547
+        5374.243503477112,
+        -540.3409846853166
       ],
       "size": [
         785.1786740116413,
@@ -2460,17 +1891,1868 @@
       },
       "color": "#432",
       "bgcolor": "#653"
+    },
+    {
+      "id": 815,
+      "type": "ComfyMathExpression",
+      "pos": [
+        1900.234454710417,
+        360.4168022690171
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 20,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "values.a",
+          "type": "FLOAT,INT,BOOLEAN",
+          "link": 1821
+        },
+        {
+          "name": "values.b",
+          "shape": 7,
+          "type": "FLOAT,INT,BOOLEAN",
+          "link": 1822
+        },
+        {
+          "name": "values.c",
+          "shape": 7,
+          "type": "FLOAT,INT,BOOLEAN",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "FLOAT",
+          "type": "FLOAT",
+          "links": [
+            2003
+          ]
+        },
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "BOOL",
+          "type": "BOOLEAN",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.42.3",
+        "Node name for S&R": "ComfyMathExpression"
+      },
+      "widgets_values": [
+        "max(a, b)"
+      ],
+      "widgets_values_named": {
+        "expression": "max(a, b)"
+      }
+    },
+    {
+      "id": 826,
+      "type": "Orbit3DCacheSession",
+      "pos": [
+        1507.681919126801,
+        702.9736064066315
+      ],
+      "size": [
+        270,
+        126
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "cache_session",
+          "type": "ORBIT3D_CACHE_SESSION",
+          "links": [
+            1963,
+            2008
+          ]
+        },
+        {
+          "name": "session_path",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-orbit-to-3d",
+        "ver": "618e1bbcd9e257f142e7707372074f9302542b34",
+        "Node name for S&R": "Orbit3DCacheSession"
+      },
+      "widgets_values": [
+        "",
+        "persistent",
+        "/home/ai/orbit3d-cache"
+      ],
+      "widgets_values_named": {
+        "cache_root": "",
+        "storage_mode": "persistent",
+        "persistent_path": "/home/ai/orbit3d-cache"
+      }
+    },
+    {
+      "id": 827,
+      "type": "Orbit3DMoGeInference",
+      "pos": [
+        2394.3231403430505,
+        995.5692508146464
+      ],
+      "size": [
+        363.2250122070312,
+        198
+      ],
+      "flags": {},
+      "order": 31,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "moge_model",
+          "type": "MOGE_MODEL",
+          "link": 1949
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 1914
+        },
+        {
+          "name": "fov_x_degrees",
+          "type": "FLOAT",
+          "widget": {
+            "name": "fov_x_degrees"
+          },
+          "link": 1950
+        }
+      ],
+      "outputs": [
+        {
+          "name": "moge_geometry",
+          "type": "MOGE_GEOMETRY",
+          "links": [
+            1921
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-orbit-to-3d",
+        "ver": "618e1bbcd9e257f142e7707372074f9302542b34",
+        "Node name for S&R": "Orbit3DMoGeInference"
+      },
+      "widgets_values": [
+        30,
+        0,
+        1,
+        true,
+        true,
+        8
+      ],
+      "widgets_values_named": {
+        "resolution_level": 30,
+        "fov_x_degrees": 0,
+        "batch_size": 1,
+        "force_projection": true,
+        "apply_mask": true,
+        "refine_steps": 8
+      }
+    },
+    {
+      "id": 829,
+      "type": "Orbit3DUnifiedViewSpill",
+      "pos": [
+        2957.1258637327533,
+        539.1442862618555
+      ],
+      "size": [
+        221.9749969482422,
+        146
+      ],
+      "flags": {},
+      "order": 36,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "cache_session",
+          "type": "ORBIT3D_CACHE_SESSION",
+          "link": 1955
+        },
+        {
+          "name": "iteration_index",
+          "type": "INT",
+          "link": 1977
+        },
+        {
+          "name": "moge_geometry",
+          "type": "MOGE_GEOMETRY",
+          "link": 1921
+        },
+        {
+          "name": "normal_map",
+          "type": "IMAGE",
+          "link": 1922
+        },
+        {
+          "name": "depth_map",
+          "type": "IMAGE",
+          "link": 1923
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 1924
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "link": 1925
+        }
+      ],
+      "outputs": [
+        {
+          "name": "cache_ref",
+          "type": "ORBIT3D_CACHE_REF",
+          "links": [
+            1979
+          ]
+        },
+        {
+          "name": "report",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-orbit-to-3d",
+        "ver": "618e1bbcd9e257f142e7707372074f9302542b34",
+        "Node name for S&R": "Orbit3DUnifiedViewSpill"
+      }
+    },
+    {
+      "id": 830,
+      "type": "Orbit3DUnifiedCacheFinalize",
+      "pos": [
+        3310.5877653905463,
+        461.57132169955656
+      ],
+      "size": [
+        254.79999389648438,
+        68.26433177878107
+      ],
+      "flags": {},
+      "order": 40,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "cache_ref",
+          "type": "ORBIT3D_CACHE_REF",
+          "link": 1983
+        }
+      ],
+      "outputs": [
+        {
+          "name": "report",
+          "type": "STRING",
+          "links": []
+        },
+        {
+          "name": "cache_manifest",
+          "type": "ORBIT3D_GENERIC_CACHE_MANIFEST",
+          "links": [
+            1927
+          ]
+        },
+        {
+          "name": "release_report",
+          "type": "STRING",
+          "links": [
+            1928
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-orbit-to-3d",
+        "ver": "618e1bbcd9e257f142e7707372074f9302542b34",
+        "Node name for S&R": "Orbit3DUnifiedCacheFinalize"
+      }
+    },
+    {
+      "id": 843,
+      "type": "Orbit3DMultiViewCacheOpen",
+      "pos": [
+        3306.700143079318,
+        586.4800434397239
+      ],
+      "size": [
+        257.8250030517578,
+        138.799570190302
+      ],
+      "flags": {},
+      "order": 41,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "cache_manifest",
+          "type": "ORBIT3D_GENERIC_CACHE_MANIFEST",
+          "link": 1927
+        },
+        {
+          "name": "after_release",
+          "type": "STRING",
+          "link": 1928
+        }
+      ],
+      "outputs": [
+        {
+          "name": "view_cache",
+          "type": "ORBIT3D_VIEW_CACHE",
+          "links": [
+            1929
+          ]
+        },
+        {
+          "name": "moge_cache",
+          "type": "ORBIT3D_MOGE_CACHE",
+          "links": [
+            1931
+          ]
+        },
+        {
+          "name": "marigold_cache",
+          "type": "ORBIT3D_MARIGOLD_CACHE",
+          "links": [
+            1932
+          ]
+        },
+        {
+          "name": "cache_session",
+          "type": "ORBIT3D_CACHE_SESSION",
+          "links": [
+            1939
+          ]
+        },
+        {
+          "name": "fov",
+          "type": "FLOAT",
+          "links": [
+            1824
+          ]
+        },
+        {
+          "name": "report",
+          "type": "STRING",
+          "links": []
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-orbit-to-3d",
+        "ver": "618e1bbcd9e257f142e7707372074f9302542b34",
+        "Node name for S&R": "Orbit3DMultiViewCacheOpen",
+        "aux_id": "mefisure-create/ComfyUI-OrbitTo3D"
+      }
+    },
+    {
+      "id": 844,
+      "type": "Orbit3DCleanupCacheSession",
+      "pos": [
+        5837.1734563605505,
+        693.2819415269485
+      ],
+      "size": [
+        251.54999389648438,
+        79.65756613939948
+      ],
+      "flags": {},
+      "order": 57,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "cache_session",
+          "type": "ORBIT3D_CACHE_SESSION",
+          "link": 1939
+        },
+        {
+          "name": "after_export",
+          "type": "STRING",
+          "link": 2035
+        }
+      ],
+      "outputs": [
+        {
+          "name": "report",
+          "type": "STRING",
+          "links": []
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-orbit-to-3d",
+        "ver": "618e1bbcd9e257f142e7707372074f9302542b34",
+        "Node name for S&R": "Orbit3DCleanupCacheSession"
+      },
+      "widgets_values": [
+        true
+      ],
+      "widgets_values_named": {
+        "delete_cache": true
+      }
+    },
+    {
+      "id": 850,
+      "type": "Orbit3DVSRBatchCache",
+      "pos": [
+        1876.9370750707083,
+        421.3266598552311
+      ],
+      "size": [
+        278.5750030517578,
+        86
+      ],
+      "flags": {},
+      "order": 21,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 1962
+        },
+        {
+          "name": "cache_session",
+          "type": "ORBIT3D_CACHE_SESSION",
+          "link": 1963
+        }
+      ],
+      "outputs": [
+        {
+          "name": "first_image",
+          "type": "IMAGE",
+          "links": [
+            1964
+          ]
+        },
+        {
+          "name": "mmap_batch",
+          "type": "IMAGE",
+          "links": [
+            1969
+          ]
+        },
+        {
+          "name": "view_count",
+          "type": "INT",
+          "links": [
+            1974,
+            1992
+          ]
+        },
+        {
+          "name": "report",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-orbit-to-3d",
+        "ver": "618e1bbcd9e257f142e7707372074f9302542b34",
+        "Node name for S&R": "Orbit3DVSRBatchCache",
+        "aux_id": "mefisure-create/ComfyUI-OrbitTo3D"
+      }
+    },
+    {
+      "id": 852,
+      "type": "Orbit3DVSRViewAtIndex",
+      "pos": [
+        2314.4302674183427,
+        484.76660256021927
+      ],
+      "size": [
+        210,
+        58
+      ],
+      "flags": {},
+      "order": 27,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 1985
+        },
+        {
+          "name": "index",
+          "type": "INT",
+          "widget": {
+            "name": "index"
+          },
+          "link": 1976
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            1972
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-orbit-to-3d",
+        "ver": "618e1bbcd9e257f142e7707372074f9302542b34",
+        "Node name for S&R": "Orbit3DVSRViewAtIndex",
+        "aux_id": "mefisure-create/ComfyUI-OrbitTo3D"
+      },
+      "widgets_values": [
+        0
+      ],
+      "widgets_values_named": {
+        "index": 0
+      }
+    },
+    {
+      "id": 828,
+      "type": "WhileLoopOpen | akatz-loops",
+      "pos": [
+        2260.135720047265,
+        131.05766106178402
+      ],
+      "size": [
+        292.9,
+        190
+      ],
+      "flags": {},
+      "order": 25,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "initial_value0",
+          "shape": 7,
+          "type": "*",
+          "link": 1984
+        },
+        {
+          "name": "initial_value1",
+          "shape": 7,
+          "type": "*",
+          "link": 1969
+        },
+        {
+          "name": "initial_value2",
+          "shape": 7,
+          "type": "*",
+          "link": 1974
+        },
+        {
+          "name": "initial_value3",
+          "shape": 7,
+          "type": "*",
+          "link": null
+        },
+        {
+          "name": "initial_value4",
+          "shape": 7,
+          "type": "*",
+          "link": 2009
+        }
+      ],
+      "outputs": [
+        {
+          "name": "FLOW_CONTROL",
+          "type": "FLOW_CONTROL",
+          "links": [
+            1978
+          ]
+        },
+        {
+          "name": "value0",
+          "type": "*",
+          "links": [
+            1975,
+            1976,
+            1977
+          ]
+        },
+        {
+          "name": "value1",
+          "type": "*",
+          "links": [
+            1985,
+            1986
+          ]
+        },
+        {
+          "name": "value2",
+          "type": "*",
+          "links": [
+            1987,
+            1988
+          ]
+        },
+        {
+          "name": "value3",
+          "type": "*",
+          "links": [
+            1980
+          ]
+        },
+        {
+          "name": "value4",
+          "type": "*",
+          "links": [
+            2010,
+            2011
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-execution-inversion",
+        "ver": "711a5fb244fc0b39a22f5b5603cb2a86b3534631",
+        "Node name for S&R": "WhileLoopOpen | akatz-loops"
+      },
+      "widgets_values": [
+        true
+      ],
+      "widgets_values_named": {
+        "condition": true
+      }
+    },
+    {
+      "id": 853,
+      "type": "ComfyMathExpression",
+      "pos": [
+        2660.6830320641343,
+        156.57803110693368
+      ],
+      "size": [
+        280,
+        120
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 26,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "values.a",
+          "type": "FLOAT,INT,BOOLEAN",
+          "link": 1975
+        },
+        {
+          "name": "values.b",
+          "shape": 7,
+          "type": "FLOAT,INT,BOOLEAN",
+          "link": null
+        },
+        {
+          "name": "values.c",
+          "shape": 7,
+          "type": "FLOAT,INT,BOOLEAN",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "FLOAT",
+          "type": "FLOAT",
+          "links": null
+        },
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": [
+            1989,
+            1990
+          ]
+        },
+        {
+          "name": "BOOL",
+          "type": "BOOLEAN",
+          "links": null
+        }
+      ],
+      "title": "Next iteration index",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.42.3",
+        "Node name for S&R": "ComfyMathExpression"
+      },
+      "widgets_values": [
+        "a + 1"
+      ],
+      "widgets_values_named": {
+        "expression": "a + 1"
+      }
+    },
+    {
+      "id": 854,
+      "type": "AccumulateNode | akatz-loops",
+      "pos": [
+        2934.5155615534463,
+        198.75819254929354
+      ],
+      "size": [
+        230,
+        70
+      ],
+      "flags": {},
+      "order": 37,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "to_add",
+          "type": "*",
+          "link": 1979
+        },
+        {
+          "name": "accumulation",
+          "shape": 7,
+          "type": "ACCUMULATION",
+          "link": 1980
+        }
+      ],
+      "outputs": [
+        {
+          "name": "ACCUMULATION",
+          "type": "ACCUMULATION",
+          "links": [
+            1981
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-execution-inversion",
+        "ver": "711a5fb244fc0b39a22f5b5603cb2a86b3534631",
+        "Node name for S&R": "AccumulateNode | akatz-loops"
+      }
+    },
+    {
+      "id": 831,
+      "type": "WhileLoopClose | akatz-loops",
+      "pos": [
+        3316.4319395940456,
+        90.38991736181465
+      ],
+      "size": [
+        251.4749969482422,
+        146
+      ],
+      "flags": {},
+      "order": 38,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "flow_control",
+          "type": "FLOW_CONTROL",
+          "link": 1978
+        },
+        {
+          "name": "condition",
+          "type": "BOOLEAN",
+          "link": 1991
+        },
+        {
+          "name": "initial_value0",
+          "shape": 7,
+          "type": "*",
+          "link": 1990
+        },
+        {
+          "name": "initial_value1",
+          "shape": 7,
+          "type": "*",
+          "link": 1986
+        },
+        {
+          "name": "initial_value2",
+          "shape": 7,
+          "type": "*",
+          "link": 1988
+        },
+        {
+          "name": "initial_value3",
+          "shape": 7,
+          "type": "*",
+          "link": 1981
+        },
+        {
+          "name": "initial_value4",
+          "shape": 7,
+          "type": "*",
+          "link": 2011
+        }
+      ],
+      "outputs": [
+        {
+          "name": "value0",
+          "type": "*",
+          "links": null
+        },
+        {
+          "name": "value1",
+          "type": "*",
+          "links": null
+        },
+        {
+          "name": "value2",
+          "type": "*",
+          "links": null
+        },
+        {
+          "name": "value3",
+          "type": "*",
+          "links": [
+            1982
+          ]
+        },
+        {
+          "name": "value4",
+          "type": "*",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-execution-inversion",
+        "ver": "711a5fb244fc0b39a22f5b5603cb2a86b3534631",
+        "Node name for S&R": "WhileLoopClose | akatz-loops"
+      }
+    },
+    {
+      "id": 855,
+      "type": "AccumulationToListNode | akatz-loops",
+      "pos": [
+        3308.8802809084186,
+        340.77791355975296
+      ],
+      "size": [
+        270.2000030517578,
+        27.504610756675277
+      ],
+      "flags": {},
+      "order": 39,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "accumulation",
+          "type": "ACCUMULATION",
+          "link": 1982
+        }
+      ],
+      "outputs": [
+        {
+          "name": "*",
+          "shape": 6,
+          "type": "*",
+          "links": [
+            1983
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-execution-inversion",
+        "ver": "711a5fb244fc0b39a22f5b5603cb2a86b3534631",
+        "Node name for S&R": "AccumulationToListNode | akatz-loops"
+      }
+    },
+    {
+      "id": 857,
+      "type": "ComfyMathExpression",
+      "pos": [
+        2264.532963347825,
+        76.6078539481368
+      ],
+      "size": [
+        322.1250061035156,
+        128
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 23,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "values.a",
+          "type": "FLOAT,INT,BOOLEAN",
+          "link": 1992
+        },
+        {
+          "name": "values.b",
+          "shape": 7,
+          "type": "FLOAT,INT,BOOLEAN",
+          "link": null
+        },
+        {
+          "name": "values.c",
+          "shape": 7,
+          "type": "FLOAT,INT,BOOLEAN",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "FLOAT",
+          "type": "FLOAT",
+          "links": null
+        },
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": [
+            1984
+          ]
+        },
+        {
+          "name": "BOOL",
+          "type": "BOOLEAN",
+          "links": null
+        }
+      ],
+      "title": "Initial index = view_count - view_count = 0",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.42.3",
+        "Node name for S&R": "ComfyMathExpression"
+      },
+      "widgets_values": [
+        "a - a"
+      ],
+      "widgets_values_named": {
+        "expression": "a - a"
+      }
+    },
+    {
+      "id": 856,
+      "type": "ComfyMathExpression",
+      "pos": [
+        2915.1930716592774,
+        153.81984721122436
+      ],
+      "size": [
+        274.7000030517578,
+        110
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 29,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "values.a",
+          "type": "FLOAT,INT,BOOLEAN",
+          "link": 1989
+        },
+        {
+          "name": "values.b",
+          "shape": 7,
+          "type": "FLOAT,INT,BOOLEAN",
+          "link": 1987
+        },
+        {
+          "name": "values.c",
+          "shape": 7,
+          "type": "FLOAT,INT,BOOLEAN",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "FLOAT",
+          "type": "FLOAT",
+          "links": null
+        },
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "BOOL",
+          "type": "BOOLEAN",
+          "links": [
+            1991
+          ]
+        }
+      ],
+      "title": "Continue? next_index < view_count",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.42.3",
+        "Node name for S&R": "ComfyMathExpression"
+      },
+      "widgets_values": [
+        "a < b"
+      ],
+      "widgets_values_named": {
+        "expression": "a < b"
+      }
+    },
+    {
+      "id": 858,
+      "type": "Orbit3DLoopContextPack",
+      "pos": [
+        1537.7386360749115,
+        887.0595570319376
+      ],
+      "size": [
+        232.04999389648438,
+        326
+      ],
+      "flags": {},
+      "order": 24,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "background",
+          "type": "IMAGE",
+          "link": 1993
+        },
+        {
+          "name": "canvas",
+          "type": "IMAGE",
+          "link": 1994
+        },
+        {
+          "name": "x",
+          "type": "INT",
+          "link": 1995
+        },
+        {
+          "name": "y",
+          "type": "INT",
+          "link": 1996
+        },
+        {
+          "name": "diffuse",
+          "type": "IMAGE",
+          "link": 1997
+        },
+        {
+          "name": "whole_mask",
+          "type": "MASK",
+          "link": 1998
+        },
+        {
+          "name": "width",
+          "type": "INT",
+          "link": 1999
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "link": 2000
+        },
+        {
+          "name": "black",
+          "type": "IMAGE",
+          "link": 2001
+        },
+        {
+          "name": "moge_model",
+          "type": "MOGE_MODEL",
+          "link": 2002
+        },
+        {
+          "name": "fov",
+          "type": "FLOAT",
+          "link": 2003
+        },
+        {
+          "name": "normal_model",
+          "type": "MARIGOLDV2_MODEL",
+          "link": 2004
+        },
+        {
+          "name": "normal_vae",
+          "type": "VAE",
+          "link": 2005
+        },
+        {
+          "name": "depth_model",
+          "type": "MARIGOLDV2_MODEL",
+          "link": 2006
+        },
+        {
+          "name": "depth_vae",
+          "type": "VAE",
+          "link": 2007
+        },
+        {
+          "name": "cache_session",
+          "type": "ORBIT3D_CACHE_SESSION",
+          "link": 2008
+        }
+      ],
+      "outputs": [
+        {
+          "name": "context",
+          "type": "ORBIT3D_LOOP_STATIC_CONTEXT",
+          "links": [
+            2009
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-orbit-to-3d",
+        "ver": "618e1bbcd9e257f142e7707372074f9302542b34",
+        "Node name for S&R": "Orbit3DLoopContextPack",
+        "aux_id": "mefisure-create/ComfyUI-OrbitTo3D"
+      }
+    },
+    {
+      "id": 859,
+      "type": "Orbit3DLoopContextUnpack",
+      "pos": [
+        1880.437826974573,
+        873.9611570459417
+      ],
+      "size": [
+        250.5999969482422,
+        326
+      ],
+      "flags": {},
+      "order": 28,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "context",
+          "type": "*",
+          "link": 2010
+        }
+      ],
+      "outputs": [
+        {
+          "name": "background",
+          "type": "IMAGE",
+          "links": [
+            1940
+          ]
+        },
+        {
+          "name": "canvas",
+          "type": "IMAGE",
+          "links": [
+            1941
+          ]
+        },
+        {
+          "name": "x",
+          "type": "INT",
+          "links": [
+            1942
+          ]
+        },
+        {
+          "name": "y",
+          "type": "INT",
+          "links": [
+            1943
+          ]
+        },
+        {
+          "name": "diffuse",
+          "type": "IMAGE",
+          "links": [
+            1944
+          ]
+        },
+        {
+          "name": "whole_mask",
+          "type": "MASK",
+          "links": [
+            1945
+          ]
+        },
+        {
+          "name": "width",
+          "type": "INT",
+          "links": [
+            1946,
+            1960
+          ]
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": [
+            1947,
+            1961
+          ]
+        },
+        {
+          "name": "black",
+          "type": "IMAGE",
+          "links": [
+            1948
+          ]
+        },
+        {
+          "name": "moge_model",
+          "type": "MOGE_MODEL",
+          "links": [
+            1949
+          ]
+        },
+        {
+          "name": "fov",
+          "type": "FLOAT",
+          "links": [
+            1950
+          ]
+        },
+        {
+          "name": "normal_model",
+          "type": "MARIGOLDV2_MODEL",
+          "links": [
+            1951
+          ]
+        },
+        {
+          "name": "normal_vae",
+          "type": "VAE",
+          "links": [
+            1952
+          ]
+        },
+        {
+          "name": "depth_model",
+          "type": "MARIGOLDV2_MODEL",
+          "links": [
+            1953
+          ]
+        },
+        {
+          "name": "depth_vae",
+          "type": "VAE",
+          "links": [
+            1954
+          ]
+        },
+        {
+          "name": "cache_session",
+          "type": "ORBIT3D_CACHE_SESSION",
+          "links": [
+            1955
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-orbit-to-3d",
+        "ver": "618e1bbcd9e257f142e7707372074f9302542b34",
+        "Node name for S&R": "Orbit3DLoopContextUnpack",
+        "aux_id": "mefisure-create/ComfyUI-OrbitTo3D"
+      }
+    },
+    {
+      "id": 861,
+      "type": "MarkdownNote",
+      "pos": [
+        1584.9583447556965,
+        1373.248706840388
+      ],
+      "size": [
+        535,
+        230
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "MarkdownNote"
+      },
+      "widgets_values": [
+        "### 3.6.13 — Akatz static context\\nAll loop-invariant dependencies are packed **once before While Open** and carried through `value4`.\\n\\n- no direct recursive-body link to Prepare Canvas / VGGT FOV / model loaders / CacheSession;\\n- tensors and models are references only — no clone/copy;\\n- FOV is persisted as a tiny scalar in the Orbit cache-session folder and restored after `UnifiedCachePrepare`, so the full context is not pinned downstream.\\n"
+      ],
+      "widgets_values_named": {
+        "text": "### 3.6.13 — Akatz static context\\nAll loop-invariant dependencies are packed **once before While Open** and carried through `value4`.\\n\\n- no direct recursive-body link to Prepare Canvas / VGGT FOV / model loaders / CacheSession;\\n- tensors and models are references only — no clone/copy;\\n- FOV is persisted as a tiny scalar in the Orbit cache-session folder and restored after `UnifiedCachePrepare`, so the full context is not pinned downstream.\\n"
+      },
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 866,
+      "type": "Pixal3DDebugExportMesh",
+      "pos": [
+        5111.555888736403,
+        -226.96083362471578
+      ],
+      "size": [
+        296.3250030517578,
+        146
+      ],
+      "flags": {},
+      "order": 50,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "mesh",
+          "type": "MESHWITHVOXEL",
+          "link": 2019
+        }
+      ],
+      "outputs": [
+        {
+          "name": "path",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "vertices",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "faces",
+          "type": "INT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Pixal3DDebugExportMesh"
+      },
+      "widgets_values": [
+        "debug/pixal3d/RAW",
+        "ply",
+        "90 degrees"
+      ],
+      "widgets_values_named": {
+        "filename_prefix": "debug/pixal3d/RAW",
+        "file_format": "ply",
+        "reorient_vertices": "90 degrees"
+      }
+    },
+    {
+      "id": 869,
+      "type": "Pixal3DDebugExportSparse",
+      "pos": [
+        3904.7529244959824,
+        -210.32698045730587
+      ],
+      "size": [
+        353.72499694824216,
+        150
+      ],
+      "flags": {},
+      "order": 44,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "coords",
+          "type": "COORDS",
+          "link": 2022
+        }
+      ],
+      "outputs": [
+        {
+          "name": "path",
+          "type": "STRING",
+          "links": []
+        },
+        {
+          "name": "num_voxels",
+          "type": "INT",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Pixal3DDebugExportSparse"
+      },
+      "widgets_values": [
+        32,
+        "debug/pixal3d/ss_voxels",
+        "ply",
+        "90 degrees"
+      ],
+      "widgets_values_named": {
+        "sparse_structure_resolution": 32,
+        "filename_prefix": "debug/pixal3d/ss_voxels",
+        "file_format": "ply",
+        "reorient_vertices": "90 degrees"
+      }
+    },
+    {
+      "id": 870,
+      "type": "Pixal3DDebugExportShape",
+      "pos": [
+        4316.9023509897115,
+        -229.89092347142946
+      ],
+      "size": [
+        334.09999694824216,
+        194
+      ],
+      "flags": {},
+      "order": 47,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "pipeline",
+          "type": "TRELLIS2PIPELINE",
+          "link": 2024
+        },
+        {
+          "name": "shape_slat",
+          "type": "SHAPE_SLAT",
+          "link": 2023
+        },
+        {
+          "name": "resolution",
+          "type": "INT",
+          "widget": {
+            "name": "resolution"
+          },
+          "link": 2025
+        }
+      ],
+      "outputs": [
+        {
+          "name": "path",
+          "type": "STRING",
+          "links": []
+        },
+        {
+          "name": "vertices",
+          "type": "INT",
+          "links": []
+        },
+        {
+          "name": "faces",
+          "type": "INT",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Pixal3DDebugExportShape"
+      },
+      "widgets_values": [
+        512,
+        "debug/pixal3d/raw_shape",
+        "ply",
+        true,
+        "90 degrees"
+      ],
+      "widgets_values_named": {
+        "resolution": 512,
+        "filename_prefix": "debug/pixal3d/raw_shape",
+        "file_format": "ply",
+        "use_tiled_decoder": true,
+        "reorient_vertices": "90 degrees"
+      }
+    },
+    {
+      "id": 871,
+      "type": "Pixal3DDebugExportShape",
+      "pos": [
+        4723.232708348462,
+        -254.5159802883134
+      ],
+      "size": [
+        334.09999694824216,
+        194
+      ],
+      "flags": {},
+      "order": 49,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "pipeline",
+          "type": "TRELLIS2PIPELINE",
+          "link": 2027
+        },
+        {
+          "name": "shape_slat",
+          "type": "SHAPE_SLAT",
+          "link": 2026
+        },
+        {
+          "name": "resolution",
+          "type": "INT",
+          "widget": {
+            "name": "resolution"
+          },
+          "link": 2028
+        }
+      ],
+      "outputs": [
+        {
+          "name": "path",
+          "type": "STRING",
+          "links": []
+        },
+        {
+          "name": "vertices",
+          "type": "INT",
+          "links": []
+        },
+        {
+          "name": "faces",
+          "type": "INT",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Pixal3DDebugExportShape"
+      },
+      "widgets_values": [
+        512,
+        "debug/pixal3d/HQ_shape",
+        "ply",
+        true,
+        "90 degrees"
+      ],
+      "widgets_values_named": {
+        "resolution": 512,
+        "filename_prefix": "debug/pixal3d/HQ_shape",
+        "file_format": "ply",
+        "use_tiled_decoder": true,
+        "reorient_vertices": "90 degrees"
+      }
+    },
+    {
+      "id": 872,
+      "type": "Orbit3DComponentCleanerPLY",
+      "pos": [
+        5419.341706475413,
+        89.60286228976686
+      ],
+      "size": [
+        357.29999389648435,
+        174
+      ],
+      "flags": {},
+      "order": 51,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "mesh",
+          "type": "MESHWITHVOXEL",
+          "link": 2031
+        }
+      ],
+      "outputs": [
+        {
+          "name": "mesh",
+          "type": "MESHWITHVOXEL",
+          "links": [
+            2032
+          ]
+        },
+        {
+          "name": "report",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-orbit-to-3d",
+        "ver": "618e1bbcd9e257f142e7707372074f9302542b34",
+        "Node name for S&R": "Orbit3DComponentCleanerPLY"
+      },
+      "widgets_values": [
+        "pre",
+        512,
+        0.00005,
+        "/home/ai/wtivo-lab/raw_audit/orbit_raw_component_tool",
+        8
+      ],
+      "widgets_values_named": {
+        "stage": "pre",
+        "max_faces": 512,
+        "max_area": 0.00005,
+        "component_tool_path": "/home/ai/wtivo-lab/raw_audit/orbit_raw_component_tool",
+        "minimum_mem_available_gib": 8
+      }
+    },
+    {
+      "id": 873,
+      "type": "Orbit3DWTiVoExternalRunner",
+      "pos": [
+        5420.652540721246,
+        388.1268879870725
+      ],
+      "size": [
+        327.7250061035156,
+        318
+      ],
+      "flags": {},
+      "order": 52,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "mesh",
+          "type": "MESHWITHVOXEL",
+          "link": 2032
+        }
+      ],
+      "outputs": [
+        {
+          "name": "mesh",
+          "type": "MESHWITHVOXEL",
+          "links": [
+            2033
+          ]
+        },
+        {
+          "name": "report",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-orbit-to-3d",
+        "ver": "618e1bbcd9e257f142e7707372074f9302542b34",
+        "Node name for S&R": "Orbit3DWTiVoExternalRunner"
+      },
+      "widgets_values": [
+        1536,
+        2048,
+        12000000,
+        10,
+        1.5,
+        4,
+        40,
+        24,
+        0,
+        8,
+        "/home/ai/wtivo-lab/wtivo-src"
+      ],
+      "widgets_values_named": {
+        "input_res": 1536,
+        "final_res": 2048,
+        "proxy_points": 12000000,
+        "lambda_fill": 10,
+        "feature_weight": 1.5,
+        "threads": 4,
+        "memory_limit_gib": 40,
+        "minimum_mem_available_gib": 24,
+        "gpu_index": 0,
+        "min_gpu_free_gib": 8,
+        "wtivo_root": "/home/ai/wtivo-lab/wtivo-src"
+      }
+    },
+    {
+      "id": 874,
+      "type": "Orbit3DComponentCleanerPLY",
+      "pos": [
+        5814.284879751836,
+        107.05407683670069
+      ],
+      "size": [
+        297.29999389648435,
+        174
+      ],
+      "flags": {},
+      "order": 53,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "mesh",
+          "type": "MESHWITHVOXEL",
+          "link": 2033
+        }
+      ],
+      "outputs": [
+        {
+          "name": "mesh",
+          "type": "MESHWITHVOXEL",
+          "links": [
+            2036,
+            2038
+          ]
+        },
+        {
+          "name": "report",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-orbit-to-3d",
+        "ver": "618e1bbcd9e257f142e7707372074f9302542b34",
+        "Node name for S&R": "Orbit3DComponentCleanerPLY"
+      },
+      "widgets_values": [
+        "post",
+        3000,
+        0.0002,
+        "/home/ai/wtivo-lab/raw_audit/orbit_raw_component_tool",
+        8
+      ],
+      "widgets_values_named": {
+        "stage": "post",
+        "max_faces": 3000,
+        "max_area": 0.0002,
+        "component_tool_path": "/home/ai/wtivo-lab/raw_audit/orbit_raw_component_tool",
+        "minimum_mem_available_gib": 8
+      }
+    },
+    {
+      "id": 875,
+      "type": "Pixal3DDebugExportMesh",
+      "pos": [
+        5812.215099597056,
+        479.93693681210596
+      ],
+      "size": [
+        296.3250030517578,
+        146
+      ],
+      "flags": {},
+      "order": 56,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "mesh",
+          "type": "MESHWITHVOXEL",
+          "link": 2037
+        }
+      ],
+      "outputs": [
+        {
+          "name": "path",
+          "type": "STRING",
+          "links": [
+            2035
+          ]
+        },
+        {
+          "name": "vertices",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "faces",
+          "type": "INT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Pixal3DDebugExportMesh"
+      },
+      "widgets_values": [
+        "MV",
+        "ply",
+        "90 degrees"
+      ],
+      "widgets_values_named": {
+        "filename_prefix": "MV",
+        "file_format": "ply",
+        "reorient_vertices": "90 degrees"
+      }
+    },
+    {
+      "id": 876,
+      "type": "Trellis2SimplifyMesh",
+      "pos": [
+        5822.568277091988,
+        342.5760934326225
+      ],
+      "size": [
+        270,
+        82
+      ],
+      "flags": {},
+      "order": 54,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "mesh",
+          "type": "MESHWITHVOXEL",
+          "link": 2036
+        }
+      ],
+      "outputs": [
+        {
+          "name": "mesh",
+          "type": "MESHWITHVOXEL",
+          "links": [
+            2037
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "trellis2",
+        "ver": "b0e84c0f29857a444e8bcb5b9be2ea218e96efd0",
+        "Node name for S&R": "Trellis2SimplifyMesh"
+      },
+      "widgets_values": [
+        5000000,
+        "Cumesh"
+      ],
+      "widgets_values_named": {
+        "target_face_num": 5000000,
+        "method": "Cumesh"
+      }
+    },
+    {
+      "id": 877,
+      "type": "Pixal3DDebugExportMesh",
+      "pos": [
+        5757.265263678772,
+        -240.52531565569103
+      ],
+      "size": [
+        296.3250030517578,
+        146
+      ],
+      "flags": {},
+      "order": 55,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "mesh",
+          "type": "MESHWITHVOXEL",
+          "link": 2038
+        }
+      ],
+      "outputs": [
+        {
+          "name": "path",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "vertices",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "faces",
+          "type": "INT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Pixal3DDebugExportMesh"
+      },
+      "widgets_values": [
+        "debug/pixal3d/Large_Mesh",
+        "ply",
+        "90 degrees"
+      ],
+      "widgets_values_named": {
+        "filename_prefix": "debug/pixal3d/Large_Mesh",
+        "file_format": "ply",
+        "reorient_vertices": "90 degrees"
+      }
     }
   ],
   "links": [
-    [
-      30,
-      17,
-      0,
-      18,
-      2,
-      "STRING"
-    ],
     [
       69,
       1,
@@ -2544,30 +3826,6 @@
       "INT"
     ],
     [
-      1110,
-      532,
-      0,
-      533,
-      0,
-      "MESHWITHVOXEL"
-    ],
-    [
-      1111,
-      533,
-      0,
-      17,
-      0,
-      "TRIMESH"
-    ],
-    [
-      1114,
-      38,
-      0,
-      532,
-      0,
-      "MESHWITHVOXEL"
-    ],
-    [
       1191,
       577,
       0,
@@ -2584,60 +3842,12 @@
       "VAE"
     ],
     [
-      1193,
-      578,
-      0,
-      579,
-      0,
-      "MARIGOLDV2_MODEL"
-    ],
-    [
-      1194,
-      589,
-      0,
-      579,
-      1,
-      "IMAGE"
-    ],
-    [
-      1195,
-      578,
-      2,
-      579,
-      2,
-      "VAE"
-    ],
-    [
-      1201,
-      583,
-      0,
-      584,
-      0,
-      "MOGE_MODEL"
-    ],
-    [
-      1202,
-      589,
-      0,
-      584,
-      1,
-      "IMAGE"
-    ],
-    [
       1204,
       586,
       0,
       587,
       0,
       "IMAGE"
-    ],
-    [
-      1245,
-      589,
-      1,
-      597,
-      2,
-      "MASK"
     ],
     [
       1259,
@@ -2654,54 +3864,6 @@
       602,
       1,
       "VAE"
-    ],
-    [
-      1261,
-      602,
-      0,
-      603,
-      0,
-      "MARIGOLDV2_MODEL"
-    ],
-    [
-      1262,
-      589,
-      0,
-      603,
-      1,
-      "IMAGE"
-    ],
-    [
-      1263,
-      602,
-      2,
-      603,
-      2,
-      "VAE"
-    ],
-    [
-      1382,
-      579,
-      0,
-      646,
-      1,
-      "IMAGE"
-    ],
-    [
-      1384,
-      603,
-      0,
-      646,
-      3,
-      "IMAGE"
-    ],
-    [
-      1385,
-      589,
-      1,
-      646,
-      4,
-      "MASK"
     ],
     [
       1386,
@@ -2730,186 +3892,10 @@
     [
       1559,
       721,
-      1,
+      0,
       712,
       1,
       "STRING"
-    ],
-    [
-      1560,
-      721,
-      3,
-      710,
-      0,
-      "FLOAT"
-    ],
-    [
-      1561,
-      721,
-      4,
-      710,
-      1,
-      "FLOAT"
-    ],
-    [
-      1755,
-      712,
-      0,
-      784,
-      0,
-      "IMAGE"
-    ],
-    [
-      1756,
-      784,
-      0,
-      589,
-      0,
-      "IMAGE"
-    ],
-    [
-      1757,
-      784,
-      1,
-      597,
-      0,
-      "IMAGE"
-    ],
-    [
-      1758,
-      784,
-      2,
-      589,
-      2,
-      "INT"
-    ],
-    [
-      1759,
-      784,
-      3,
-      589,
-      3,
-      "INT"
-    ],
-    [
-      1760,
-      784,
-      4,
-      646,
-      0,
-      "IMAGE"
-    ],
-    [
-      1761,
-      784,
-      5,
-      589,
-      4,
-      "MASK"
-    ],
-    [
-      1768,
-      712,
-      0,
-      785,
-      0,
-      "IMAGE"
-    ],
-    [
-      1769,
-      785,
-      0,
-      589,
-      1,
-      "IMAGE"
-    ],
-    [
-      1767,
-      784,
-      8,
-      646,
-      2,
-      "IMAGE"
-    ],
-    [
-      1771,
-      589,
-      1,
-      786,
-      0,
-      "MASK"
-    ],
-    [
-      1773,
-      584,
-      0,
-      787,
-      0,
-      "MOGE_GEOMETRY"
-    ],
-    [
-      1776,
-      603,
-      0,
-      788,
-      0,
-      "IMAGE"
-    ],
-    [
-      1778,
-      579,
-      0,
-      789,
-      0,
-      "IMAGE"
-    ],
-    [
-      1780,
-      597,
-      0,
-      790,
-      0,
-      "IMAGE"
-    ],
-    [
-      1798,
-      790,
-      0,
-      799,
-      0,
-      "IMAGE"
-    ],
-    [
-      1799,
-      786,
-      0,
-      799,
-      1,
-      "MASK"
-    ],
-    [
-      1800,
-      789,
-      0,
-      799,
-      2,
-      "IMAGE"
-    ],
-    [
-      1801,
-      788,
-      0,
-      799,
-      3,
-      "IMAGE"
-    ],
-    [
-      1802,
-      787,
-      0,
-      799,
-      4,
-      "MOGE_GEOMETRY"
     ],
     [
       1804,
@@ -2936,12 +3922,548 @@
       "PIXAL3D_MV_VIEWS"
     ],
     [
+      1808,
+      801,
+      0,
+      799,
+      8,
+      "STRING"
+    ],
+    [
+      1809,
+      801,
+      1,
+      799,
+      9,
+      "STRING"
+    ],
+    [
       1810,
       801,
       0,
       721,
       1,
       "STRING"
+    ],
+    [
+      1824,
+      843,
+      4,
+      799,
+      10,
+      "FLOAT"
+    ],
+    [
+      1914,
+      589,
+      0,
+      827,
+      1,
+      "IMAGE"
+    ],
+    [
+      1915,
+      589,
+      0,
+      579,
+      1,
+      "IMAGE"
+    ],
+    [
+      1916,
+      589,
+      0,
+      603,
+      1,
+      "IMAGE"
+    ],
+    [
+      1917,
+      589,
+      1,
+      646,
+      4,
+      "MASK"
+    ],
+    [
+      1918,
+      579,
+      0,
+      646,
+      1,
+      "IMAGE"
+    ],
+    [
+      1919,
+      603,
+      0,
+      646,
+      3,
+      "IMAGE"
+    ],
+    [
+      1920,
+      589,
+      1,
+      597,
+      2,
+      "MASK"
+    ],
+    [
+      1921,
+      827,
+      0,
+      829,
+      2,
+      "MOGE_GEOMETRY"
+    ],
+    [
+      1922,
+      579,
+      0,
+      829,
+      3,
+      "IMAGE"
+    ],
+    [
+      1923,
+      603,
+      0,
+      829,
+      4,
+      "IMAGE"
+    ],
+    [
+      1924,
+      597,
+      0,
+      829,
+      5,
+      "IMAGE"
+    ],
+    [
+      1925,
+      589,
+      1,
+      829,
+      6,
+      "MASK"
+    ],
+    [
+      1927,
+      830,
+      1,
+      843,
+      0,
+      "ORBIT3D_GENERIC_CACHE_MANIFEST"
+    ],
+    [
+      1928,
+      830,
+      2,
+      843,
+      1,
+      "STRING"
+    ],
+    [
+      1929,
+      843,
+      0,
+      799,
+      7,
+      "ORBIT3D_VIEW_CACHE"
+    ],
+    [
+      1939,
+      843,
+      3,
+      844,
+      0,
+      "ORBIT3D_CACHE_SESSION"
+    ],
+    [
+      1940,
+      859,
+      0,
+      589,
+      0,
+      "IMAGE"
+    ],
+    [
+      1941,
+      859,
+      1,
+      597,
+      0,
+      "IMAGE"
+    ],
+    [
+      1942,
+      859,
+      2,
+      589,
+      2,
+      "INT"
+    ],
+    [
+      1943,
+      859,
+      3,
+      589,
+      3,
+      "INT"
+    ],
+    [
+      1944,
+      859,
+      4,
+      646,
+      0,
+      "IMAGE"
+    ],
+    [
+      1945,
+      859,
+      5,
+      589,
+      4,
+      "MASK"
+    ],
+    [
+      1948,
+      859,
+      8,
+      646,
+      2,
+      "IMAGE"
+    ],
+    [
+      1949,
+      859,
+      9,
+      827,
+      0,
+      "MOGE_MODEL"
+    ],
+    [
+      1951,
+      859,
+      11,
+      579,
+      0,
+      "MARIGOLDV2_MODEL"
+    ],
+    [
+      1952,
+      859,
+      12,
+      579,
+      2,
+      "VAE"
+    ],
+    [
+      1953,
+      859,
+      13,
+      603,
+      0,
+      "MARIGOLDV2_MODEL"
+    ],
+    [
+      1954,
+      859,
+      14,
+      603,
+      2,
+      "VAE"
+    ],
+    [
+      1955,
+      859,
+      15,
+      829,
+      0,
+      "ORBIT3D_CACHE_SESSION"
+    ],
+    [
+      1962,
+      712,
+      0,
+      850,
+      0,
+      "IMAGE"
+    ],
+    [
+      1963,
+      826,
+      0,
+      850,
+      1,
+      "ORBIT3D_CACHE_SESSION"
+    ],
+    [
+      1964,
+      850,
+      0,
+      784,
+      0,
+      "IMAGE"
+    ],
+    [
+      1972,
+      852,
+      0,
+      589,
+      1,
+      "IMAGE"
+    ],
+    [
+      1978,
+      828,
+      0,
+      831,
+      0,
+      "FLOW_CONTROL"
+    ],
+    [
+      1976,
+      828,
+      1,
+      852,
+      1,
+      "INT"
+    ],
+    [
+      1977,
+      828,
+      1,
+      829,
+      1,
+      "INT"
+    ],
+    [
+      1985,
+      828,
+      2,
+      852,
+      0,
+      "IMAGE"
+    ],
+    [
+      1986,
+      828,
+      2,
+      831,
+      3,
+      "*"
+    ],
+    [
+      1988,
+      828,
+      3,
+      831,
+      4,
+      "*"
+    ],
+    [
+      1979,
+      829,
+      0,
+      854,
+      0,
+      "ORBIT3D_CACHE_REF"
+    ],
+    [
+      1980,
+      828,
+      4,
+      854,
+      1,
+      "ACCUMULATION"
+    ],
+    [
+      1981,
+      854,
+      0,
+      831,
+      5,
+      "ACCUMULATION"
+    ],
+    [
+      1990,
+      853,
+      1,
+      831,
+      2,
+      "INT"
+    ],
+    [
+      1991,
+      856,
+      2,
+      831,
+      1,
+      "BOOLEAN"
+    ],
+    [
+      1982,
+      831,
+      3,
+      855,
+      0,
+      "ACCUMULATION"
+    ],
+    [
+      1983,
+      855,
+      0,
+      830,
+      0,
+      "ORBIT3D_CACHE_REF"
+    ],
+    [
+      1993,
+      784,
+      0,
+      858,
+      0,
+      "IMAGE"
+    ],
+    [
+      1994,
+      784,
+      1,
+      858,
+      1,
+      "IMAGE"
+    ],
+    [
+      1995,
+      784,
+      2,
+      858,
+      2,
+      "INT"
+    ],
+    [
+      1996,
+      784,
+      3,
+      858,
+      3,
+      "INT"
+    ],
+    [
+      1997,
+      784,
+      4,
+      858,
+      4,
+      "IMAGE"
+    ],
+    [
+      1998,
+      784,
+      5,
+      858,
+      5,
+      "MASK"
+    ],
+    [
+      1999,
+      784,
+      6,
+      858,
+      6,
+      "INT"
+    ],
+    [
+      2000,
+      784,
+      7,
+      858,
+      7,
+      "INT"
+    ],
+    [
+      2001,
+      784,
+      8,
+      858,
+      8,
+      "IMAGE"
+    ],
+    [
+      2002,
+      583,
+      0,
+      858,
+      9,
+      "MOGE_MODEL"
+    ],
+    [
+      2003,
+      815,
+      0,
+      858,
+      10,
+      "FLOAT"
+    ],
+    [
+      2004,
+      578,
+      0,
+      858,
+      11,
+      "MARIGOLDV2_MODEL"
+    ],
+    [
+      2005,
+      578,
+      2,
+      858,
+      12,
+      "VAE"
+    ],
+    [
+      2006,
+      602,
+      0,
+      858,
+      13,
+      "MARIGOLDV2_MODEL"
+    ],
+    [
+      2007,
+      602,
+      2,
+      858,
+      14,
+      "VAE"
+    ],
+    [
+      2008,
+      826,
+      0,
+      858,
+      15,
+      "ORBIT3D_CACHE_SESSION"
+    ],
+    [
+      2010,
+      828,
+      5,
+      859,
+      0,
+      "ORBIT3D_LOOP_STATIC_CONTEXT"
+    ],
+    [
+      2011,
+      828,
+      5,
+      831,
+      6,
+      "ORBIT3D_LOOP_STATIC_CONTEXT"
     ],
     [
       81,
@@ -2952,68 +4474,260 @@
       "INT"
     ],
     [
-      1763,
-      784,
+      1946,
+      859,
       6,
       579,
       3,
       "INT"
     ],
     [
-      1765,
-      784,
+      1947,
+      859,
       7,
       579,
       4,
       "INT"
     ],
     [
-      1534,
-      710,
+      1960,
+      859,
+      6,
+      603,
+      3,
+      "INT"
+    ],
+    [
+      1961,
+      859,
+      7,
+      603,
+      4,
+      "INT"
+    ],
+    [
+      1931,
+      843,
       1,
-      584,
+      799,
+      4,
+      "ORBIT3D_MOGE_CACHE"
+    ],
+    [
+      1932,
+      843,
+      2,
+      799,
+      5,
+      "ORBIT3D_MARIGOLD_CACHE"
+    ],
+    [
+      1950,
+      859,
+      10,
+      827,
       2,
       "FLOAT"
     ],
     [
-      1764,
-      784,
-      6,
-      603,
-      3,
-      "INT"
-    ],
-    [
-      1766,
-      784,
-      7,
-      603,
-      4,
-      "INT"
-    ],
-    [
-      1803,
-      710,
+      1984,
+      857,
       1,
-      799,
-      7,
+      828,
+      0,
+      "INT"
+    ],
+    [
+      1969,
+      850,
+      1,
+      828,
+      1,
+      "IMAGE"
+    ],
+    [
+      1974,
+      850,
+      2,
+      828,
+      2,
+      "INT"
+    ],
+    [
+      2009,
+      858,
+      0,
+      828,
+      4,
+      "ORBIT3D_LOOP_STATIC_CONTEXT"
+    ],
+    [
+      2019,
+      38,
+      0,
+      866,
+      0,
+      "MESHWITHVOXEL"
+    ],
+    [
+      2022,
+      35,
+      0,
+      869,
+      0,
+      "COORDS"
+    ],
+    [
+      2023,
+      36,
+      0,
+      870,
+      1,
+      "SHAPE_SLAT"
+    ],
+    [
+      2024,
+      36,
+      2,
+      870,
+      0,
+      "TRELLIS2PIPELINE"
+    ],
+    [
+      2025,
+      36,
+      1,
+      870,
+      2,
+      "INT"
+    ],
+    [
+      2026,
+      37,
+      0,
+      871,
+      1,
+      "SHAPE_SLAT"
+    ],
+    [
+      2027,
+      37,
+      2,
+      871,
+      0,
+      "TRELLIS2PIPELINE"
+    ],
+    [
+      2028,
+      37,
+      1,
+      871,
+      2,
+      "INT"
+    ],
+    [
+      2031,
+      38,
+      0,
+      872,
+      0,
+      "MESHWITHVOXEL"
+    ],
+    [
+      2032,
+      872,
+      0,
+      873,
+      0,
+      "MESHWITHVOXEL"
+    ],
+    [
+      2033,
+      873,
+      0,
+      874,
+      0,
+      "MESHWITHVOXEL"
+    ],
+    [
+      2035,
+      875,
+      0,
+      844,
+      1,
+      "STRING"
+    ],
+    [
+      2036,
+      874,
+      0,
+      876,
+      0,
+      "MESHWITHVOXEL"
+    ],
+    [
+      2037,
+      876,
+      0,
+      875,
+      0,
+      "MESHWITHVOXEL"
+    ],
+    [
+      2038,
+      874,
+      0,
+      877,
+      0,
+      "MESHWITHVOXEL"
+    ],
+    [
+      1821,
+      721,
+      2,
+      815,
+      0,
       "FLOAT"
     ],
     [
-      1808,
-      801,
-      0,
-      799,
-      5,
-      "STRING"
+      1822,
+      721,
+      3,
+      815,
+      1,
+      "FLOAT"
     ],
     [
-      1809,
-      801,
+      1975,
+      828,
       1,
-      799,
-      6,
-      "STRING"
+      853,
+      0,
+      "*"
+    ],
+    [
+      1992,
+      850,
+      2,
+      857,
+      0,
+      "INT"
+    ],
+    [
+      1989,
+      853,
+      1,
+      856,
+      0,
+      "INT"
+    ],
+    [
+      1987,
+      828,
+      3,
+      856,
+      1,
+      "*"
     ]
   ],
   "groups": [
@@ -3035,8 +4749,8 @@
       "bounding": [
         1023.6635091876603,
         5.291923518825442,
-        401.94877886895847,
-        631.328023159914
+        390.6272754531908,
+        1004.9399680523165
       ],
       "color": "#6f5f9e",
       "flags": {}
@@ -3047,8 +4761,8 @@
       "bounding": [
         1461.4434908386643,
         5.301176107728081,
-        732.5077684094613,
-        704.637879539096
+        729.8862428662678,
+        1236.264446616882
       ],
       "color": "#4f8a6f",
       "flags": {}
@@ -3059,8 +4773,8 @@
       "bounding": [
         2242.665461218515,
         7.7479052239123245,
-        1399.9999369471552,
-        1058.5227903255773
+        1395.4711697375005,
+        1234.007129790897
       ],
       "color": "#9a7545",
       "flags": {}
@@ -3083,8 +4797,8 @@
       "bounding": [
         5363.624916076671,
         15.124874114990108,
-        1075.7323756015085,
-        942.4305554907097
+        753.7415091011508,
+        770.5166316625592
       ],
       "color": "#4f6f96",
       "flags": {}
@@ -3097,8 +4811,8 @@
         "version": 1,
         "state": {
           "lastGroupId": 6,
-          "lastNodeId": 808,
-          "lastLinkId": 1810,
+          "lastNodeId": 877,
+          "lastLinkId": 2038,
           "lastRerouteId": 0
         },
         "revision": 0,
@@ -3436,8 +5150,8 @@
         "version": 1,
         "state": {
           "lastGroupId": 6,
-          "lastNodeId": 808,
-          "lastLinkId": 1810,
+          "lastNodeId": 877,
+          "lastLinkId": 2038,
           "lastRerouteId": 0
         },
         "revision": 0,
@@ -3967,8 +5681,8 @@
         "version": 1,
         "state": {
           "lastGroupId": 6,
-          "lastNodeId": 808,
-          "lastLinkId": 1810,
+          "lastNodeId": 877,
+          "lastLinkId": 2038,
           "lastRerouteId": 0
         },
         "revision": 0,
@@ -3988,7 +5702,7 @@
           "bounding": [
             -2272.183044188052,
             -309.7979717689818,
-            135.1515121459961,
+            134.8249969482422,
             68
           ]
         },
@@ -4084,56 +5798,6 @@
         "widgets": [],
         "nodes": [
           {
-            "id": 632,
-            "type": "Image Blend",
-            "pos": [
-              -3321.677142097931,
-              -385.3869587680365
-            ],
-            "size": [
-              270,
-              78
-            ],
-            "flags": {},
-            "order": 0,
-            "mode": 0,
-            "inputs": [
-              {
-                "localized_name": "image_a",
-                "name": "image_a",
-                "type": "IMAGE",
-                "link": 1353
-              },
-              {
-                "localized_name": "image_b",
-                "name": "image_b",
-                "type": "IMAGE",
-                "link": 1354
-              }
-            ],
-            "outputs": [
-              {
-                "localized_name": "image",
-                "name": "image",
-                "type": "IMAGE",
-                "links": [
-                  1362
-                ]
-              }
-            ],
-            "properties": {
-              "cnr_id": "was-node-suite-comfyui",
-              "ver": "1.0.2",
-              "Node name for S&R": "Image Blend"
-            },
-            "widgets_values": [
-              0.1
-            ],
-            "widgets_values_named": {
-              "blend_percentage": 0.1
-            }
-          },
-          {
             "id": 633,
             "type": "EulerLightingNode",
             "pos": [
@@ -4145,7 +5809,7 @@
               242
             ],
             "flags": {},
-            "order": 1,
+            "order": 0,
             "mode": 0,
             "inputs": [
               {
@@ -4173,7 +5837,7 @@
                 "name": "IMAGE",
                 "type": "IMAGE",
                 "links": [
-                  1354
+                  1857
                 ]
               }
             ],
@@ -4213,7 +5877,7 @@
               242
             ],
             "flags": {},
-            "order": 2,
+            "order": 1,
             "mode": 0,
             "inputs": [
               {
@@ -4241,8 +5905,8 @@
                 "name": "IMAGE",
                 "type": "IMAGE",
                 "links": [
-                  1353,
-                  1361
+                  1361,
+                  1856
                 ]
               }
             ],
@@ -4282,7 +5946,7 @@
               82
             ],
             "flags": {},
-            "order": 8,
+            "order": 7,
             "mode": 0,
             "inputs": [
               {
@@ -4329,7 +5993,7 @@
               146
             ],
             "flags": {},
-            "order": 3,
+            "order": 2,
             "mode": 0,
             "inputs": [
               {
@@ -4342,7 +6006,7 @@
                 "localized_name": "источник",
                 "name": "source",
                 "type": "IMAGE",
-                "link": 1362
+                "link": 1858
               },
               {
                 "localized_name": "маска",
@@ -4390,7 +6054,7 @@
               102
             ],
             "flags": {},
-            "order": 6,
+            "order": 5,
             "mode": 0,
             "inputs": [
               {
@@ -4442,7 +6106,7 @@
               102
             ],
             "flags": {},
-            "order": 7,
+            "order": 6,
             "mode": 0,
             "inputs": [
               {
@@ -4494,7 +6158,7 @@
               102
             ],
             "flags": {},
-            "order": 9,
+            "order": 8,
             "mode": 0,
             "inputs": [
               {
@@ -4546,7 +6210,7 @@
               82
             ],
             "flags": {},
-            "order": 10,
+            "order": 9,
             "mode": 0,
             "inputs": [
               {
@@ -4584,15 +6248,15 @@
             "id": 644,
             "type": "ImageInvert",
             "pos": [
-              -2593.883077480463,
-              -228.0152317611355
+              -2586.438829827449,
+              -250.34770210701356
             ],
             "size": [
-              210.2030242919922,
+              211.4,
               26
             ],
             "flags": {},
-            "order": 12,
+            "order": 11,
             "mode": 0,
             "inputs": [
               {
@@ -4626,11 +6290,11 @@
               -539.0614282947872
             ],
             "size": [
-              257.74848022460935,
+              259.22499694824216,
               26
             ],
             "flags": {},
-            "order": 13,
+            "order": 12,
             "mode": 0,
             "inputs": [
               {
@@ -4668,7 +6332,7 @@
               82
             ],
             "flags": {},
-            "order": 4,
+            "order": 3,
             "mode": 0,
             "inputs": [
               {
@@ -4714,7 +6378,7 @@
               102
             ],
             "flags": {},
-            "order": 11,
+            "order": 10,
             "mode": 0,
             "inputs": [
               {
@@ -4766,7 +6430,7 @@
               102
             ],
             "flags": {},
-            "order": 5,
+            "order": 4,
             "mode": 0,
             "inputs": [
               {
@@ -4805,40 +6469,68 @@
               "blend_factor": 1,
               "blend_mode": "screen"
             }
+          },
+          {
+            "id": 821,
+            "type": "ImageBlend",
+            "pos": [
+              -3300.776023530211,
+              -412.4478202767282
+            ],
+            "size": [
+              270,
+              102
+            ],
+            "flags": {},
+            "order": 13,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "изображение1",
+                "name": "image1",
+                "type": "IMAGE",
+                "link": 1856
+              },
+              {
+                "localized_name": "изображение2",
+                "name": "image2",
+                "type": "IMAGE",
+                "link": 1857
+              }
+            ],
+            "outputs": [
+              {
+                "localized_name": "ИЗОБРАЖЕНИЕ",
+                "name": "IMAGE",
+                "type": "IMAGE",
+                "links": [
+                  1858
+                ]
+              }
+            ],
+            "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.42.3",
+              "Node name for S&R": "ImageBlend"
+            },
+            "widgets_values": [
+              0.1,
+              "normal"
+            ],
+            "widgets_values_named": {
+              "blend_factor": 0.1,
+              "blend_mode": "normal"
+            }
           }
         ],
         "groups": [],
         "links": [
-          {
-            "id": 1353,
-            "origin_id": 634,
-            "origin_slot": 0,
-            "target_id": 632,
-            "target_slot": 0,
-            "type": "IMAGE"
-          },
-          {
-            "id": 1354,
-            "origin_id": 633,
-            "origin_slot": 0,
-            "target_id": 632,
-            "target_slot": 1,
-            "type": "IMAGE"
-          },
           {
             "id": 1361,
             "origin_id": 634,
             "origin_slot": 0,
             "target_id": 635,
             "target_slot": 0,
-            "type": "IMAGE"
-          },
-          {
-            "id": 1362,
-            "origin_id": 632,
-            "origin_slot": 0,
-            "target_id": 635,
-            "target_slot": 1,
             "type": "IMAGE"
           },
           {
@@ -5024,6 +6716,30 @@
             "target_id": -20,
             "target_slot": 0,
             "type": "IMAGE"
+          },
+          {
+            "id": 1856,
+            "origin_id": 634,
+            "origin_slot": 0,
+            "target_id": 821,
+            "target_slot": 0,
+            "type": "IMAGE"
+          },
+          {
+            "id": 1857,
+            "origin_id": 633,
+            "origin_slot": 0,
+            "target_id": 821,
+            "target_slot": 1,
+            "type": "IMAGE"
+          },
+          {
+            "id": 1858,
+            "origin_id": 821,
+            "origin_slot": 0,
+            "target_id": 635,
+            "target_slot": 1,
+            "type": "IMAGE"
           }
         ],
         "extra": {}
@@ -5033,8 +6749,8 @@
         "version": 1,
         "state": {
           "lastGroupId": 6,
-          "lastNodeId": 808,
-          "lastLinkId": 1810,
+          "lastNodeId": 877,
+          "lastLinkId": 2038,
           "lastRerouteId": 0
         },
         "revision": 0,
@@ -5107,7 +6823,7 @@
             "name": "INT",
             "type": "INT",
             "linkIds": [
-              1747
+              1842
             ],
             "localized_name": "ЦЕЛОЕ",
             "label": "x-offset",
@@ -5121,7 +6837,7 @@
             "name": "INT_1",
             "type": "INT",
             "linkIds": [
-              1748
+              1837
             ],
             "localized_name": "ЦЕЛОЕ_1",
             "label": "y-offset",
@@ -5163,7 +6879,7 @@
             "name": "width",
             "type": "INT",
             "linkIds": [
-              1741
+              1850
             ],
             "localized_name": "width",
             "pos": [
@@ -5176,7 +6892,7 @@
             "name": "height",
             "type": "INT",
             "linkIds": [
-              1744
+              1851
             ],
             "localized_name": "height",
             "pos": [
@@ -5205,7 +6921,7 @@
             "id": 783,
             "type": "EmptyImage",
             "pos": [
-              -5245.123384179095,
+              -5251.14561770348,
               -193.13519637663921
             ],
             "size": [
@@ -5213,7 +6929,7 @@
               130
             ],
             "flags": {},
-            "order": 11,
+            "order": 6,
             "mode": 0,
             "inputs": [
               {
@@ -5223,7 +6939,7 @@
                 "widget": {
                   "name": "width"
                 },
-                "link": 1752
+                "link": 1829
               },
               {
                 "localized_name": "высота",
@@ -5232,7 +6948,7 @@
                 "widget": {
                   "name": "height"
                 },
-                "link": 1753
+                "link": 1830
               }
             ],
             "outputs": [
@@ -5267,15 +6983,15 @@
             "id": 596,
             "type": "EmptyImage",
             "pos": [
-              -5550.676555167913,
-              207.33622512370883
+              -5555.193195851965,
+              218.627826833845
             ],
             "size": [
               270,
               130
             ],
             "flags": {},
-            "order": 1,
+            "order": 0,
             "mode": 0,
             "inputs": [
               {
@@ -5285,7 +7001,7 @@
                 "widget": {
                   "name": "width"
                 },
-                "link": 1241
+                "link": 1835
               },
               {
                 "localized_name": "высота",
@@ -5294,7 +7010,7 @@
                 "widget": {
                   "name": "height"
                 },
-                "link": 1242
+                "link": 1836
               }
             ],
             "outputs": [
@@ -5326,134 +7042,6 @@
             }
           },
           {
-            "id": 776,
-            "type": "MathExpression|pysssss",
-            "pos": [
-              -5498.796986435767,
-              -137.24718212045732
-            ],
-            "size": [
-              210,
-              128
-            ],
-            "flags": {},
-            "order": 4,
-            "mode": 0,
-            "inputs": [
-              {
-                "localized_name": "a",
-                "name": "a",
-                "shape": 7,
-                "type": "INT,FLOAT,IMAGE,LATENT",
-                "link": 1728
-              },
-              {
-                "localized_name": "b",
-                "name": "b",
-                "shape": 7,
-                "type": "INT,FLOAT,IMAGE,LATENT",
-                "link": 1729
-              },
-              {
-                "localized_name": "c",
-                "name": "c",
-                "shape": 7,
-                "type": "INT,FLOAT,IMAGE,LATENT",
-                "link": null
-              }
-            ],
-            "outputs": [
-              {
-                "localized_name": "ЦЕЛОЕ",
-                "name": "INT",
-                "type": "INT",
-                "links": [
-                  1747
-                ]
-              },
-              {
-                "localized_name": "ПЛАВАЮЩИЙ",
-                "name": "FLOAT",
-                "type": "FLOAT",
-                "links": []
-              }
-            ],
-            "properties": {
-              "cnr_id": "comfyui-custom-scripts",
-              "ver": "1.2.5"
-            },
-            "widgets_values": [
-              "(max(a, b)-a)/2"
-            ],
-            "widgets_values_named": {
-              "expression": "(max(a, b)-a)/2"
-            }
-          },
-          {
-            "id": 777,
-            "type": "MathExpression|pysssss",
-            "pos": [
-              -5495.300866074402,
-              28.38971572191334
-            ],
-            "size": [
-              210,
-              128
-            ],
-            "flags": {},
-            "order": 5,
-            "mode": 0,
-            "inputs": [
-              {
-                "localized_name": "a",
-                "name": "a",
-                "shape": 7,
-                "type": "INT,FLOAT,IMAGE,LATENT",
-                "link": 1730
-              },
-              {
-                "localized_name": "b",
-                "name": "b",
-                "shape": 7,
-                "type": "INT,FLOAT,IMAGE,LATENT",
-                "link": 1731
-              },
-              {
-                "localized_name": "c",
-                "name": "c",
-                "shape": 7,
-                "type": "INT,FLOAT,IMAGE,LATENT",
-                "link": null
-              }
-            ],
-            "outputs": [
-              {
-                "localized_name": "ЦЕЛОЕ",
-                "name": "INT",
-                "type": "INT",
-                "links": [
-                  1748
-                ]
-              },
-              {
-                "localized_name": "ПЛАВАЮЩИЙ",
-                "name": "FLOAT",
-                "type": "FLOAT",
-                "links": []
-              }
-            ],
-            "properties": {
-              "cnr_id": "comfyui-custom-scripts",
-              "ver": "1.2.5"
-            },
-            "widgets_values": [
-              "(max(a, b)-b)/2"
-            ],
-            "widgets_values_named": {
-              "expression": "(max(a, b)-b)/2"
-            }
-          },
-          {
             "id": 779,
             "type": "SolidMask",
             "pos": [
@@ -5465,7 +7053,7 @@
               106
             ],
             "flags": {},
-            "order": 7,
+            "order": 2,
             "mode": 0,
             "inputs": [
               {
@@ -5475,7 +7063,7 @@
                 "widget": {
                   "name": "width"
                 },
-                "link": 1734
+                "link": 1831
               },
               {
                 "localized_name": "высота",
@@ -5484,7 +7072,7 @@
                 "widget": {
                   "name": "height"
                 },
-                "link": 1735
+                "link": 1832
               }
             ],
             "outputs": [
@@ -5525,7 +7113,7 @@
               26
             ],
             "flags": {},
-            "order": 8,
+            "order": 3,
             "mode": 0,
             "inputs": [
               {
@@ -5563,7 +7151,7 @@
               106
             ],
             "flags": {},
-            "order": 9,
+            "order": 4,
             "mode": 0,
             "inputs": [
               {
@@ -5573,7 +7161,7 @@
                 "widget": {
                   "name": "width"
                 },
-                "link": 1737
+                "link": 1833
               },
               {
                 "localized_name": "высота",
@@ -5582,7 +7170,7 @@
                 "widget": {
                   "name": "height"
                 },
-                "link": 1738
+                "link": 1834
               }
             ],
             "outputs": [
@@ -5613,83 +7201,18 @@
             }
           },
           {
-            "id": 582,
-            "type": "MathExpression|pysssss",
-            "pos": [
-              -5799.932609976824,
-              219.30161222739812
-            ],
-            "size": [
-              210,
-              128
-            ],
-            "flags": {},
-            "order": 0,
-            "mode": 0,
-            "inputs": [
-              {
-                "localized_name": "a",
-                "name": "a",
-                "shape": 7,
-                "type": "INT,FLOAT,IMAGE,LATENT",
-                "link": 1742
-              },
-              {
-                "localized_name": "b",
-                "name": "b",
-                "shape": 7,
-                "type": "INT,FLOAT,IMAGE,LATENT",
-                "link": 1745
-              },
-              {
-                "localized_name": "c",
-                "name": "c",
-                "shape": 7,
-                "type": "INT,FLOAT,IMAGE,LATENT",
-                "link": null
-              }
-            ],
-            "outputs": [
-              {
-                "localized_name": "ЦЕЛОЕ",
-                "name": "INT",
-                "type": "INT",
-                "links": [
-                  1241,
-                  1242
-                ]
-              },
-              {
-                "localized_name": "ПЛАВАЮЩИЙ",
-                "name": "FLOAT",
-                "type": "FLOAT",
-                "links": []
-              }
-            ],
-            "properties": {
-              "cnr_id": "comfyui-custom-scripts",
-              "ver": "1.2.5"
-            },
-            "widgets_values": [
-              "max(a, b)"
-            ],
-            "widgets_values_named": {
-              "expression": "max(a, b)"
-            }
-          },
-          {
             "id": 715,
             "type": "ImageFromBatch",
             "pos": [
-              -5803.169310525622,
-              -243.25410653227215
+              -5544.2152676126525,
+              -225.18754379605417
             ],
             "size": [
               270,
               82
             ],
             "flags": {},
-            "order": 2,
+            "order": 1,
             "mode": 0,
             "inputs": [
               {
@@ -5705,7 +7228,7 @@
                 "name": "IMAGE",
                 "type": "IMAGE",
                 "links": [
-                  1740
+                  1843
                 ]
               }
             ],
@@ -5724,129 +7247,6 @@
             }
           },
           {
-            "id": 775,
-            "type": "Get Image Size (JPS)",
-            "pos": [
-              -5745.685605925865,
-              -79.47986924818993
-            ],
-            "size": [
-              180.37500610351563,
-              46
-            ],
-            "flags": {},
-            "order": 3,
-            "mode": 0,
-            "inputs": [
-              {
-                "localized_name": "image",
-                "name": "image",
-                "type": "IMAGE",
-                "link": 1740
-              }
-            ],
-            "outputs": [
-              {
-                "localized_name": "width",
-                "name": "width",
-                "type": "INT",
-                "links": [
-                  1728,
-                  1730,
-                  1732,
-                  1741,
-                  1742
-                ]
-              },
-              {
-                "localized_name": "height",
-                "name": "height",
-                "type": "INT",
-                "links": [
-                  1729,
-                  1731,
-                  1733,
-                  1744,
-                  1745
-                ]
-              }
-            ],
-            "properties": {
-              "cnr_id": "ComfyUI_JPS-Nodes",
-              "ver": "0e2a9aca02b17dde91577bfe4b65861df622dcaf",
-              "Node name for S&R": "Get Image Size (JPS)"
-            }
-          },
-          {
-            "id": 778,
-            "type": "MathExpression|pysssss",
-            "pos": [
-              -5732.320998382616,
-              33.87015420436501
-            ],
-            "size": [
-              210,
-              128
-            ],
-            "flags": {},
-            "order": 6,
-            "mode": 0,
-            "inputs": [
-              {
-                "localized_name": "a",
-                "name": "a",
-                "shape": 7,
-                "type": "INT,FLOAT,IMAGE,LATENT",
-                "link": 1732
-              },
-              {
-                "localized_name": "b",
-                "name": "b",
-                "shape": 7,
-                "type": "INT,FLOAT,IMAGE,LATENT",
-                "link": 1733
-              },
-              {
-                "localized_name": "c",
-                "name": "c",
-                "shape": 7,
-                "type": "INT,FLOAT,IMAGE,LATENT",
-                "link": null
-              }
-            ],
-            "outputs": [
-              {
-                "localized_name": "ЦЕЛОЕ",
-                "name": "INT",
-                "type": "INT",
-                "links": [
-                  1734,
-                  1735,
-                  1737,
-                  1738,
-                  1752,
-                  1753
-                ]
-              },
-              {
-                "localized_name": "ПЛАВАЮЩИЙ",
-                "name": "FLOAT",
-                "type": "FLOAT",
-                "links": []
-              }
-            ],
-            "properties": {
-              "cnr_id": "comfyui-custom-scripts",
-              "ver": "1.2.5"
-            },
-            "widgets_values": [
-              "max(a, b)"
-            ],
-            "widgets_values_named": {
-              "expression": "max(a, b)"
-            }
-          },
-          {
             "id": 782,
             "type": "MaskToImage",
             "pos": [
@@ -5858,7 +7258,7 @@
               26
             ],
             "flags": {},
-            "order": 10,
+            "order": 5,
             "mode": 0,
             "inputs": [
               {
@@ -5883,74 +7283,291 @@
               "ver": "0.42.3",
               "Node name for S&R": "MaskToImage"
             }
+          },
+          {
+            "id": 816,
+            "type": "ComfyMathExpression",
+            "pos": [
+              -5526.66605358844,
+              141.43006103537456
+            ],
+            "size": [
+              400,
+              200
+            ],
+            "flags": {
+              "collapsed": true
+            },
+            "order": 7,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "a",
+                "name": "values.a",
+                "type": "FLOAT,INT,BOOLEAN",
+                "link": 1848
+              },
+              {
+                "localized_name": "b",
+                "name": "values.b",
+                "shape": 7,
+                "type": "FLOAT,INT,BOOLEAN",
+                "link": 1849
+              },
+              {
+                "localized_name": "c",
+                "name": "values.c",
+                "shape": 7,
+                "type": "FLOAT,INT,BOOLEAN",
+                "link": null
+              }
+            ],
+            "outputs": [
+              {
+                "localized_name": "ПЛАВАЮЩИЙ",
+                "name": "FLOAT",
+                "type": "FLOAT",
+                "links": null
+              },
+              {
+                "localized_name": "ЦЕЛОЕ",
+                "name": "INT",
+                "type": "INT",
+                "links": [
+                  1829,
+                  1830,
+                  1831,
+                  1832,
+                  1833,
+                  1834,
+                  1835,
+                  1836
+                ]
+              },
+              {
+                "localized_name": "BOOL",
+                "name": "BOOL",
+                "type": "BOOLEAN",
+                "links": null
+              }
+            ],
+            "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.42.3",
+              "Node name for S&R": "ComfyMathExpression"
+            },
+            "widgets_values": [
+              "max(a, b)"
+            ],
+            "widgets_values_named": {
+              "expression": "max(a, b)"
+            }
+          },
+          {
+            "id": 817,
+            "type": "ComfyMathExpression",
+            "pos": [
+              -5524.407888312968,
+              90.99421709061009
+            ],
+            "size": [
+              400,
+              200
+            ],
+            "flags": {
+              "collapsed": true
+            },
+            "order": 8,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "a",
+                "name": "values.a",
+                "type": "FLOAT,INT,BOOLEAN",
+                "link": 1846
+              },
+              {
+                "localized_name": "b",
+                "name": "values.b",
+                "shape": 7,
+                "type": "FLOAT,INT,BOOLEAN",
+                "link": 1847
+              },
+              {
+                "localized_name": "c",
+                "name": "values.c",
+                "shape": 7,
+                "type": "FLOAT,INT,BOOLEAN",
+                "link": null
+              }
+            ],
+            "outputs": [
+              {
+                "localized_name": "ПЛАВАЮЩИЙ",
+                "name": "FLOAT",
+                "type": "FLOAT",
+                "links": null
+              },
+              {
+                "localized_name": "ЦЕЛОЕ",
+                "name": "INT",
+                "type": "INT",
+                "links": [
+                  1837
+                ]
+              },
+              {
+                "localized_name": "BOOL",
+                "name": "BOOL",
+                "type": "BOOLEAN",
+                "links": null
+              }
+            ],
+            "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.42.3",
+              "Node name for S&R": "ComfyMathExpression"
+            },
+            "widgets_values": [
+              "(max(a, b)-b)/2"
+            ],
+            "widgets_values_named": {
+              "expression": "(max(a, b)-b)/2"
+            }
+          },
+          {
+            "id": 818,
+            "type": "ComfyMathExpression",
+            "pos": [
+              -5521.3967715507715,
+              36.04169800255742
+            ],
+            "size": [
+              400,
+              200
+            ],
+            "flags": {
+              "collapsed": true
+            },
+            "order": 9,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "a",
+                "name": "values.a",
+                "type": "FLOAT,INT,BOOLEAN",
+                "link": 1844
+              },
+              {
+                "localized_name": "b",
+                "name": "values.b",
+                "shape": 7,
+                "type": "FLOAT,INT,BOOLEAN",
+                "link": 1845
+              },
+              {
+                "localized_name": "c",
+                "name": "values.c",
+                "shape": 7,
+                "type": "FLOAT,INT,BOOLEAN",
+                "link": null
+              }
+            ],
+            "outputs": [
+              {
+                "localized_name": "ПЛАВАЮЩИЙ",
+                "name": "FLOAT",
+                "type": "FLOAT",
+                "links": null
+              },
+              {
+                "localized_name": "ЦЕЛОЕ",
+                "name": "INT",
+                "type": "INT",
+                "links": [
+                  1842
+                ]
+              },
+              {
+                "localized_name": "BOOL",
+                "name": "BOOL",
+                "type": "BOOLEAN",
+                "links": null
+              }
+            ],
+            "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.42.3",
+              "Node name for S&R": "ComfyMathExpression"
+            },
+            "widgets_values": [
+              "(max(a, b)-a)/2"
+            ],
+            "widgets_values_named": {
+              "expression": "(max(a, b)-a)/2"
+            }
+          },
+          {
+            "id": 819,
+            "type": "GetImageSize",
+            "pos": [
+              -5531.569845729871,
+              -77.62708105973623
+            ],
+            "size": [
+              224.62500610351563,
+              66
+            ],
+            "flags": {},
+            "order": 10,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "изображение",
+                "name": "image",
+                "type": "IMAGE",
+                "link": 1843
+              }
+            ],
+            "outputs": [
+              {
+                "localized_name": "width",
+                "name": "width",
+                "type": "INT",
+                "links": [
+                  1844,
+                  1846,
+                  1848,
+                  1850
+                ]
+              },
+              {
+                "localized_name": "height",
+                "name": "height",
+                "type": "INT",
+                "links": [
+                  1845,
+                  1847,
+                  1849,
+                  1851
+                ]
+              },
+              {
+                "localized_name": "batch_size",
+                "name": "batch_size",
+                "type": "INT",
+                "links": null
+              }
+            ],
+            "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.42.3",
+              "Node name for S&R": "GetImageSize"
+            }
           }
         ],
         "groups": [],
         "links": [
-          {
-            "id": 1752,
-            "origin_id": 778,
-            "origin_slot": 0,
-            "target_id": 783,
-            "target_slot": 0,
-            "type": "INT"
-          },
-          {
-            "id": 1753,
-            "origin_id": 778,
-            "origin_slot": 0,
-            "target_id": 783,
-            "target_slot": 1,
-            "type": "INT"
-          },
-          {
-            "id": 1241,
-            "origin_id": 582,
-            "origin_slot": 0,
-            "target_id": 596,
-            "target_slot": 0,
-            "type": "INT"
-          },
-          {
-            "id": 1242,
-            "origin_id": 582,
-            "origin_slot": 0,
-            "target_id": 596,
-            "target_slot": 1,
-            "type": "INT"
-          },
-          {
-            "id": 1728,
-            "origin_id": 775,
-            "origin_slot": 0,
-            "target_id": 776,
-            "target_slot": 0,
-            "type": "INT"
-          },
-          {
-            "id": 1729,
-            "origin_id": 775,
-            "origin_slot": 1,
-            "target_id": 776,
-            "target_slot": 1,
-            "type": "INT"
-          },
-          {
-            "id": 1730,
-            "origin_id": 775,
-            "origin_slot": 0,
-            "target_id": 777,
-            "target_slot": 0,
-            "type": "INT"
-          },
-          {
-            "id": 1731,
-            "origin_id": 775,
-            "origin_slot": 1,
-            "target_id": 777,
-            "target_slot": 1,
-            "type": "INT"
-          },
           {
             "id": 1736,
             "origin_id": 779,
@@ -5958,46 +7575,6 @@
             "target_id": 780,
             "target_slot": 0,
             "type": "MASK"
-          },
-          {
-            "id": 1742,
-            "origin_id": 775,
-            "origin_slot": 0,
-            "target_id": 582,
-            "target_slot": 0,
-            "type": "INT"
-          },
-          {
-            "id": 1745,
-            "origin_id": 775,
-            "origin_slot": 1,
-            "target_id": 582,
-            "target_slot": 1,
-            "type": "INT"
-          },
-          {
-            "id": 1740,
-            "origin_id": 715,
-            "origin_slot": 0,
-            "target_id": 775,
-            "target_slot": 0,
-            "type": "IMAGE"
-          },
-          {
-            "id": 1732,
-            "origin_id": 775,
-            "origin_slot": 0,
-            "target_id": 778,
-            "target_slot": 0,
-            "type": "INT"
-          },
-          {
-            "id": 1733,
-            "origin_id": 775,
-            "origin_slot": 1,
-            "target_id": 778,
-            "target_slot": 1,
-            "type": "INT"
           },
           {
             "id": 1739,
@@ -6032,22 +7609,6 @@
             "type": "IMAGE"
           },
           {
-            "id": 1747,
-            "origin_id": 776,
-            "origin_slot": 0,
-            "target_id": -20,
-            "target_slot": 2,
-            "type": "INT"
-          },
-          {
-            "id": 1748,
-            "origin_id": 777,
-            "origin_slot": 0,
-            "target_id": -20,
-            "target_slot": 3,
-            "type": "INT"
-          },
-          {
             "id": 1751,
             "origin_id": 780,
             "origin_slot": 0,
@@ -6064,22 +7625,6 @@
             "type": "MASK"
           },
           {
-            "id": 1741,
-            "origin_id": 775,
-            "origin_slot": 0,
-            "target_id": -20,
-            "target_slot": 6,
-            "type": "INT"
-          },
-          {
-            "id": 1744,
-            "origin_id": 775,
-            "origin_slot": 1,
-            "target_id": -20,
-            "target_slot": 7,
-            "type": "INT"
-          },
-          {
             "id": 1750,
             "origin_id": 782,
             "origin_slot": 0,
@@ -6088,34 +7633,154 @@
             "type": "IMAGE"
           },
           {
-            "id": 1734,
-            "origin_id": 778,
+            "id": 1829,
+            "origin_id": 816,
+            "origin_slot": 1,
+            "target_id": 783,
+            "target_slot": 0,
+            "type": "INT"
+          },
+          {
+            "id": 1830,
+            "origin_id": 816,
+            "origin_slot": 1,
+            "target_id": 783,
+            "target_slot": 1,
+            "type": "INT"
+          },
+          {
+            "id": 1835,
+            "origin_id": 816,
+            "origin_slot": 1,
+            "target_id": 596,
+            "target_slot": 0,
+            "type": "INT"
+          },
+          {
+            "id": 1836,
+            "origin_id": 816,
+            "origin_slot": 1,
+            "target_id": 596,
+            "target_slot": 1,
+            "type": "INT"
+          },
+          {
+            "id": 1837,
+            "origin_id": 817,
+            "origin_slot": 1,
+            "target_id": -20,
+            "target_slot": 3,
+            "type": "INT"
+          },
+          {
+            "id": 1842,
+            "origin_id": 818,
+            "origin_slot": 1,
+            "target_id": -20,
+            "target_slot": 2,
+            "type": "INT"
+          },
+          {
+            "id": 1843,
+            "origin_id": 715,
             "origin_slot": 0,
+            "target_id": 819,
+            "target_slot": 0,
+            "type": "IMAGE"
+          },
+          {
+            "id": 1850,
+            "origin_id": 819,
+            "origin_slot": 0,
+            "target_id": -20,
+            "target_slot": 6,
+            "type": "INT"
+          },
+          {
+            "id": 1851,
+            "origin_id": 819,
+            "origin_slot": 1,
+            "target_id": -20,
+            "target_slot": 7,
+            "type": "INT"
+          },
+          {
+            "id": 1831,
+            "origin_id": 816,
+            "origin_slot": 1,
             "target_id": 779,
             "target_slot": 0,
             "type": "INT"
           },
           {
-            "id": 1735,
-            "origin_id": 778,
-            "origin_slot": 0,
+            "id": 1832,
+            "origin_id": 816,
+            "origin_slot": 1,
             "target_id": 779,
             "target_slot": 1,
             "type": "INT"
           },
           {
-            "id": 1737,
-            "origin_id": 778,
-            "origin_slot": 0,
+            "id": 1833,
+            "origin_id": 816,
+            "origin_slot": 1,
             "target_id": 781,
             "target_slot": 0,
             "type": "INT"
           },
           {
-            "id": 1738,
-            "origin_id": 778,
-            "origin_slot": 0,
+            "id": 1834,
+            "origin_id": 816,
+            "origin_slot": 1,
             "target_id": 781,
+            "target_slot": 1,
+            "type": "INT"
+          },
+          {
+            "id": 1848,
+            "origin_id": 819,
+            "origin_slot": 0,
+            "target_id": 816,
+            "target_slot": 0,
+            "type": "INT"
+          },
+          {
+            "id": 1849,
+            "origin_id": 819,
+            "origin_slot": 1,
+            "target_id": 816,
+            "target_slot": 1,
+            "type": "INT"
+          },
+          {
+            "id": 1846,
+            "origin_id": 819,
+            "origin_slot": 0,
+            "target_id": 817,
+            "target_slot": 0,
+            "type": "INT"
+          },
+          {
+            "id": 1847,
+            "origin_id": 819,
+            "origin_slot": 1,
+            "target_id": 817,
+            "target_slot": 1,
+            "type": "INT"
+          },
+          {
+            "id": 1844,
+            "origin_id": 819,
+            "origin_slot": 0,
+            "target_id": 818,
+            "target_slot": 0,
+            "type": "INT"
+          },
+          {
+            "id": 1845,
+            "origin_id": 819,
+            "origin_slot": 1,
+            "target_id": 818,
             "target_slot": 1,
             "type": "INT"
           }
@@ -6132,12 +7797,13 @@
     "VHS_MetadataImage": true,
     "VHS_KeepIntermediate": true,
     "ds": {
-      "scale": 0.1454545454545464,
+      "scale": 0.4021899810176386,
       "offset": [
-        4152.082364915074,
-        2263.939113484931
+        590.1722413659177,
+        586.8088094482366
       ]
-    }
+    },
+    "orbit3d_patch": "3.6.10 VSR mmap batch: one file-backed storage; no per-iteration Image Ref loader"
   },
   "version": 0.4
 }

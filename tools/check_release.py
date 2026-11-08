@@ -22,33 +22,89 @@ for p in ROOT.rglob("*.py"):
     except Exception as e:
         errors.append(f"py_compile {p.relative_to(ROOT)}: {e}")
 
-# Public API contract.
-init = (ROOT / "__init__.py").read_text()
-expected = {
-    "Orbit3DLoadModel",
-    "Orbit3DMultiViewConfig",
-    "Orbit3DSparseGenerator",
-    "Orbit3DShapeGenerator",
-    "Orbit3DShapeCascadeGenerator",
-    "Orbit3DVGGTViewSelector",
-    "Orbit3DRealBasicVSR",
-    "Orbit3DMoGeGeometryListToBatch",
-    "Orbit3DMoGeGeometryBatchToList",
-    "Orbit3DAngleGrid",
-    "Orbit3DMoGeInference",
+# Public API contract. The WTiVo mappings are expanded through ** in the
+# package registry, so AST literal_eval on every key is not valid here.
+def mapping_keys(path: Path, name: str) -> tuple[set[str], int]:
+    tree = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
+    for node in tree.body:
+        if isinstance(node, ast.Assign) and any(
+            isinstance(t, ast.Name) and t.id == name for t in node.targets
+        ):
+            if not isinstance(node.value, ast.Dict):
+                break
+            keys = set()
+            spreads = 0
+            for key in node.value.keys:
+                if key is None:
+                    spreads += 1
+                elif isinstance(key, ast.Constant) and isinstance(key.value, str):
+                    if key.value in keys:
+                        errors.append(f"duplicate {name} key: {key.value}")
+                    keys.add(key.value)
+                else:
+                    errors.append(f"nonliteral {name} key in {path.relative_to(ROOT)}")
+            return keys, spreads
+    errors.append(f"{name} not found in {path.relative_to(ROOT)}")
+    return set(), 0
+
+core_expected = {
+    "Orbit3DLoadModel", "Orbit3DMultiViewConfig", "Orbit3DSparseGenerator",
+    "Orbit3DShapeGenerator", "Orbit3DShapeCascadeGenerator",
+    "Orbit3DVGGTViewSelector", "Orbit3DRealBasicVSR",
+    "Orbit3DMoGeGeometryListToBatch", "Orbit3DMoGeGeometryBatchToList",
+    "Orbit3DAngleGrid", "Orbit3DMoGeInference",
 }
-tree = ast.parse(init)
-mapping = None
-for n in tree.body:
-    if isinstance(n, ast.Assign) and any(
-        isinstance(t, ast.Name) and t.id == "NODE_CLASS_MAPPINGS" for t in n.targets
-    ):
-        if isinstance(n.value, ast.Dict):
-            mapping = {ast.literal_eval(k): None for k in n.value.keys}
-if mapping is None:
-    errors.append("NODE_CLASS_MAPPINGS not found")
-elif set(mapping) != expected:
-    errors.append(f"public node IDs differ: {sorted(set(mapping) ^ expected)}")
+cache_expected = {
+    "Orbit3DCacheSession", "Orbit3DVSRBatchCache", "Orbit3DVSRViewAtIndex",
+    "Orbit3DLoopContextPack", "Orbit3DLoopContextUnpack",
+    "Orbit3DUnifiedViewSpill", "Orbit3DUnifiedCacheFinalize",
+    "Orbit3DUnifiedCacheManifestLoad", "Orbit3DMultiViewCacheOpen",
+    "Orbit3DCleanupCacheSession", "Orbit3DDecodeUnifiedCacheFrame",
+}
+wtivo_expected = {
+    "Orbit3DImportMeshPLY", "Orbit3DComponentCleanerPLY",
+    "Orbit3DWTiVoExternalRunner",
+}
+registered, class_spreads = mapping_keys(ROOT / "__init__.py", "NODE_CLASS_MAPPINGS")
+display, display_spreads = mapping_keys(ROOT / "__init__.py", "NODE_DISPLAY_NAME_MAPPINGS")
+wtivo_classes, wtivo_class_spreads = mapping_keys(ROOT / "orbit3d_ext" / "wtivo_integration_nodes.py", "NODE_CLASS_MAPPINGS")
+wtivo_display, wtivo_display_spreads = mapping_keys(ROOT / "orbit3d_ext" / "wtivo_integration_nodes.py", "NODE_DISPLAY_NAME_MAPPINGS")
+if class_spreads != 1 or display_spreads != 1 or wtivo_class_spreads or wtivo_display_spreads:
+    errors.append("Unexpected registry spread structure; review public node assembly")
+if wtivo_classes != wtivo_display:
+    errors.append(f"WTiVo class/display mapping mismatch: {sorted(wtivo_classes ^ wtivo_display)}")
+if not wtivo_expected <= wtivo_classes:
+    errors.append(f"Required WTiVo IDs missing: {sorted(wtivo_expected - wtivo_classes)}")
+if registered != display:
+    errors.append(f"Core class/display mapping mismatch: {sorted(registered ^ display)}")
+all_public = registered | wtivo_classes
+if not core_expected <= all_public:
+    errors.append(f"Original public IDs missing: {sorted(core_expected - all_public)}")
+if not cache_expected <= all_public:
+    errors.append(f"Production cache node IDs missing: {sorted(cache_expected - all_public)}")
+
+# The shipped example must use nodes registered by this distribution; nodes
+# from third-party packages are not treated as Orbit's responsibility.
+workflow_path = ROOT / "example_workflows" / "OrbitTo3D_HighPrecision_MultiView.json"
+workflow = json.loads(workflow_path.read_text(encoding="utf-8"))
+workflow_node_types = set()
+def collect_workflow_nodes(items):
+    for node in items:
+        workflow_node_types.add(node["type"])
+collect_workflow_nodes(workflow.get("nodes", []))
+for subgraph in workflow.get("definitions", {}).get("subgraphs", []):
+    collect_workflow_nodes(subgraph.get("nodes", []))
+missing_orbit_nodes = sorted(
+    x for x in workflow_node_types if x.startswith("Orbit3D") and x not in all_public
+)
+if missing_orbit_nodes:
+    errors.append(f"Bundled example refers to unregistered Orbit nodes: {missing_orbit_nodes}")
+for required_type in ("Orbit3DUnifiedViewSpill", "Orbit3DWTiVoExternalRunner", "Orbit3DCleanupCacheSession"):
+    if required_type not in workflow_node_types:
+        errors.append(f"Bundled example missing 0.1.1 stage: {required_type}")
+for debug_type in ("Pixal3DDebugExportMesh", "Pixal3DDebugExportSparse", "Pixal3DDebugExportShape"):
+    if debug_type in workflow_node_types:
+        warnings.append(f"Example depends on a non-shipped debug node: {debug_type}")
 
 # Extended MoGe node must inherit native execution rather than copy it.
 moge_path = ROOT / "orbit3d_ext" / "moge_nodes.py"
@@ -179,6 +235,10 @@ if missing_from_manifest:
 if stale_manifest:
     errors.append(f"manifest references non-shipped files: {stale_manifest}")
 
+# Ensure the intended version bump is part of the release payload.
+if 'version = "0.1.1"' not in pyproject:
+    errors.append("Expected release version 0.1.1 in pyproject.toml")
+
 # Registry metadata may remain placeholder for an RC, but must be resolved before publication.
 if 'PublisherId = "local-orbit-to-3d"' in pyproject:
     errors.append("Comfy Registry PublisherId is still the RC placeholder")
@@ -201,7 +261,7 @@ if errors:
     sys.exit(1)
 
 print("Release checks passed.")
-print(f"Public Orbit nodes: {len(expected)}")
+print(f"Public Orbit nodes: {len(all_public)} (core {len(registered)}, WTiVo {len(wtivo_classes)})")
 print(f'Manifest files: {len(data["files"])}; tracked symbols: {len(data["tracked_symbols"])}')
 for w in warnings:
     print("WARNING:", w)

@@ -30,6 +30,45 @@ The verified production path is yaw-only (`pitch_step=360`, elevations all zero)
 
 Both use the standard `MOGE_GEOMETRY` socket type. `Orbit3DMultiViewConfig` also accepts standard `MOGE_GEOMETRY` directly.
 
+## 0.1.1: Disk-backed preprocessing and persistent caches
+
+Production nodes: `Orbit3DCacheSession`, `Orbit3DVSRBatchCache`,
+`Orbit3DVSRViewAtIndex`, `Orbit3DLoopContextPack`,
+`Orbit3DLoopContextUnpack`, `Orbit3DUnifiedViewSpill`,
+`Orbit3DUnifiedCacheFinalize`, `Orbit3DUnifiedCacheManifestLoad`,
+`Orbit3DMultiViewCacheOpen`, `Orbit3DDecodeUnifiedCacheFrame`, and
+`Orbit3DCleanupCacheSession`.
+
+The production workflow processes each selected view in an Akatz while-loop
+and writes a synchronized Unified packet to a file-backed cache. A VSR mmap,
+per-view MoGe/Marigold spill, ordered manifest, and optional persistent
+snapshot lower simultaneous CPU tensor residency. `Orbit3DMultiViewConfig`
+can consume the cache-backed views directly. Disk storage/lifetime changes
+must not silently modify the sparse occupancy, camera, projection or guidance
+math. See [CACHE.md](CACHE.md) for ordering, persistence and cleanup rules.
+
+## 0.1.1: Mesh repair, checkpoints and diagnostics
+
+- `Orbit3DComponentCleanerPLY`: conservative external connected-component filtering
+  around WTiVo (pre/post) using an independently built C++ cleaner.
+- `Orbit3DWTiVoExternalRunner`: exports geometry-only PLY, releases ComfyUI
+  models, controls a resource-limited external WTiVo systemd job, checks its
+  watertight edge audit and imports the repaired geometry into a compatible
+  `MESHWITHVOXEL` socket.
+- `Orbit3DImportMeshPLY`: geometry-only PLY import for existing external results.
+- `Orbit3DSaveMeshWithVoxelCheckpoint` and `Orbit3DLoadMeshWithVoxelCheckpoint`:
+  save/load intermediate meshes.
+- `Orbit3DSaveSparseStage`, `Orbit3DLoadSparseStage`,
+  `Orbit3DSaveShape512Stage`, `Orbit3DLoadShape512Stage`,
+  `Orbit3DExperimentalShapeCascade`: isolated experimental stage checkpoint
+  and local geometry investigations. They are **not** part of a validated
+  autonomous local-repair workflow.
+- Optional MeshLib/PMP/winding and diagnostics nodes remain experimental; do
+  not present them as verified production repair solutions.
+
+WTiVo is an **external component**; its solver, helper launcher and component
+cleaner are **not distributed** here. See [WTIVO.md](WTIVO.md).
+
 ## Current reconstruction behavior
 
 The current regression baseline preserves the tested Pixal3D multiview behavior, including:

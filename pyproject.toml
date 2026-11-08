@@ -1,7 +1,7 @@
 [project]
 name = "orbit-to-3d"
-description = "Orbit to 3D: turntable selection, VSR and Pixal3D multiview reconstruction"
-version = "0.1.0"
+description = "Mesh-only turntable-to-3D: VGGT/VSR, disk-cached multiview Pixal3D and WTiVo integration"
+version = "0.1.1"
 license = {file = "LICENSE"} 
 # classifiers = [
 #     # For OS-independent nodes (works on all operating systems)

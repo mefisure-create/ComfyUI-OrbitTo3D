@@ -258,10 +258,11 @@ def build_views(
 
     native_w, native_h = next(iter(native_sizes))
 
-    native_images = torch.stack(
-        [to_native_cond_tensor(im) for im in images],
-        dim=0,
-    )[None]  # [1, V, 3, H, W]
+    # ORBIT3D_MV_MEMLEAN_V2
+    # Preserve the exact same RGBA PIL sources and materialise the old
+    # to_native_cond_tensor() values only for the view currently processed by DINO.
+    # This changes storage/allocation lifetime only, not image conditioning values.
+    native_images = tuple(images)
 
     print(
         f"[Pixal3D MV] native views kept at "
@@ -426,24 +427,9 @@ def attach_geometry_confidence(
     # Camera looks along -Z; visible/front-facing normals have +Z.
     # --------------------------------------------------------------
 
-    n = (
-        normal_maps[..., :3]
-        .detach()
-        .cpu()
-        .float()
-        .clamp(0.0, 1.0)
-    )
-
-    n = n.mul(2.0).sub(1.0)
-
-    # PNG quantization / resize can slightly change vector length.
-    n = n / torch.linalg.vector_norm(
-        n,
-        dim=-1,
-        keepdim=True,
-    ).clamp_min(1e-6)
-
-    facing = n[..., 2].clamp(0.0, 1.0)
+    # ORBIT3D_MV_MEMLEAN_V2
+    # The original Marigold normal decode/normalise/+Nz formula is evaluated
+    # per view below so V full XYZ/facing temporaries never coexist.
 
     # --------------------------------------------------------------
     # Alpha only gates the BONUS.
@@ -489,12 +475,31 @@ def attach_geometry_confidence(
             f"got {base + bonus}"
         )
 
-    conf = base + bonus * alpha * facing
-
-    conf = conf.clamp(
-        min=base,
-        max=base + bonus,
-    )
+    # ORBIT3D_MV_MEMLEAN_V2
+    # Same elementwise law and clamp as the original vectorised expression.
+    conf = torch.empty((V, H, W), dtype=torch.float32, device="cpu")
+    for v in range(V):
+        n_v = (
+            normal_maps[v, ..., :3]
+            .detach()
+            .cpu()
+            .float()
+            .clamp(0.0, 1.0)
+        )
+        n_v = n_v.mul(2.0).sub(1.0)
+        n_v = n_v / torch.linalg.vector_norm(
+            n_v,
+            dim=-1,
+            keepdim=True,
+        ).clamp_min(1e-6)
+        facing_v = n_v[..., 2].clamp(0.0, 1.0)
+        conf[v].copy_(
+            (base + bonus * alpha[v] * facing_v).clamp(
+                min=base,
+                max=base + bonus,
+            )
+        )
+        del n_v, facing_v
 
     # [V,H,W] -> [1,V,1,H,W]
     views["geometry_confidence"] = (
@@ -633,15 +638,9 @@ def attach_moge_shape512_geometry(
             f"MoGe Shape512 source view count mismatch: RGB={V}, ss_geometry={points.shape[0]}"
         )
 
-    n = normal / torch.linalg.vector_norm(
-        normal, dim=-1, keepdim=True
-    ).clamp_min(1e-6)
-
-    # SHAPE_HR_GEOMETRY_V1
-    # MoGe normals are in OpenCV camera coordinates (+Z forward into scene).
-    # A front-facing surface normal points back toward the camera, i.e. -Z.
-    # Using +Nz made every MoGe confidence collapse to the 0.50 floor.
-    facing = (-n[..., 2]).clamp(0.0, 1.0)
+    # ORBIT3D_MV_MEMLEAN_V2
+    # Keep the original OpenCV-camera -Nz convention. Normalisation/facing is
+    # evaluated one view at a time below; alpha remains exactly mask.float().
     alpha = mask.float()
 
     base = float(base_confidence)
@@ -657,14 +656,37 @@ def attach_moge_shape512_geometry(
             f"got {base + bonus}"
         )
 
-    conf = (base + bonus * alpha * facing).clamp(min=base, max=base + bonus)
-    depth_native = points[..., 2].contiguous()
+    # ORBIT3D_MV_MEMLEAN_V2
+    # Same confidence law as before, evaluated per view to avoid n[V,H,W,3].
+    conf = torch.empty(
+        (V, points.shape[1], points.shape[2]),
+        dtype=torch.float32,
+        device="cpu",
+    )
+    for v in range(V):
+        normal_v = normal[v]
+        norm_v = torch.linalg.vector_norm(
+            normal_v,
+            dim=-1,
+        ).clamp_min(1e-6)
+        facing_v = (-normal_v[..., 2] / norm_v).clamp(0.0, 1.0)
+        conf[v].copy_(
+            (base + bonus * alpha[v] * facing_v).clamp(
+                min=base,
+                max=base + bonus,
+            )
+        )
+        del norm_v, facing_v
+
+    # Same camera-space Z values as before. points is retained by ss_geometry,
+    # so this can safely be a strided view rather than another VxHxW allocation.
+    depth_native = points[..., 2]
 
     views["moge_geometry_confidence"] = (
         conf.unsqueeze(0).unsqueeze(2).contiguous()
     )
     views["moge_depth_native"] = (
-        depth_native.unsqueeze(0).unsqueeze(2).contiguous()
+        depth_native.unsqueeze(0).unsqueeze(2)
     )
     views["moge_alpha_native"] = (
         alpha.unsqueeze(0).unsqueeze(2).contiguous()

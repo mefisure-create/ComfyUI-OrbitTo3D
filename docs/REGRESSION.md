@@ -1,8 +1,8 @@
 # Regression and release validation
 
-## Accepted clean-room baseline
+## Previously accepted 0.1.0 clean-room baseline
 
-The current release candidate passed an end-to-end clean-room run with:
+The **0.1.0** candidate passed an end-to-end clean-room run with:
 
 ```text
 ComfyUI               0.42.3
@@ -23,6 +23,27 @@ ComfyUI cache mode      --cache-none
 
 The final clean-room run used stock ComfyUI MoGe core code plus `Orbit3DMoGeInference`; no manual `comfy_extras/nodes_moge.py` patch was present. The generated mesh was visually accepted and the full prompt completed without `ERROR`, `Traceback` or `ModuleNotFoundError`.
 
+## 0.1.1 new-path validation status
+
+The current source release has a 120-view / 3° reference workflow, but the
+previous 24-view clean-room result **does not cover** its Akatz Unified Cache,
+persistent snapshot, temporary cleanup, WTiVo systemd worker or mesh postprocess
+steps. Syntax, metadata, manifest and workflow registry checks are static
+checks only. Before calling this a complete release regression:
+
+- Test both cache-session modes on a new 24-view small run, then the full
+  120-view target, recording view count, disk use, peak RAM/VRAM, and end-to-end
+  output geometry.
+- Confirm that Unified manifests contain all required indexed views, reopening
+  a persistent snapshot succeeds, and `delete_cache=true` removes the temporary
+  session **after** reconstruction/export without erasing the persistent copy.
+- Confirm prompt cancellation leaves no active WTiVo transient systemd unit;
+  audit the worker cgroup memory limit and WTiVo output edge audit.
+- Confirm pre/post component filtering does not remove intended connected
+  geometry, and document geometry-only attribute loss.
+- Resolve all `Pixal3DDebugExport*` nodes explicitly or publish a portable
+  equivalent workflow with verified export/cleanup dependency ordering.
+
 ## Release regression procedure
 
 1. Start from a clean ComfyUI environment, not the development/production venv.
@@ -31,7 +52,7 @@ The final clean-room run used stock ComfyUI MoGe core code plus `Orbit3DMoGeInfe
 4. Install Orbit from the candidate source tree.
 5. Confirm `python tools/check_release.py` passes.
 6. Load `example_workflows/OrbitTo3D_HighPrecision_MultiView.json` and confirm there are no missing nodes/models.
-7. Start ComfyUI with `--cache-none` and run the complete 24-view workflow through final mesh reconstruction/export.
+7. Start ComfyUI with `--cache-none` and run the previously accepted 24-view baseline, then the new 0.1.1 120-view workflow with its external cache/WTiVo prerequisites installed.
 8. Confirm the mesh is consistent with the accepted visual baseline.
 9. Search the complete run log for `ERROR`, `Traceback` and `ModuleNotFoundError`.
 10. If Trellis2 upstream-derived code changed, complete the procedure in [../UPSTREAM.md](../UPSTREAM.md) before advancing the pinned baseline.

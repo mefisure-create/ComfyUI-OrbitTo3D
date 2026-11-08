@@ -34,23 +34,22 @@ These are **workflow dependencies**, not Python dependencies of the Orbit packag
 
 | Custom-node package | Nodes used by the example | Purpose | Version recorded in the example |
 |---|---|---|---|
-| [`visualbruno/ComfyUI-Trellis2`](https://github.com/visualbruno/ComfyUI-Trellis2) | `Trellis2DecodeLatents`, `Trellis2ReconstructMeshWithQuad`, `Trellis2MeshWithVoxelToTrimesh`, `Trellis2ExportMesh` | downstream mesh decode / reconstruction / conversion / export and the companion runtime stack Orbit is based on | commit `b0e84c0f29857a444e8bcb5b9be2ea218e96efd0` |
+| [`visualbruno/ComfyUI-Trellis2`](https://github.com/visualbruno/ComfyUI-Trellis2) | `Trellis2DecodeLatents`, `Trellis2SimplifyMesh` | downstream mesh decode / simplification and the companion runtime stack Orbit is based on | commit `b0e84c0f29857a444e8bcb5b9be2ea218e96efd0` |
+| [`akatz-ai/ComfyUI-Execution-Inversion`](https://github.com/akatz-ai/ComfyUI-Execution-Inversion) | `WhileLoopOpen`, `WhileLoopClose`, `AccumulateNode`, `AccumulationToListNode` (`| akatz-loops`) | per-view iteration and ordered cache reference collection | commit `711a5fb244fc0b39a22f5b5603cb2a86b3534631` |
 | [`city96/ComfyUI-GGUF`](https://github.com/city96/ComfyUI-GGUF) | `UnetLoaderGGUF` | loads the Qwen-Image-Edit GGUF backbone used by Marigold V2 | not pinned in workflow metadata |
 | [`visualbruno/ComfyUI-Marigold-v2`](https://github.com/visualbruno/ComfyUI-Marigold-v2) | `MarigoldV2LoRALoader`, `MarigoldV2Predict` | native-resolution normal and depth prediction | not pinned in workflow metadata |
 | [`Kosinkadink/ComfyUI-VideoHelperSuite`](https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite) | `VHS_LoadVideo` | loads the turntable video as an ordered frame batch | `1.7.9` |
-| [`comfyorg/comfyui-impact-pack`](https://github.com/comfyorg/comfyui-impact-pack) | `ImpactImageBatchToImageList`, `ImageListToImageBatch`, `MaskListToMaskBatch` | batch/list conversion around per-view processing | `8.28.3` |
-| [`pythongosssss/ComfyUI-Custom-Scripts`](https://github.com/pythongosssss/ComfyUI-Custom-Scripts) | `MathExpression|pysssss` | FOV and canvas/padding arithmetic | `1.2.5` |
-| [`WASasquatch/was-node-suite-comfyui`](https://github.com/WASasquatch/was-node-suite-comfyui) | `Image Blend` (inside the Clay Render subgraph) | clay-render image blending | `1.0.2` |
 | [`TJ16th/comfyUI_TJ_NormalLighting`](https://github.com/TJ16th/comfyUI_TJ_NormalLighting) | `EulerLightingNode` (inside the Clay Render subgraph) | normal-map virtual lighting for the clay render | commit `f02c6094d92f974a2dbcaacc4019a71906d2b917` |
-| [`JPS-GER/ComfyUI_JPS-Nodes`](https://github.com/JPS-GER/ComfyUI_JPS-Nodes) | `Get Image Size (JPS)` (inside Prepare Canvas / Padding) | source-size extraction for padding / recomposition | commit `0e2a9aca02b17dde91577bfe4b65861df622dcaf` |
 
-The example also uses several **ComfyUI core** nodes (`LoadMoGeModel`, `VAELoader`, `Preview3D`, BiRefNet/background-removal and standard image/mask compositing nodes). These do not require separate custom-node packages. The bundled workflow uses `Orbit3DMoGeInference` instead of the core `MoGeInference`: it inherits the native ComfyUI execution implementation unchanged and only extends the `resolution_level` validation range to 30.
+The supplied workflow also contains **`Pixal3DDebugExportMesh`, `Pixal3DDebugExportShape`, and `Pixal3DDebugExportSparse`** nodes with no publisher metadata. They are **not registered by OrbitTo3D or guaranteed by the installed Trellis2 baseline**. These are local debug/export dependencies. You must install the exact implementation already present on the source machine, or intentionally replace/remove these branches and rewire the export/cleanup dependency before calling the workflow portable. In particular, cache cleanup is gated by a debug-export output path; removing the debug export without replacing that ordering dependency is unsafe.
+
+The example also uses **ComfyUI core** nodes, including `ComfyMathExpression`, `ImageBlend` and `GetImageSize` (in subgraphs), `LoadMoGeModel`, `VAELoader`, background-removal and standard image/mask compositing nodes. These do not require separate custom-node packages. The bundled workflow uses `Orbit3DMoGeInference` instead of the core `MoGeInference`: it inherits the native ComfyUI execution implementation unchanged and only extends the `resolution_level` validation range to 30.
 
 If you build a different Orbit graph and provide already prepared images, masks, normal/depth maps and/or `MOGE_GEOMETRY`, you do **not** need every example-workflow package above.
 
 # Tested reference configuration
 
-The bundled high-precision multiview workflow has been validated with the following reference setup. This is a **tested configuration**, not a minimum hardware requirement.
+The previous version was validated with the following reference setup. This is a **historical tested configuration**, not a minimum hardware requirement or a claim that the complete 0.1.1 workflow has been revalidated.
 
 | Component | Tested configuration |
 |---|---|
@@ -64,7 +63,7 @@ The bundled high-precision multiview workflow has been validated with the follow
 | GPU | NVIDIA GeForce RTX 4090, 24 GB VRAM |
 | System RAM | 64 GB |
 
-This profile is the reference used for regression testing of the current print-oriented workflow: 24 selected turntable frames are spaced at 15-degree yaw intervals, each selected view is upscaled 2× before geometry preparation, and the final ShapeHR / mesh generation stage runs at resolution 1536.
+This is the **0.1.0 clean-room regression baseline**, not the new 0.1.1 example configuration: 24 selected turntable frames are spaced at 15-degree yaw intervals, each selected view is upscaled 2× before geometry preparation, and the final ShapeHR / mesh generation stage runs at resolution 1536.
 
 For repeated or automated execution, `--cache-none` remains recommended to prevent ComfyUI's execution cache from retaining large preprocessing outputs in system RAM between runs.
 
@@ -135,9 +134,9 @@ For an automated combiner/orchestrator, it is reasonable to restart or select th
 
 # Example workflow
 
-The release ships `example_workflows/OrbitTo3D_HighPrecision_MultiView.json`. It is arranged into six compact numbered sections: model loading/patching, task configuration, frame selection/preparation, geometry/normal/depth/render preparation, 3D mesh generation, and output. The expected model/checkpoint locations are listed later in this document. The complete list of third-party custom-node packages required by this example is documented under **Requirements → Required custom nodes for the bundled example workflow** above.
+The 0.1.1 release ships `example_workflows/OrbitTo3D_HighPrecision_MultiView.json` copied from the supplied working graph. It is configured for **120 yaw views at 3°** (Angle Grid `yaw_step=3`, `pitch_step=360`) and contains an **Akatz preprocessing loop, persistent Unified Cache and WTiVo postprocess route**. It uses original-host absolute paths (notably `/home/ai/orbit3d-cache`, `/home/ai/wtivo-lab/...` and `~/vggt-omega`); edit them for a new host. Earlier versions were arranged into six compact numbered sections: model loading/patching, task configuration, frame selection/preparation, geometry/normal/depth/render preparation, 3D mesh generation, and output. The expected model/checkpoint locations are listed later in this document. The complete list of third-party custom-node packages required by this example is documented under **Requirements → Required custom nodes for the bundled example workflow** above.
 
-`Orbit3DAngleGrid.azimuths` is connected to both `Orbit3DVGGTViewSelector.target_angles` and `Orbit3DMultiViewConfig.azimuths`, so the requested yaw list has a single source of truth. `Orbit3DAngleGrid.elevations` is connected to `Orbit3DMultiViewConfig.elevations`. The verified production example remains yaw-only: keep `pitch_step=360`.
+`Orbit3DAngleGrid.azimuths` is connected to both `Orbit3DVGGTViewSelector.target_angles` and `Orbit3DMultiViewConfig.azimuths`, so the requested yaw list has a single source of truth. `Orbit3DAngleGrid.elevations` is connected to `Orbit3DMultiViewConfig.elevations`. The current example remains yaw-only: keep `pitch_step=360`. For cache lifetime details see [CACHE.md](CACHE.md); for WTiVo and local systemd launcher setup see [WTIVO.md](WTIVO.md).
 
 # Model/checkpoint paths used by the validated workflow
 
@@ -164,3 +163,11 @@ VGGT-Omega was loaded from:
 ```
 
 Portable defaults use `~/vggt-omega`; adjust the node/path if your checkout lives elsewhere.
+
+# Version 0.1.1 additional requirements
+
+- Install [Akatz Execution Inversion](https://github.com/akatz-ai/ComfyUI-Execution-Inversion), matching its recursive while-loop behavior; it is essential to the per-view cache branch.
+- Ensure sufficient fast local SSD space for the Unified cache and, if persistent mode is enabled, a second copy during snapshot finalization. Set `persistent_path` to a writable directory on the target host.
+- WTiVo is an **optional external runtime for the node package, but required by the bundled full workflow**. The solver, `orbit_raw_component_tool`, and the narrowly authorized systemd launcher are *not shipped by Orbit*. See [WTIVO.md](WTIVO.md).
+- The experimental CGAL PMP helper is distributed as C++ source. See [WTIVO.md](WTIVO.md#additional-experimental-cgal-pmp-helper) for local build instructions; it is not the WTiVo cleaner.
+- Avoid running the example unchanged on a new host: debug-export node implementations and local WTiVo paths must first be resolved.

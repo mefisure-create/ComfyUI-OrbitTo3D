@@ -5,7 +5,7 @@
 - Repository: `https://github.com/visualbruno/ComfyUI-Trellis2`
 - Orbit reference baseline: `b0e84c0f29857a444e8bcb5b9be2ea218e96efd0`
 - Base date: 2026-09-25
-- Last reviewed upstream check for this release candidate: 2026-10-29
+- Last reviewed upstream check: 2026-10-29 (v0.1.0 baseline; not re-reviewed for 0.1.1)
 - Upstream `main` at that review: `b0e84c0f29857a444e8bcb5b9be2ea218e96efd0`
 
 Orbit is derived from Trellis2 but intentionally removes large subsystems (single-view paths, texture/PBR generation, training/rendering utilities and other code not needed by the mesh-only multiview path). For that reason Orbit must **not** periodically merge the whole Trellis2 repository.

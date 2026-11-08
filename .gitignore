@@ -12,3 +12,14 @@ nvdiffrec/*
 fp8_models/*
 .upstream/
 upstream-review*.json
+
+# Local development state / generated artifacts (not release payload)
+*.pyc
+*.pyo
+.pytest_cache/
+.ruff_cache/
+*.before_*
+node.zip
+orbit3d_ext/bin/
+**/build/
+*.egg-info/

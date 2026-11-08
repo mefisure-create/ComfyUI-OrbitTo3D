@@ -311,6 +311,10 @@ def _fov_stats_from_intrinsics(intrinsics, image_hw):
 
     return {
         "image_hw": [h, w],
+        # Retain only small CPU-side calibration scalars for the axis audit.
+        # The original model inference and FOV calculations are untouched.
+        "per_view_fx_px": [float(x) for x in fx],
+        "per_view_cx_px": [float(x) for x in k[:, 0, 2]],
         "fov_x": stats(fov_x),
         "fov_y": stats(fov_y),
         "per_view_fov_x_deg": [None if not np.isfinite(x) else float(x) for x in fov_x],
@@ -375,7 +379,11 @@ def _fit_orbit(centers, fit_mask=None):
     iso -= iso[0]
 
     rr_fit = rr[fit_mask]
+    # World-space center of the fitted VGGT camera orbit. This is a candidate
+    # object rotation axis point; it is NOT an observed object landmark.
+    axis_center = mean + cx * basis[0] + cy * basis[1]
     return {
+        "axis_center_world": [float(v) for v in axis_center],
         "rel_deg": rel,
         "iso_deg": iso,
         "span_raw_deg": float(rel[-1] - rel[0]),
@@ -385,6 +393,71 @@ def _fit_orbit(centers, fit_mask=None):
         "radius": radius,
         "radius_cv": float(rr_fit.std() / max(rr_fit.mean(), 1e-12)),
     }
+
+
+def _vgtt_axis_x_diagnostic(extrinsics, fov_stats, orbit, input_width, input_height, sample_frames):
+    """Project the fitted camera-orbit center into each image, read-only.
+
+    `extrinsics` are VGGT world-to-camera matrices. Intrinsics are the same
+    matrices already decoded by encoding_to_camera() for the existing FOV path.
+    The estimate is meaningful only when VGGT reconstructs a coherent orbit;
+    it does NOT independently verify that the character's physical axis lies
+    exactly at the camera-orbit center.
+    """
+    e = np.asarray(extrinsics, dtype=np.float64)
+    p = np.asarray(orbit["axis_center_world"], dtype=np.float64)
+    fxs = np.asarray(fov_stats["per_view_fx_px"], dtype=np.float64)
+    cxs = np.asarray(fov_stats["per_view_cx_px"], dtype=np.float64)
+    processed_width = int(fov_stats["image_hw"][1])
+    input_width = int(input_width)
+    input_height = int(input_height)
+    if len(e) != len(sample_frames) or len(fxs) != len(e):
+        raise ValueError("VGGT axis diagnostic: camera/intrinsics index mismatch")
+
+    # Match _crop_supported_aspect(): the usual portrait video 800x1216
+    # needs no crop, but extreme aspect ratios are center-cropped first.
+    crop_left, crop_width = 0, input_width
+    ar = input_height / max(input_width, 1)
+    if ar < 0.5:
+        crop_width = min(input_width, max(1, int(round(input_height / 0.5))))
+        crop_left = (input_width - crop_width) // 2
+    # Tall input is cropped vertically, which does not change horizontal x.
+    if processed_width < 1 or crop_width < 1:
+        raise ValueError("Invalid width for VGGT axis diagnostic")
+
+    measurements = []
+    for i, source_frame in enumerate(sample_frames):
+        cam = e[i, :3, :3] @ p + e[i, :3, 3]
+        depth = float(cam[2])
+        if not np.isfinite(depth) or depth <= 1e-8:
+            continue
+        x_processed = float(fxs[i] * cam[0] / depth + cxs[i])
+        x_original = x_processed * (crop_width / processed_width) + crop_left
+        if np.isfinite(x_original):
+            measurements.append({
+                "source_frame": int(source_frame),
+                "x_input_px": float(x_original),
+                "x_input_normalized": float(x_original / input_width),
+                "camera_depth": depth,
+            })
+    xs = np.array([v["x_input_px"] for v in measurements], dtype=np.float64)
+    result = {
+        "kind": "vgtt_orbit_center_projection",
+        "input_image_size": [input_width, input_height],
+        "views_total": int(len(e)),
+        "views_valid": int(len(xs)),
+        "measurements": measurements,
+        "axis_center_world_vggt_gauge": orbit["axis_center_world"],
+    }
+    if len(xs):
+        result.update({
+            "median_x_input_px": float(np.median(xs)),
+            "std_x_input_px": float(xs.std()),
+            "p10_x_input_px": float(np.percentile(xs, 10)),
+            "p90_x_input_px": float(np.percentile(xs, 90)),
+            "offset_from_image_center_px": float(np.median(xs) - input_width / 2),
+        })
+    return result
 
 
 def _nearest(source_frames, angles, target):
@@ -447,10 +520,8 @@ class VGGTTurntableFourViewsNative:
             }
         }
 
-    RETURN_TYPES = ("IMAGE", "STRING", "STRING", "FLOAT", "FLOAT")
-    RETURN_NAMES = (
-        "views", "frames", "report", "fov_x_deg", "fov_y_deg",
-    )
+    RETURN_TYPES = ("STRING", "STRING", "FLOAT", "FLOAT", "FLOAT", "STRING")
+    RETURN_NAMES = ("frames", "report", "fov_x_deg", "fov_y_deg", "axis_x_input_px", "axis_diagnostic")
     FUNCTION = "run"
     CATEGORY = "Frame Tools/Angular Search"
 
@@ -593,6 +664,9 @@ class VGGTTurntableFourViewsNative:
         c_frames = np.asarray(coarse_indices, dtype=np.int64)
         c_orbit = _fit_orbit(_camera_centers(c_extr))
         c_result = _orbit_summary(c_frames, c_orbit, lookup_targets)
+        c_axis = _vgtt_axis_x_diagnostic(
+            c_extr, c_fov, c_orbit, images.shape[2], images.shape[1], c_frames
+        )
         progress.update(1)
 
         coarse_matches = [
@@ -655,6 +729,7 @@ class VGGTTurntableFourViewsNative:
         refined_orbits = []
         refined_fovs = []
         refined_peaks = []
+        refined_axes = []
 
         for group_number, group_indices in enumerate(refine_groups, start=1):
             refined_set = set(anchors)
@@ -674,6 +749,9 @@ class VGGTTurntableFourViewsNative:
             fit_mask = np.asarray([int(x) in anchors for x in r_frames], dtype=bool)
             r_orbit = _fit_orbit(_camera_centers(r_extr), fit_mask=fit_mask)
             r_result = _orbit_summary(r_frames, r_orbit, group_lookup_targets)
+            r_axis = _vgtt_axis_x_diagnostic(
+                r_extr, r_fov, r_orbit, images.shape[2], images.shape[1], r_frames
+            )
 
             group_matches = [
                 _nearest(r_frames, r_orbit["iso_deg"], t)
@@ -685,6 +763,7 @@ class VGGTTurntableFourViewsNative:
             refined_orbits.append(r_orbit)
             refined_fovs.append(r_fov)
             refined_peaks.append(r_peak)
+            refined_axes.append(r_axis)
             refined_groups_report.append({
                 "group": group_number,
                 "target_indices": group_indices,
@@ -692,6 +771,7 @@ class VGGTTurntableFourViewsNative:
                 "lookup_angles_deg": [float(t) for t in group_lookup_targets],
                 "input_views": len(refined_indices),
                 "orbit": r_result,
+                "axis_projection": {k: v for k, v in r_axis.items() if k != "measurements"},
                 "camera_fov": r_fov,
                 "peak_cuda_allocated_gib": r_peak,
             })
@@ -749,7 +829,42 @@ class VGGTTurntableFourViewsNative:
             selected_fov_y = float(c_fov["fov_y"]["median_deg"])
             fov_selection = "coarse_median_no_refinement_needed"
 
+        # Diagnostic only: compare independent orbit fits. We do not feed
+        # this estimate back into frame selection or alter any source pixels.
+        axis_runs = [c_axis] + refined_axes
+        axis_values = [float(x["median_x_input_px"]) for x in axis_runs
+                       if "median_x_input_px" in x]
+        axis_x_input_px = float(np.median(axis_values)) if axis_values else float("nan")
+        axis_diagnostic = {
+            "method": "VGGT reconstructed camera-orbit center projected into input image",
+            "input_width_px": int(images.shape[2]),
+            "input_height_px": int(images.shape[1]),
+            "axis_x_input_px": axis_x_input_px if math.isfinite(axis_x_input_px) else None,
+            "offset_from_input_center_px": (
+                axis_x_input_px - images.shape[2] / 2 if math.isfinite(axis_x_input_px) else None
+            ),
+            "per_pass_median_x_px": axis_values,
+            "between_pass_std_px": float(np.std(axis_values)) if axis_values else None,
+            "coarse": c_axis,
+            "refinements": [
+                {k: v for k, v in x.items() if k != "measurements"} for x in refined_axes
+            ],
+            "warnings": [
+                "Axis estimate is inferred from camera orbit, not directly observed on the character.",
+                "VGGT assumes a static scene with moving cameras; turntable equivalence must be validated.",
+                "The value is in ORIGINAL INPUT image pixels (before x2 resize/padding).",
+                "No automatic image shifting is performed.",
+            ],
+        }
+        axis_report_text = json.dumps(axis_diagnostic, ensure_ascii=False, indent=2)
+        print(
+            f"[VGGT Axis Audit] x={axis_x_input_px:.2f}px "
+            f"(input width={images.shape[2]}); pass medians={axis_values}",
+            flush=True,
+        )
+
         report_obj = {
+            "rotation_axis_diagnostic": axis_diagnostic,
             "implementation": "native_comfyui_modelpatcher_v4_dynamic_targets_clockwise",
             "source_frames": n,
             "clockwise": clockwise,
@@ -817,7 +932,8 @@ class VGGTTurntableFourViewsNative:
                         pass
                 raise RuntimeError("VGGT reconstruction failed strict validation:\n- " + "\n- ".join(warnings))
 
-        views = images[selected_frames]
+        # ORBIT3D PATCH 3.6.9 VGGT NO VIEWS
+        # Selected frame numbers are returned; IMAGE extraction is delegated downstream.
         frames = json.dumps(selected_frames, ensure_ascii=False)
 
         if offload_after_run:
@@ -826,8 +942,9 @@ class VGGTTurntableFourViewsNative:
             model_management.soft_empty_cache()
 
         return (
-            views, frames, report,
+            frames, report,
             selected_fov_x, selected_fov_y,
+            axis_x_input_px, axis_report_text,
         )
 
 
