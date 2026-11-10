@@ -450,6 +450,18 @@ class Orbit3DShapeGenerator(_trellis.Trellis2ShapeGenerator):
                     ["Marigold", "MoGe"],
                     {"default": "Marigold"},
                 ),
+                "detail_tile_grid": (
+                    "INT", {"default": 3, "min": 3, "max": 5, "step": 1,
+                            "tooltip": "Native DINO crop grid per axis: 3 preserves baseline; 4/5 use smaller overlapping crops."},
+                ),
+                "detail_cond_mode": (
+                    ["blend", "full_only", "tiles_only"],
+                    {"default": "blend", "tooltip":
+                        "Shape512 DINO ablation: blend=current 3x3 mix; "
+                        "full_only=disable native detail crops; "
+                        "tiles_only=zero full-frame spatial LR contribution "
+                        "(global DINO and NAF still active)."},
+                ),
             }
         )
         return {"required": required, "optional": optional}
@@ -475,6 +487,8 @@ class Orbit3DShapeGenerator(_trellis.Trellis2ShapeGenerator):
         shape512_mode="normal",
         shape512_normals_source="Marigold",
         shape512_depth_source="Marigold",
+        detail_tile_grid=3,
+        detail_cond_mode="blend",
         shape_seed_mode="inherit",
         shape_seed=0,
         pixal3d_mv_views=None,
@@ -502,6 +516,11 @@ class Orbit3DShapeGenerator(_trellis.Trellis2ShapeGenerator):
         views["marigold_shape512_mode"] = mode
         views["shape512_normals_source"] = normal_source
         views["shape512_depth_source"] = depth_source
+        views["shape512_detail_tile_grid"] = int(detail_tile_grid)
+        detail_cond_mode = str(detail_cond_mode).strip().lower()
+        if detail_cond_mode not in ("blend", "full_only", "tiles_only"):
+            raise ValueError(f"invalid Shape512 detail_cond_mode={detail_cond_mode!r}")
+        views["shape512_detail_cond_mode"] = detail_cond_mode
 
         print(
             f"[Orbit3D Shape512 config] mode={mode}; "
@@ -537,6 +556,10 @@ class Orbit3DShapeCascadeGenerator(_trellis.Trellis2ShapeCascadeGenerator):
         optional = {
             "pixal3d_mv_views": base.get("optional", {})["pixal3d_mv_views"],
         }
+        required["detail_tile_grid"] = (
+            "INT", {"default": 3, "min": 3, "max": 5, "step": 1,
+                    "tooltip": "Native DINO crop grid per axis for ShapeHR; independent of Shape512."},
+        )
         return {"required": required, "optional": optional}
 
     CATEGORY = "Orbit to 3D/Pixal3D"
@@ -563,6 +586,7 @@ class Orbit3DShapeCascadeGenerator(_trellis.Trellis2ShapeCascadeGenerator):
         shape_hr_mode="off",
         shape_hr_normals_source="Marigold",
         shape_hr_depth_source="Marigold",
+        detail_tile_grid=3,
         shape_hr_seed_mode="inherit",
         shape_hr_seed=0,
         shape_hr_noise_cache_mode="off",
@@ -580,6 +604,9 @@ class Orbit3DShapeCascadeGenerator(_trellis.Trellis2ShapeCascadeGenerator):
         _require_geometry_sources(
             pixal3d_mv_views, mode, normal_source, depth_source, "ShapeHR"
         )
+
+        views = dict(pixal3d_mv_views)
+        views["shape_hr_detail_tile_grid"] = int(detail_tile_grid)
 
         return super().process(
             pipeline=pipeline,
@@ -606,5 +633,5 @@ class Orbit3DShapeCascadeGenerator(_trellis.Trellis2ShapeCascadeGenerator):
             shape_hr_seed=shape_hr_seed,
             shape_hr_noise_cache_mode=shape_hr_noise_cache_mode,
             shape_hr_noise_cache_path=shape_hr_noise_cache_path,
-            pixal3d_mv_views=pixal3d_mv_views,
+            pixal3d_mv_views=views,
         )

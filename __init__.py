@@ -27,6 +27,7 @@ from .orbit3d_ext.geometry_nodes import (
     Orbit3DMoGeGeometryListToBatch,
     Orbit3DMoGeGeometryBatchToList,
 )
+from .orbit3d_ext.axis_canvas_nodes import Orbit3DAxisBBoxCanvas
 from .orbit3d_ext.angle_nodes import Orbit3DAngleGrid
 from .orbit3d_ext.moge_nodes import Orbit3DMoGeInference
 
@@ -46,6 +47,7 @@ from .orbit3d_ext.production_cache_nodes import (
 )
 from .orbit3d_ext.unified_cache_nodes import Orbit3DDecodeUnifiedCacheFrame
 from .orbit3d_ext.camera_checkpoint_nodes import Orbit3DExportPixal3DMVCameras
+from .orbit3d_ext.experimental_shape1024_direct_nodes import Orbit3DSS64Shape1024DirectExperimental
 from .orbit3d_ext.experimental_shape_nodes import (
     Orbit3DSaveSparseStage,
     Orbit3DLoadSparseStage,
@@ -53,6 +55,7 @@ from .orbit3d_ext.experimental_shape_nodes import (
     Orbit3DLoadShape512Stage,
     Orbit3DExperimentalShapeCascade,
 )
+from .orbit3d_ext.experimental_resolution_nodes import Orbit3DSS64Shape512Experimental
 
 # Mesh repair and checkpoints
 from .orbit3d_ext.meshlib_repair_nodes import Orbit3DMeshLibFillHolesNicelyPack
@@ -98,7 +101,9 @@ NODE_CLASS_MAPPINGS = {
     "Orbit3DLoadSparseStage": Orbit3DLoadSparseStage,
     "Orbit3DSaveShape512Stage": Orbit3DSaveShape512Stage,
     "Orbit3DLoadShape512Stage": Orbit3DLoadShape512Stage,
+    "Orbit3DSS64Shape1024DirectExperimental": Orbit3DSS64Shape1024DirectExperimental,
     "Orbit3DExperimentalShapeCascade": Orbit3DExperimentalShapeCascade,
+    "Orbit3DSS64Shape512Experimental": Orbit3DSS64Shape512Experimental,
 
     # Core reconstruction and preparation
     "Orbit3DLoadModel": Orbit3DLoadModel,
@@ -110,6 +115,7 @@ NODE_CLASS_MAPPINGS = {
     "Orbit3DRealBasicVSR": TurntableCyclicRealBasicVSR,
     "Orbit3DMoGeGeometryListToBatch": Orbit3DMoGeGeometryListToBatch,
     "Orbit3DMoGeGeometryBatchToList": Orbit3DMoGeGeometryBatchToList,
+    "Orbit3DAxisBBoxCanvas": Orbit3DAxisBBoxCanvas,
     "Orbit3DAngleGrid": Orbit3DAngleGrid,
     "Orbit3DMoGeInference": Orbit3DMoGeInference,
 
@@ -144,7 +150,9 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "Orbit3DLoadSparseStage": "Orbit3D - Load Sparse Stage [Experimental]",
     "Orbit3DSaveShape512Stage": "Orbit3D - Save Shape512 Stage [Experimental]",
     "Orbit3DLoadShape512Stage": "Orbit3D - Load Shape512 Stage [Experimental]",
+    "Orbit3DSS64Shape1024DirectExperimental": "Orbit3D - SS64 to Shape1024 Direct [Experimental]",
     "Orbit3DExperimentalShapeCascade": "Orbit3D - Experimental Shape Cascade",
+    "Orbit3DSS64Shape512Experimental": "Orbit3D - SS64 to Shape512 Weights [Experimental]",
 
     # Core reconstruction and preparation
     "Orbit3DLoadModel": "Orbit3D - Load Model",
@@ -156,6 +164,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "Orbit3DRealBasicVSR": "Orbit3D - Cyclic RealBasicVSR",
     "Orbit3DMoGeGeometryListToBatch": "Orbit3D - MoGe Geometry List To Batch",
     "Orbit3DMoGeGeometryBatchToList": "Orbit3D - MoGe Geometry Batch To List",
+    "Orbit3DAxisBBoxCanvas": "Orbit3D - Axis BBox Canvas (MMap)",
     "Orbit3DAngleGrid": "Orbit3D - Yaw/Pitch Angle Grid",
     "Orbit3DMoGeInference": "Orbit3D - MoGe Inference (Extended Resolution)",
 
@@ -170,6 +179,48 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     # WTiVo display names
     **_orbit3d_wtivo_display,
 }
+
+# Optional, isolated HR64 diagnostics: register before profiler instrumentation.
+# Keep existing production and experimental node mappings unmodified.
+from .orbit3d_ext.experimental_hr64_compare_nodes import (
+    Orbit3DExtractCascadeHR64CoordsExperimental,
+    Orbit3DCompareSS64CascadeHR64Experimental,
+)
+NODE_CLASS_MAPPINGS["Orbit3DExtractCascadeHR64CoordsExperimental"] = Orbit3DExtractCascadeHR64CoordsExperimental
+NODE_CLASS_MAPPINGS["Orbit3DCompareSS64CascadeHR64Experimental"] = Orbit3DCompareSS64CascadeHR64Experimental
+NODE_DISPLAY_NAME_MAPPINGS["Orbit3DExtractCascadeHR64CoordsExperimental"] = "Orbit3D - Extract Cascade HR64 Coords [Experimental]"
+NODE_DISPLAY_NAME_MAPPINGS["Orbit3DCompareSS64CascadeHR64Experimental"] = "Orbit3D - Compare SS64 vs Cascade HR64 [Experimental]"
+
+# Separate SS64 occupancy-fill experiment (registration before RAM profiler).
+from .orbit3d_ext.experimental_ss_force_fill_nodes import Orbit3DSSForceFillExperimental
+NODE_CLASS_MAPPINGS["Orbit3DSSForceFillExperimental"] = Orbit3DSSForceFillExperimental
+NODE_DISPLAY_NAME_MAPPINGS["Orbit3DSSForceFillExperimental"] = "Orbit3D - SS Force Fill [Experimental]"
+
+# Isolated coarse-to-fine SS32 / SS64 occupancy fusion experiment.
+from .orbit3d_ext.experimental_ss32_ss64_fusion_nodes import Orbit3DSS32SS64FusionExperimental
+NODE_CLASS_MAPPINGS["Orbit3DSS32SS64FusionExperimental"] = Orbit3DSS32SS64FusionExperimental
+NODE_DISPLAY_NAME_MAPPINGS["Orbit3DSS32SS64FusionExperimental"] = "Orbit3D - Fuse SS32 and SS64 [Experimental]"
+
+
+# Isolated pre-Cascade HR64 free-space audit: no Shape1024 generation.
+from .orbit3d_ext.experimental_hr_free_space_nodes import Orbit3DHRFreeSpaceAuditFilter
+NODE_CLASS_MAPPINGS["Orbit3DHRFreeSpaceAuditFilter"] = Orbit3DHRFreeSpaceAuditFilter
+NODE_DISPLAY_NAME_MAPPINGS["Orbit3DHRFreeSpaceAuditFilter"] = "Orbit3D - HR Free-Space Audit & Filter [Experimental]"
+
+# HR VAE subdivision free-space audit (independent from the existing HR64 audit).
+from .orbit3d_ext.experimental_hr_subvoxel_audit_nodes import Orbit3DHRSubvoxelFreeSpaceAudit
+NODE_CLASS_MAPPINGS["Orbit3DHRSubvoxelFreeSpaceAudit"] = Orbit3DHRSubvoxelFreeSpaceAudit
+NODE_DISPLAY_NAME_MAPPINGS["Orbit3DHRSubvoxelFreeSpaceAudit"] = "Orbit3D - HR Subvoxel Free-Space Audit [Experimental]"
+
+# V8: global Shape512 VAE pruning; experiment-only, no production generator edits.
+from .orbit3d_ext.experimental_vae_prune_decode_nodes import Orbit3DShape512VAEGlobalPruneDecode
+NODE_CLASS_MAPPINGS["Orbit3DShape512VAEGlobalPruneDecode"] = Orbit3DShape512VAEGlobalPruneDecode
+NODE_DISPLAY_NAME_MAPPINGS["Orbit3DShape512VAEGlobalPruneDecode"] = "Orbit3D - Shape512 VAE Global Prune & Export [Experimental]"
+
+# V9 read-only export: exact ShapeHR scaffold, no change to generation.
+from .orbit3d_ext.experimental_hr_surface_bridge_nodes import Orbit3DExportCascadeHRScaffoldV9
+NODE_CLASS_MAPPINGS["Orbit3DExportCascadeHRScaffoldV9"] = Orbit3DExportCascadeHRScaffoldV9
+NODE_DISPLAY_NAME_MAPPINGS["Orbit3DExportCascadeHRScaffoldV9"] = "Orbit3D - Export Cascade HR Scaffold [V9 Diagnostic]"
 
 # Optional diagnostics. Instrument the final registry, including experimental
 # and WTiVo nodes, not a partially assembled registry.

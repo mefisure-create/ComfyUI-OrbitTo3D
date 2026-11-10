@@ -1054,6 +1054,7 @@ class DinoV3ProjMultiViewFeatureExtractor(DinoV3ProjFeatureExtractor):
         *args,
         multiview_fusion: str = "average",
         detail_tiles: bool = False,
+        detail_tile_grid: int = 3,
         detail_tile_fraction: float = 0.60,
         detail_full_strength: float = 0.35,
         detail_tile_strength: float = 1.0,
@@ -1065,6 +1066,7 @@ class DinoV3ProjMultiViewFeatureExtractor(DinoV3ProjFeatureExtractor):
             f"multiview_fusion must be average, weighted_average or attention, got {multiview_fusion}"
         self.multiview_fusion = multiview_fusion
         self.detail_tiles = detail_tiles
+        self.detail_tile_grid = int(detail_tile_grid)
         self.detail_tile_fraction = float(detail_tile_fraction)
         self.detail_full_strength = float(detail_full_strength)
         self.detail_tile_strength = float(detail_tile_strength)
@@ -1374,13 +1376,27 @@ class DinoV3ProjMultiViewFeatureExtractor(DinoV3ProjFeatureExtractor):
 
             if self.detail_tiles:
 
-                s = self.detail_tile_fraction
+                n = int(self.detail_tile_grid)
+                s0 = self.detail_tile_fraction
+                if n not in (3, 4, 5):
+                    raise ValueError(f"detail_tile_grid must be 3, 4, or 5; got {n}")
 
-                positions = (
-                    0.0,
-                    (1.0 - s) * 0.5,
-                    1.0 - s,
-                )
+                if n == 3:
+                    # Exact original 0.1.1 crop positions and fractions.
+                    s = s0
+                    positions = (0.0, (1.0 - s) * 0.5, 1.0 - s)
+                else:
+                    # Preserve the relative overlap of the baseline 3x3 tiles.
+                    # Baseline stride / crop width = (1-s0) / (2*s0).
+                    stride_ratio = (1.0 - s0) / (2.0 * s0)
+                    s = 1.0 / (1.0 + (n - 1) * stride_ratio)
+                    positions = tuple((1.0 - s) * i / (n - 1) for i in range(n))
+
+                if v == 0:
+                    print(
+                        f"[Pixal3D detail tiles] {n}x{n}, crop_fraction={s:.5f}, "
+                        f"dino_image_size={self.image_size}", flush=True,
+                    )
 
                 tile_rects = tuple(
                     (x, y, x + s, y + s)

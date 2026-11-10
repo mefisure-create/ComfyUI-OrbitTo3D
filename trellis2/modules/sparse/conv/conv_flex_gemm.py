@@ -45,7 +45,7 @@ def sparse_conv3d_forward(self, x: SparseTensor) -> SparseTensor:
     
     out, neighbor_cache_ = sparse_submanifold_conv3d(
         x.feats,
-        x.coords,
+        x.coords.contiguous(),
         torch.Size([*x.shape, *x.spatial_shape]),
         self.weight,
         self.bias,

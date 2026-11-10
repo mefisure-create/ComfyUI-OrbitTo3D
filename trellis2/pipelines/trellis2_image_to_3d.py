@@ -4740,6 +4740,33 @@ class Trellis2ImageTo3DPipeline(Pipeline):
                 "visibility weights unavailable"
             )
 
+        # Per-Stage DINO crop controls. Reset for each call, including when models
+        # are retained by keep_models_loaded; this does not affect SS or NAF.
+        detail_grid_key = (
+            "shape_hr_detail_tile_grid"
+            if geometry_stage == "shape_hr"
+            else "shape512_detail_tile_grid"
+        )
+        image_cond_model.detail_tile_grid = int(views.get(detail_grid_key, 3))
+
+        # Shape512 DINO ablation. Set the state on EVERY invocation so that
+        # keep_models_loaded cannot carry a previous experiment into the next.
+        # ShapeHR stays on the original tile blend, independently of Shape512.
+        if geometry_stage != "shape_hr":
+            dino_mode = str(views.get("shape512_detail_cond_mode", "blend")).strip().lower()
+            if dino_mode not in ("blend", "full_only", "tiles_only"):
+                raise ValueError(f"invalid shape512_detail_cond_mode={dino_mode!r}")
+            image_cond_model.detail_tiles = dino_mode != "full_only"
+            image_cond_model.detail_full_strength = 0.0 if dino_mode == "tiles_only" else 0.35
+            image_cond_model.detail_tile_strength = 1.0
+            print(
+                f"[Pixal3D Shape512 DINO ablation] mode={dino_mode}, "
+                f"tiles={image_cond_model.detail_tiles}, "
+                f"full_lr={image_cond_model.detail_full_strength}, "
+                f"tile_lr={image_cond_model.detail_tile_strength}",
+                flush=True,
+            )
+
         z_global, z_proj = self._run_mv_extractor(
             image_cond_model,
             views,
