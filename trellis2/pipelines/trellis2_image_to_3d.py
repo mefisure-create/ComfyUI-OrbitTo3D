@@ -6154,6 +6154,32 @@ class Trellis2ImageTo3DPipeline(Pipeline):
         if self.low_vram:
             flow_model.cpu()
             self._cleanup_cuda()        
+        # BEGIN ORBIT3D_SS64_T5_EXPERIMENT
+        # Scoped opt-in: the ordinary sampler below is unchanged.
+        from .ss64_t5_capture import active_request, capture_logits
+        t5_request = active_request()
+        if t5_request is not None:
+            if int(resolution) != 64 or int(num_samples) != 1 or fill_holes:
+                raise ValueError("SS64 T5 requires one native SS64 sample without fill")
+            decoder = self.models['sparse_structure_decoder']
+            if self.low_vram:
+                decoder.to(self.device)
+            try:
+                logits = decoder(z_s)
+                coords = capture_logits(t5_request, z_s, logits)
+                del logits
+            finally:
+                # The experiment returns PRE-S4 coordinates, exactly as the
+                # original offline logit dump. Release diagnostic state too.
+                self._ss_moge_diag_state = None
+                if self.low_vram:
+                    decoder.cpu()
+                    del z_s
+                    cond = self._cond_cpu(cond)
+                    self._cleanup_cuda()
+            return coords
+        # END ORBIT3D_SS64_T5_EXPERIMENT
+
         # Decode sparse structure latent
         decoder = self.models['sparse_structure_decoder']
         if self.low_vram:

@@ -222,6 +222,16 @@ from .orbit3d_ext.experimental_hr_surface_bridge_nodes import Orbit3DExportCasca
 NODE_CLASS_MAPPINGS["Orbit3DExportCascadeHRScaffoldV9"] = Orbit3DExportCascadeHRScaffoldV9
 NODE_DISPLAY_NAME_MAPPINGS["Orbit3DExportCascadeHRScaffoldV9"] = "Orbit3D - Export Cascade HR Scaffold [V9 Diagnostic]"
 
+# SS64 completion: opt-in T5 and one-pass SurfaceAll.
+from .orbit3d_ext.experimental_ss64_t5_nodes import (
+    Orbit3DSS64T5Experimental,
+    Orbit3DSS64SurfaceAll,
+)
+NODE_CLASS_MAPPINGS["Orbit3DSS64T5Experimental"] = Orbit3DSS64T5Experimental
+NODE_CLASS_MAPPINGS["Orbit3DSS64SurfaceAll"] = Orbit3DSS64SurfaceAll
+NODE_DISPLAY_NAME_MAPPINGS["Orbit3DSS64T5Experimental"] = "Orbit3D - Sparse64 Generator T5 [Experimental]"
+NODE_DISPLAY_NAME_MAPPINGS["Orbit3DSS64SurfaceAll"] = "Orbit3D - Sparse64 Generator T5 + SurfaceAll"
+
 # Optional diagnostics. Instrument the final registry, including experimental
 # and WTiVo nodes, not a partially assembled registry.
 try:

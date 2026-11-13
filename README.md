@@ -15,6 +15,10 @@ The project is derived from, and coexists with, [`visualbruno/ComfyUI-Trellis2`]
 
 The bundled [0.1.1 workflow](example_workflows/OrbitTo3D_HighPrecision_MultiView.json) is configured for a **3° yaw grid (120 views)** with 1536 ShapeHR and WTiVo 1536→2048. It captures the supplied working configuration, including **machine-specific absolute paths and external debug-export nodes**; adapt those before running on another host. The earlier **24-view / 15° clean-room regression** is retained as a reference, **not** presented as validation of the entire new 120-view + WTiVo graph.
 
+## SS64 completion (resolution_test)
+
+The opt-in **Sparse64 Generator T5 + SurfaceAll** adds conservative one-pass occupancy completion to native SS64. See [SS64 completion notes](docs/SS64_COMPLETION.md) for the exact rule, node sockets, checkpoint compatibility, observed results and limitations. The normal sparse generator and Shape/Cascade paths are unchanged.
+
 ## Documentation
 
 - [Installation & dependencies](docs/INSTALLATION.md) — ComfyUI/Trellis2 environment, node packs, external binaries and workflow adaptation.
